@@ -1,28 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:yencampus/Decoration/Fonts.dart';
 
-Widget sliverAppBar(BuildContext context){
+Widget sliverAppBar(BuildContext context,String title, String imgUrl){
   return SliverAppBar(
-    title: Text("YenCampus+"),
-    centerTitle: true,
     floating: false,
     pinned: true,
     snap: false,
+    backgroundColor: Colors.white,
+    elevation: 0.0,
+    expandedHeight: ScreenUtil().setHeight(700),
     excludeHeaderSemantics: true,
-    backgroundColor: Colors.deepPurple,
-    foregroundColor: Colors.brown,
-    shadowColor: Colors.black87,
-    expandedHeight: ScreenUtil().setHeight(200),
+    collapsedHeight: ScreenUtil().setHeight(200),
+    leading: Container(),
     flexibleSpace: FlexibleSpaceBar(
+      centerTitle: true,
+      collapseMode: CollapseMode.parallax,
+      title: Text(title,style: titleStyle.copyWith(
+        backgroundColor: Colors.white.withOpacity(0.5),
+        fontSize: ScreenUtil().setSp(80)
+      ),textAlign: TextAlign.center,),
       background: FittedBox(
-        fit: BoxFit.fill,
-        child: Card(color: Colors.deepPurple,),
+        fit: BoxFit.contain,
+        child: Image.asset(imgUrl),
       ),
     ),
-    actions: [
-      new Text("Home",style: TextStyle(color: Colors.red),),
-      new Text("School",style: TextStyle(color: Colors.red)),
-      new Text("University",style: TextStyle(color: Colors.red))
-    ],
   );
 }

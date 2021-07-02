@@ -11,7 +11,7 @@ Widget appBar(BuildContext context,Widget page, List<String> items){
         border: Border(
             bottom : BorderSide(
                 color: Colors.grey.shade400,
-                width: 2)
+                width: 4)
         )
     ),
     child: Stack(
@@ -42,6 +42,11 @@ Widget appBar(BuildContext context,Widget page, List<String> items){
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
+                  new  InkWell(
+                    onTap: (){Navigator.push(context, new MaterialPageRoute(
+                          builder: (context)=>page));},
+                    child: Icon(Icons.home_rounded,size: 40,),
+                  ),
                   new Container(
                     width: width*(2/3),
                     height: ScreenUtil().setHeight(100),

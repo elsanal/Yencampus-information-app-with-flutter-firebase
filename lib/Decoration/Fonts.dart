@@ -6,8 +6,8 @@ import 'package:google_fonts/google_fonts.dart';
 
 
 TextStyle titleStyle = GoogleFonts.comfortaa(
-  fontSize: ScreenUtil().setSp(80),
-  fontWeight: FontWeight.bold,
+  fontSize: ScreenUtil().setSp(100),
+  fontWeight: FontWeight.w900,
   color: Colors.black,
 );
 
@@ -17,8 +17,8 @@ TextStyle titleStyle2 = GoogleFonts.comfortaa(
   color: Colors.black,
 );
 
-TextStyle textStyle = GoogleFonts.comfortaa(
-  fontSize: ScreenUtil().setSp(50),
+TextStyle textStyle = GoogleFonts.lato(
+  fontSize: ScreenUtil().setSp(45),
   fontWeight: FontWeight.w600,
   color: Colors.black,
 );

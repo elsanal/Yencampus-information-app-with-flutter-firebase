@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:yencampus/Components/HomeAppBar.dart';
+import 'package:yencampus/Components/HomePageContent.dart';
 import 'package:yencampus/Components/SliverList.dart';
 import 'package:yencampus/Decoration/Fonts.dart';
 import 'package:yencampus/Pages/Scholarship.dart';
