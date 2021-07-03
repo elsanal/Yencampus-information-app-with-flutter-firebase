@@ -1,4 +1,4 @@
-package com.yentech.yencampus.yencampus
+package com.yentech.yencampus
 
 import io.flutter.embedding.android.FlutterActivity
 

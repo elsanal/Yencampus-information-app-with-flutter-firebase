@@ -3,7 +3,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:yencampus/Decoration/Fonts.dart';
 import 'package:yencampus/Pages/Scholarship.dart';
 
-Widget appBar(BuildContext context,Widget page, List<String> items){
+Widget appBar(BuildContext context,List<Widget> pages, List<String> items,
+                bool isHome){
   var width = MediaQuery.of(context).size.width;
   return Container(
     decoration: BoxDecoration(
@@ -39,49 +40,7 @@ Widget appBar(BuildContext context,Widget page, List<String> items){
           top: ScreenUtil().setHeight(120),
             child: Container(
               width: width,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  new  InkWell(
-                    onTap: (){Navigator.push(context, new MaterialPageRoute(
-                          builder: (context)=>page));},
-                    child: Icon(Icons.home_rounded,size: 40,),
-                  ),
-                  new Container(
-                    width: width*(2/3),
-                    height: ScreenUtil().setHeight(100),
-                    child: new TextFormField(
-                      maxLines: 1,
-                      decoration: InputDecoration(
-                        contentPadding: EdgeInsets.only(
-                          top: ScreenUtil().setHeight(0),
-                          bottom: ScreenUtil().setHeight(0),
-                          left: ScreenUtil().setHeight(10),
-                          right: ScreenUtil().setHeight(10),
-                        ),
-                          fillColor: Colors.white,
-                          filled: true,
-                          enabledBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.all(
-                                  Radius.circular(ScreenUtil().setWidth(40))
-                              ),
-                              borderSide: BorderSide(color: Colors.black87,width: 2.0)
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(ScreenUtil().setWidth(40))
-                              ),
-                              borderSide: BorderSide(color: Colors.pink,width: 2.0)
-                          ),
-                        // suffix: Text("Search"),
-                        suffixIcon: Icon(Icons.search),
-                        hintText: "Search"
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            )
+              child: searchBarWithoutHome(width))
         ),
         new Positioned(
           bottom: ScreenUtil().setHeight(10),
@@ -99,7 +58,7 @@ Widget appBar(BuildContext context,Widget page, List<String> items){
                   return InkWell(
                     onTap: (){
                       Navigator.push(context, new MaterialPageRoute(
-                          builder: (context)=>page));
+                          builder: (context)=>pages[index]));
                     },
                     child: menuBarItem(items[index]),
                   );
@@ -141,4 +100,42 @@ Widget category(String cat){
     child: Text(cat,style: titleStyle2,),
   );
 }
+
+Widget searchBarWithoutHome(double width){
+  return Center(
+    child: new Container(
+      width: width*(2/3),
+      height: ScreenUtil().setHeight(100),
+      child: new TextFormField(
+        maxLines: 1,
+        decoration: InputDecoration(
+            contentPadding: EdgeInsets.only(
+              top: ScreenUtil().setHeight(0),
+              bottom: ScreenUtil().setHeight(0),
+              left: ScreenUtil().setHeight(10),
+              right: ScreenUtil().setHeight(10),
+            ),
+            fillColor: Colors.white,
+            filled: true,
+            enabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.all(
+                    Radius.circular(ScreenUtil().setWidth(40))
+                ),
+                borderSide: BorderSide(color: Colors.black87,width: 2.0)
+            ),
+            focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.all(
+                    Radius.circular(ScreenUtil().setWidth(40))
+                ),
+                borderSide: BorderSide(color: Colors.pink,width: 2.0)
+            ),
+            // suffix: Text("Search"),
+            suffixIcon: Icon(Icons.search),
+            hintText: "Search"
+        ),
+      ),
+    ),
+  );
+}
+
 

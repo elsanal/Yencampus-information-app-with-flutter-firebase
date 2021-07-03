@@ -1,9 +1,10 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:yencampus/Components/Details.dart';
 import 'package:yencampus/Decoration/Fonts.dart';
 
-Widget sliverList(BuildContext context){
+Widget detailBody(BuildContext context, DocumentSnapshot doc){
   var height = MediaQuery.of(context).size.height;
   var width = MediaQuery.of(context).size.width;
   return SliverToBoxAdapter(
@@ -12,15 +13,15 @@ Widget sliverList(BuildContext context){
           shrinkWrap: true,
           physics: NeverScrollableScrollPhysics(),
           children: [
-            _header("Country", "China"),
+            _header("Country", doc['country_english']),
             new SizedBox(height: 10,),
-            _header("Level", "Bachelor, Master, PhD"),
+            _header("Level", doc['level_english'][0].toString()),
             new SizedBox(height: 10,),
-            _header("Amount", "1000 USD"),
+            _header("Amount", doc['amount']),
             new SizedBox(height: 10,),
-            _header("Duration", "2021-06-15"),
+            _header("Duration", doc['duration']),
             new SizedBox(height: 10,),
-            _header("Eligible", "All countries"),
+            _header("Eligible", doc['eligible_english'][0].toString()),
             new SizedBox(height: 10,),
 
             new Container(child: Image.asset(

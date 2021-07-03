@@ -1,13 +1,15 @@
-
 import 'package:colorful_safe_area/colorful_safe_area.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:yencampus/Components/HomeAppBar.dart';
 import 'package:yencampus/Components/HomePageContent.dart';
-import 'package:yencampus/Components/SliverList.dart';
+import 'package:yencampus/Components/DetailBody.dart';
 import 'package:yencampus/Decoration/Fonts.dart';
+import 'package:yencampus/Pages/Exams.dart';
+import 'package:yencampus/Pages/Job.dart';
 import 'package:yencampus/Pages/Scholarship.dart';
+import 'package:yencampus/Pages/University.dart';
 
 
 class Homepage extends StatefulWidget {
@@ -19,7 +21,15 @@ class Homepage extends StatefulWidget {
 
 class _HomepageState extends State<Homepage> {
 
-  List<String> items = ["Home","Scholarships","Universities","Jobs","Exams"];
+  List<String> _items = ["Scholarships","Universities","Jobs","Exams"];
+  List<Widget> _pages = [Scholarship(),University(),Job(),Exam()];
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    print("Homepage");
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     var height = MediaQuery.of(context).size.height;
@@ -37,7 +47,7 @@ class _HomepageState extends State<Homepage> {
                 child: new Container(
                   height: ScreenUtil().setHeight(360),
                   width: width,
-                  child: appBar(context,Scholarship(),items),
+                  child: appBar(context,_pages,_items,true),
                 ),
               ),
               Positioned(

@@ -1,5 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.yentech.yencampus.yencampus">
+    android:name="androidx.multidex.MultiDexApplication"
+    package="com.yentech.yencampus">
     <uses-permission android:name="android.permission.INTERNET"/>
    <application
         android:label="yencampus"
