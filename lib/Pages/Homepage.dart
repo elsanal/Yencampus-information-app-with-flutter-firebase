@@ -6,6 +6,8 @@ import 'package:yencampus/Components/HomeAppBar.dart';
 import 'package:yencampus/Components/HomePageContent.dart';
 import 'package:yencampus/Components/DetailBody.dart';
 import 'package:yencampus/Decoration/Fonts.dart';
+import 'package:yencampus/Function/getFirebaseData.dart';
+import 'package:yencampus/Models/ScholarshipClass.dart';
 import 'package:yencampus/Pages/Exams.dart';
 import 'package:yencampus/Pages/Job.dart';
 import 'package:yencampus/Pages/Scholarship.dart';
@@ -23,12 +25,19 @@ class _HomepageState extends State<Homepage> {
 
   List<String> _items = ["Scholarships","Universities","Jobs","Exams"];
   List<Widget> _pages = [Scholarship(),University(),Job(),Exam()];
+  List<ScholarshipGnClass> docs=[];
 
   @override
-  void initState() {
+  void initState(){
     // TODO: implement initState
     print("Homepage");
+    _initData();
+    // print(docs.length);
     super.initState();
+  }
+  _initData()async{
+    docs = await getScholarship();
+    print(docs[0].level_en);
   }
   @override
   Widget build(BuildContext context) {

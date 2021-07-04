@@ -11,7 +11,7 @@ Widget sliverAppBar(BuildContext context,String title, String imgUrl){
     elevation: 0.0,
     expandedHeight: ScreenUtil().setHeight(700),
     excludeHeaderSemantics: true,
-    collapsedHeight: ScreenUtil().setHeight(200),
+    // collapsedHeight: ScreenUtil().setHeight(200),
     leading: Container(),
     flexibleSpace: FlexibleSpaceBar(
       centerTitle: true,
@@ -22,7 +22,7 @@ Widget sliverAppBar(BuildContext context,String title, String imgUrl){
       ),textAlign: TextAlign.center,),
       background: FittedBox(
         fit: BoxFit.contain,
-        child: Image.asset(imgUrl),
+        child: Image.network(imgUrl),
       ),
     ),
   );

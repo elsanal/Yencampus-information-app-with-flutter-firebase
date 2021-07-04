@@ -4,10 +4,11 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:yencampus/Components/PagesBody.dart';
 import 'package:yencampus/Components/PagesSliverBar.dart';
 import 'package:yencampus/Decoration/FormField.dart';
+import 'package:yencampus/Function/getFirebaseData.dart';
+import 'package:yencampus/Models/ScholarshipClass.dart';
 
 
 class Scholarship extends StatefulWidget {
-
 
   @override
   _ScholarshipState createState() => _ScholarshipState();
@@ -17,25 +18,20 @@ class _ScholarshipState extends State<Scholarship> {
 
   List<String> _items = ["All","Most recent","Popular","Fully funded",
                           "Partially funded","More"];
-  List<DocumentSnapshot> enContent = [];
-  List<DocumentSnapshot> frContent = [];
-  int nb = 0;
+  List<ScholarshipGnClass> docs = [];
+  String selected = 'all';
   String input = '';
 
-  getData()async{
-    FirebaseFirestore.instance.collection("scholarship")
-    .get()
-    .then((QuerySnapshot snapshot){
-      snapshot.docs.forEach((doc) {
-        enContent.add(doc);
-      });
-    });
-  }
   @override
   void initState() {
     // TODO: implement initState
-    getData();
+    // _initData();
+    print("Scholarship");
     super.initState();
+  }
+  _initData()async{
+    docs = await getScholarship();
+    print(docs[0].level_en);
   }
   @override
 
@@ -49,7 +45,7 @@ class _ScholarshipState extends State<Scholarship> {
            pageAppBar(
                appBarBackground(
                    context,_formField(width),_menuBar(width, _items))),
-            pageBody(context,enContent),
+            pageBody(context,selected),
           ],
         )
       ),
@@ -87,9 +83,8 @@ class _ScholarshipState extends State<Scholarship> {
         itemBuilder: (context,index){
           return InkWell(
             onTap: (){
-              print(items[index]);
               setState(() {
-
+                selected = items[index];
               });
             },
             child: pageMenuBar(items[index]),

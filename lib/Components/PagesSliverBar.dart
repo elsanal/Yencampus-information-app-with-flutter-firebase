@@ -70,8 +70,7 @@ Widget searchBarWithHome(BuildContext context,Widget formField){
     children: [
       new SizedBox(width: 10,),
       new  InkWell(
-        onTap: (){Navigator.pushReplacement(context, new MaterialPageRoute(
-            builder: (context)=>Homepage()));},
+        onTap: (){Navigator.of(context).pop(true);},
         child: CircleAvatar(
             radius: 25,
             backgroundColor: Colors.grey[200],

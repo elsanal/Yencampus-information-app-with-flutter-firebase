@@ -1,10 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:yencampus/Components/Details.dart';
 import 'package:yencampus/Decoration/Fonts.dart';
+import 'package:yencampus/Models/ScholarshipClass.dart';
 
-Widget detailBody(BuildContext context, DocumentSnapshot doc){
+Widget detailBody(BuildContext context, ScholarshipGnClass doc){
   var height = MediaQuery.of(context).size.height;
   var width = MediaQuery.of(context).size.width;
   return SliverToBoxAdapter(
@@ -13,36 +15,36 @@ Widget detailBody(BuildContext context, DocumentSnapshot doc){
           shrinkWrap: true,
           physics: NeverScrollableScrollPhysics(),
           children: [
-            _header("Country", doc['country_english']),
+            _header("Country", doc.country_fr),
             new SizedBox(height: 10,),
-            _header("Level", doc['level_english'][0].toString()),
+            _header("Level", doc.level_fr[0].toString()),
             new SizedBox(height: 10,),
-            _header("Amount", doc['amount']),
+            _header("Amount", doc.amount),
             new SizedBox(height: 10,),
-            _header("Duration", doc['duration']),
+            _header("Duration", doc.duration),
             new SizedBox(height: 10,),
-            _header("Eligible", doc['eligible_english'][0].toString()),
-            new SizedBox(height: 10,),
-
-            new Container(child: Image.asset(
-              "assets/hat2.jpeg", fit: BoxFit.fill,),),
+            _header("Eligible", doc.eligible_fr[0].toString()),
             new SizedBox(height: 10,),
 
-            _body("body"),
+            new Container(child: Image.network(
+              doc.images[0]['src']['src'], fit: BoxFit.fill,),),
+            new SizedBox(height: 10,),
+
+            _body(doc.description_fr),
             new SizedBox(height: 20,),
             _title2("Conditions"),
-            _body("body"),
+            _body(doc.condition_fr),
             new SizedBox(height: 20,),
             _title2("Documents"),
-            _body("body"),
+            _body(doc.req_docs_fr),
             new SizedBox(height: 20,),
 
-            new Container(child: Image.asset(
-              "assets/hat2.jpeg", fit: BoxFit.fill,),),
+            new Container(child: Image.network(
+              doc.images[1]['src']['src'], fit: BoxFit.fill,),),
             new SizedBox(height: 10,),
 
             _title2("How to apply ?"),
-            _body("body"),
+            _body(doc.how_to_apply_fr),
             new SizedBox(height: 20,),
 
             new Container(
@@ -82,14 +84,7 @@ Widget _title2(String title){
 Widget _body(String body){
   return Container(
     padding: EdgeInsets.all(ScreenUtil().setWidth(10)),
-    child: new Text("The most wanted scholarship. Chinese Government Scholarship "
-        "is open now. i am going to apply for it."
-        "The most wanted scholarship. Chinese Government Scholarship"
-        "is open now. i am going to apply for it.",style: textStyle,
-      // maxLines:,
-      overflow: TextOverflow.visible,
-      textAlign: TextAlign.justify,
-    ),
+    child: Html(data: body,),
   );
 }
 
