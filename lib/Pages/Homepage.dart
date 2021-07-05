@@ -2,11 +2,12 @@ import 'package:colorful_safe_area/colorful_safe_area.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:intl/intl.dart';
 import 'package:yencampus/Components/HomeAppBar.dart';
 import 'package:yencampus/Components/HomePageContent.dart';
 import 'package:yencampus/Components/DetailBody.dart';
 import 'package:yencampus/Decoration/Fonts.dart';
-import 'package:yencampus/Function/getFirebaseData.dart';
+import 'package:yencampus/Function/getScholarshipData.dart';
 import 'package:yencampus/Models/ScholarshipClass.dart';
 import 'package:yencampus/Pages/Exams.dart';
 import 'package:yencampus/Pages/Job.dart';
@@ -26,18 +27,23 @@ class _HomepageState extends State<Homepage> {
   List<String> _items = ["Scholarships","Universities","Jobs","Exams"];
   List<Widget> _pages = [Scholarship(),University(),Job(),Exam()];
   List<ScholarshipGnClass> docs=[];
-
+  String _date = '';
   @override
   void initState(){
     // TODO: implement initState
-    print("Homepage");
     _initData();
-    // print(docs.length);
+    _initData();
     super.initState();
   }
   _initData()async{
-    docs = await getScholarship();
+    docs = await getTargetScholarship(_getDate());
     print(docs[0].level_en);
+  }
+  String _getDate(){
+    DateTime _time = DateTime.now();
+    var formatDate = DateFormat('yyyy-MM-dd');
+    String date = formatDate.format(_time);
+    return date;
   }
   @override
   Widget build(BuildContext context) {
@@ -70,29 +76,36 @@ class _HomepageState extends State<Homepage> {
                   child: ListView(
                     shrinkWrap: true,
                     children: [
-                      category("New Posts"),
+                      docs.length>0?category("Available Scholarships"):Container(),
                       Container(
                           height: ScreenUtil().setHeight(height),
                           width: ScreenUtil().setWidth(width),
-                          child: homepageContent(context)),
+                          child: homepageContent(context,docs)),
                       Container(height: 15,),
-                      category("Popular Scholarships"),
+                      category("Free Universities"),
                       Container(
                           height: ScreenUtil().setHeight(height),
                           width: ScreenUtil().setWidth(width),
-                          child: homepageContent(context)),
+                          child: homepageContent(context,docs)),
                       Container(height: 15,),
                       category("Available Jobs"),
                       Container(
                           height: ScreenUtil().setHeight(height),
                           width: ScreenUtil().setWidth(width),
-                          child: homepageContent(context)),
+                          child: homepageContent(context,docs)),
                       Container(height: 15,),
-                      category("Exams Preparation"),
-                      Container(
-                          height: ScreenUtil().setHeight(height),
-                          width: ScreenUtil().setWidth(width),
-                          child: homepageContent(context)),
+                      // category("Tips to get Scholarship"),
+                      // Container(
+                      //     height: ScreenUtil().setHeight(height),
+                      //     width: ScreenUtil().setWidth(width),
+                      //     child: homepageContent(context,docs)),
+                      // Container(height: 15,),
+                      // category("Get admission in University"),
+                      // Container(
+                      //     height: ScreenUtil().setHeight(height),
+                      //     width: ScreenUtil().setWidth(width),
+                      //     child: homepageContent(context,docs)),
+                      // Container(height: 15,),
                       Center(child: category("All right reserved")),
                       Container(height: 20,)
                     ],

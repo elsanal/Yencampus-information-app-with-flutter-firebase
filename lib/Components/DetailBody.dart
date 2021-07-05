@@ -4,7 +4,11 @@ import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:yencampus/Components/Details.dart';
 import 'package:yencampus/Decoration/Fonts.dart';
+import 'package:yencampus/Function/sharePost.dart';
 import 'package:yencampus/Models/ScholarshipClass.dart';
+import 'package:yencampus/Models/SharePostClass.dart';
+
+import 'ShareArticle.dart';
 
 Widget detailBody(BuildContext context, ScholarshipGnClass doc){
   var height = MediaQuery.of(context).size.height;
@@ -49,22 +53,26 @@ Widget detailBody(BuildContext context, ScholarshipGnClass doc){
 
             new Container(
               width: width,
+              color: Colors.grey,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  _actionButton("Apply"),
-                  _actionButton("Save"),
-                  _actionButton("Share")
+                  _actionButton("Apply",Icons.web_rounded,Colors.green,doc),
+                  _actionButton("Save",Icons.save_rounded,Colors.blue,doc),
+                  _actionButton("Share",Icons.share_rounded,Colors.red,doc)
                 ],
               ),
             ),
-            new SizedBox(height: 10,),
+            // new SizedBox(height: 10,),
           ],
         )
     ),
   );
 }
 
+ save(int value){
+  print("save");
+}
 Widget _header(String title, String result){
   return Container(
     padding: EdgeInsets.all(ScreenUtil().setWidth(10)),
@@ -84,20 +92,44 @@ Widget _title2(String title){
 Widget _body(String body){
   return Container(
     padding: EdgeInsets.all(ScreenUtil().setWidth(10)),
-    child: Html(data: body,),
+    child: Html(data: body,style: bodyStyle),
   );
 }
 
-Widget _actionButton(String action,){
-  return new ElevatedButton(
-      style: ButtonStyle(
-          backgroundColor:MaterialStateProperty.all(Colors.grey[800]),
-          elevation: MaterialStateProperty.all(0.0)
-      ),
-      onPressed:(){},
-      child:Text(action,style: titleStyle.copyWith(
-        fontSize: ScreenUtil().setSp(50),
-        color: Colors.white,
-      ),)
+Widget _actionButton(String title,IconData icon,
+    Color iconColor,ScholarshipGnClass doc){
+  return Padding(
+    padding: const EdgeInsets.all(8.0),
+    child: new ElevatedButton(
+        style: ButtonStyle(
+            backgroundColor:MaterialStateProperty.all(iconColor),
+            elevation: MaterialStateProperty.all(5.0),
+        ),
+        onPressed:(){
+          sharePost(
+              SharePost(
+                  name: doc.name_fr,
+                  country: doc.country_fr,
+                  level: doc.level_fr,
+                  amount : doc.amount,
+                  duration : doc.duration,
+                  deadline: doc.deadline,
+                  file: doc.apply_link,
+              )
+          );
+        },
+        child: Padding(
+          padding: const EdgeInsets.all(4.0),
+          child: Column(
+            children: [
+              Icon(icon,color: Colors.white,),
+              Text(title,style: titleStyle.copyWith(
+                fontSize: ScreenUtil().setSp(50),
+                color: Colors.white,
+              ),),
+            ],
+          ),
+        )
+    ),
   );
 }

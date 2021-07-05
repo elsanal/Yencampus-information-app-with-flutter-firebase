@@ -4,8 +4,8 @@ import 'package:yencampus/Decoration/Fonts.dart';
 
 Widget sliverAppBar(BuildContext context,String title, String imgUrl){
   return SliverAppBar(
-    floating: false,
-    pinned: true,
+    floating: true,
+    pinned: false,
     snap: false,
     backgroundColor: Colors.white,
     elevation: 0.0,

@@ -4,7 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:yencampus/Components/PagesBody.dart';
 import 'package:yencampus/Components/PagesSliverBar.dart';
 import 'package:yencampus/Decoration/FormField.dart';
-import 'package:yencampus/Function/getFirebaseData.dart';
+import 'package:yencampus/Function/getScholarshipData.dart';
 import 'package:yencampus/Models/ScholarshipClass.dart';
 
 
