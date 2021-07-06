@@ -4,14 +4,15 @@ import 'package:yencampus/Components/PagesBody.dart';
 import 'package:yencampus/Components/PagesSliverBar.dart';
 import 'package:yencampus/Decoration/FormField.dart';
 
-class University extends StatefulWidget {
-  const University({Key? key}) : super(key: key);
+class Carrer extends StatefulWidget {
+  const Carrer({Key? key}) : super(key: key);
 
   @override
-  _UniversityState createState() => _UniversityState();
+  _CarrerState createState() => _CarrerState();
 }
 
-class _UniversityState extends State<University> {
+class _CarrerState extends State<Carrer> {
+
   List<String> _items = ["All","Most recent","Popular","Fully funded",
     "Partially funded","More"];
   String selected = 'all';

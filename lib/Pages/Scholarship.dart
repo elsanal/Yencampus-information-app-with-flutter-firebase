@@ -45,7 +45,7 @@ class _ScholarshipState extends State<Scholarship> {
            pageAppBar(
                appBarBackground(
                    context,_formField(width),_menuBar(width, _items))),
-            pageBody(context,selected),
+            pageBody(context,selected,"scholar"),
           ],
         )
       ),

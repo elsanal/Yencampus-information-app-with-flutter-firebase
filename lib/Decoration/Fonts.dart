@@ -20,7 +20,7 @@ TextStyle titleStyle2 = GoogleFonts.comfortaa(
 
 TextStyle textStyle = GoogleFonts.lato(
   fontSize: ScreenUtil().setSp(45),
-  fontWeight: FontWeight.w600,
+  fontWeight: FontWeight.w400,
   color: Colors.black,
 );
 

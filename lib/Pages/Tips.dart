@@ -4,14 +4,14 @@ import 'package:yencampus/Components/PagesBody.dart';
 import 'package:yencampus/Components/PagesSliverBar.dart';
 import 'package:yencampus/Decoration/FormField.dart';
 
-class University extends StatefulWidget {
-  const University({Key? key}) : super(key: key);
+class Tips extends StatefulWidget {
+  const Tips({Key? key}) : super(key: key);
 
   @override
-  _UniversityState createState() => _UniversityState();
+  _TipsState createState() => _TipsState();
 }
 
-class _UniversityState extends State<University> {
+class _TipsState extends State<Tips> {
   List<String> _items = ["All","Most recent","Popular","Fully funded",
     "Partially funded","More"];
   String selected = 'all';
@@ -84,3 +84,6 @@ class _UniversityState extends State<University> {
     );
   }
 }
+
+
+

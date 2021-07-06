@@ -4,7 +4,7 @@ import 'package:yencampus/Decoration/Fonts.dart';
 import 'package:yencampus/Pages/Homepage.dart';
 
 
-Widget pageAppBar(Widget background){
+Widget pageAppBar(Widget background,){
   return SliverAppBar(
     floating: true,
     pinned: false,
@@ -12,6 +12,7 @@ Widget pageAppBar(Widget background){
     backgroundColor: Colors.white,
     elevation: 0.0,
     expandedHeight: ScreenUtil().setHeight(400),
+    // collapsedHeight:ScreenUtil().setHeight(300),
     excludeHeaderSemantics: true,
     leading: Container(),
     flexibleSpace: FlexibleSpaceBar(
@@ -23,8 +24,8 @@ Widget pageAppBar(Widget background){
 }
 
 Widget appBarBackground(BuildContext context,
-                          Widget inputField,
-                          Widget menuBar){
+    Widget inputField,
+    Widget menuBar){
   var width = MediaQuery.of(context).size.width;
   return Container(
     height: width,
