@@ -3,6 +3,7 @@ import 'package:intl/intl.dart';
 import 'package:yencampus/Function/getJobData.dart';
 import 'package:yencampus/Function/getScholarshipData.dart';
 import 'package:yencampus/Function/getUniversityData.dart';
+import 'package:yencampus/Models/CarerClass.dart';
 import 'package:yencampus/Models/JobClass.dart';
 import 'package:yencampus/Models/ScholarshipClass.dart';
 import 'package:yencampus/Components/HomeAppBar.dart';
@@ -88,6 +89,32 @@ import 'HomePageContent.dart';
                        height: w * (2 / 3),
                        width: w,
                        child: homepageContent(context, docs, "job"),
+                     ),
+                   ],
+                 );
+               }
+             }
+         );
+       }
+     case "carer":
+       {
+         return FutureBuilder<List<CarerClass>>(
+             future: data,
+             builder: (context, snapshot) {
+               if (!snapshot.hasData) {
+                 return Center(child: Text("No Job data"),);
+               } else if (snapshot.hasError) {
+                 return Center(child: Text("Error occured"),);
+               } else {
+                 List<CarerClass> docs = snapshot.data!;
+                 return Column(
+                   crossAxisAlignment: CrossAxisAlignment.start,
+                   children: [
+                     docs.length > 0 ? category(cat) : Container(),
+                     Container(
+                       height: w * (2 / 3),
+                       width: w,
+                       child: homepageContent(context, docs, "carer"),
                      ),
                    ],
                  );

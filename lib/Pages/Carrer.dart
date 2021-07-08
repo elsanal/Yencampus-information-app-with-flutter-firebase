@@ -4,14 +4,14 @@ import 'package:yencampus/Components/PagesBody.dart';
 import 'package:yencampus/Components/PagesSliverBar.dart';
 import 'package:yencampus/Decoration/FormField.dart';
 
-class Carrer extends StatefulWidget {
-  const Carrer({Key? key}) : super(key: key);
+class Carer extends StatefulWidget {
+  const Carer({Key? key}) : super(key: key);
 
   @override
-  _CarrerState createState() => _CarrerState();
+  _CarerState createState() => _CarerState();
 }
 
-class _CarrerState extends State<Carrer> {
+class _CarerState extends State<Carer> {
 
   List<String> _items = ["All","Most recent","Popular","Fully funded",
     "Partially funded","More"];
@@ -36,7 +36,7 @@ class _CarrerState extends State<Carrer> {
               pageAppBar(
                   appBarBackground(
                       context,_formField(width),_menuBar(width, _items))),
-              pageBody(context,selected,"univ"),
+              pageBody(context,selected,"carer"),
             ],
           )
       ),

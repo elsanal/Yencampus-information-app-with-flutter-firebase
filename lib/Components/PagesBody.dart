@@ -76,6 +76,21 @@ _category(String type,double width, double height,){
             }
           }
       );
+    case "carer":
+      return FutureBuilder<List<JobClass>>(
+          future: getJob(),
+          builder: (context, snapshot) {
+            if(!snapshot.hasData){
+              return Container(child: Center(child: Text("No data"),),);
+            }
+            else if(snapshot.hasError){
+              return Container(child: Center(child: Text("Error occured"),),);
+            }
+            else{
+              return _listBuilder(snapshot, width, height, type);
+            }
+          }
+      );
   }
 }
 

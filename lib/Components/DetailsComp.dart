@@ -2,9 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:yencampus/Decoration/Fonts.dart';
 import 'package:yencampus/Function/HtmlParser.dart';
-import 'package:yencampus/Function/sharePost.dart';
-import 'package:yencampus/Models/ScholarshipClass.dart';
-import 'package:yencampus/Models/SharePostClass.dart';
+
 
 
 
@@ -31,7 +29,7 @@ Widget title2(String title){
 Widget body(String body){
   return Container(
     padding: EdgeInsets.all(ScreenUtil().setWidth(10)),
-    child: Text(parseHtmlString(body),style: textStyle,),
+    child: Text(parseHtmlString(body),style: textStyle,textAlign: TextAlign.justify,),
   );
 }
 

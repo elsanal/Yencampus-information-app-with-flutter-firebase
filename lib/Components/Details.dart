@@ -2,9 +2,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:yencampus/Components/DetailAppbar.dart';
-import 'package:yencampus/Components/DetailScholar.dart';
-import 'package:yencampus/Components/DetailJob.dart';
-import 'package:yencampus/Components/DetailUniv.dart';
+import 'package:yencampus/Components/PagesDetails/DetailCarer.dart';
+import 'package:yencampus/Components/PagesDetails/DetailScholar.dart';
+import 'package:yencampus/Components/PagesDetails/DetailJob.dart';
+import 'package:yencampus/Components/PagesDetails/DetailUniv.dart';
 import 'package:yencampus/Models/ScholarshipClass.dart';
 
 class Details extends StatefulWidget {
@@ -46,6 +47,8 @@ class _DetailsState extends State<Details> {
         return detailUniv(context,doc);
       case "job":
         return detailJob(context,doc);
+      case "carer":
+        return detailCarer(context,doc);
       default :
         return SliverToBoxAdapter(child: Container(),);
     }

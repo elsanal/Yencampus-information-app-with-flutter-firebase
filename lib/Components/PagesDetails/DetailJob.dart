@@ -11,7 +11,7 @@ import 'package:yencampus/Models/JobClass.dart';
 import 'package:yencampus/Models/ScholarshipClass.dart';
 import 'package:yencampus/Models/SharePostClass.dart';
 
-import 'ShareArticle.dart';
+import '../ShareArticle.dart';
 
 Widget detailJob(BuildContext context, JobClass doc){
   var height = MediaQuery.of(context).size.height;

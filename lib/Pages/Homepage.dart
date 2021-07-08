@@ -5,14 +5,16 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
 import 'package:yencampus/Components/HomeAppBar.dart';
 import 'package:yencampus/Components/HomePageContent.dart';
-import 'package:yencampus/Components/DetailScholar.dart';
+import 'package:yencampus/Components/PagesDetails/DetailScholar.dart';
 import 'package:yencampus/Components/HomePageItems.dart';
 import 'package:yencampus/Components/PagesSliverBar.dart';
 import 'package:yencampus/Decoration/Fonts.dart';
 import 'package:yencampus/Decoration/FormField.dart';
+import 'package:yencampus/Function/getCareerData.dart';
 import 'package:yencampus/Function/getJobData.dart';
 import 'package:yencampus/Function/getScholarshipData.dart';
 import 'package:yencampus/Function/getUniversityData.dart';
+import 'package:yencampus/Models/CarerClass.dart';
 import 'package:yencampus/Models/JobClass.dart';
 import 'package:yencampus/Models/ScholarshipClass.dart';
 import 'package:yencampus/Models/UniversityClass.dart';
@@ -34,11 +36,12 @@ class Homepage extends StatefulWidget {
 class _HomepageState extends State<Homepage> {
 
   List<String> _items = ["Scholarships","Universities","Jobs","Carer","Tips"];
-  List<Widget> _pages = [Scholarship(),University(),Job(),Carrer(),Tips()];
+  List<Widget> _pages = [Scholarship(),University(),Job(),Carer(),Tips()];
 
   late Future<List<ScholarshipGnClass>> _scholarData;
   late Future<List<UniversityClass>> _univData;
   late Future<List<JobClass>> _jobData;
+  late Future<List<CarerClass>> _carerData;
   String selected = 'all';
   String input = '';
 
@@ -48,6 +51,7 @@ class _HomepageState extends State<Homepage> {
     _scholarData =  getTargetScholarship(_getDate());
     _univData = getTargetUniversity('free');
     _jobData = getTargetJob(_getDate());
+    _carerData = getCarer();
     super.initState();
   }
   String _getDate(){
@@ -85,6 +89,10 @@ class _HomepageState extends State<Homepage> {
                       margin: EdgeInsets.only(top: 5),
                       height: 15,color: Colors.grey[400],),
                     homePageItems(context,"Available Jobs",_jobData,"job"),
+                    Container(
+                      margin: EdgeInsets.only(top: 5),
+                      height: 15,color: Colors.grey[400],),
+                    homePageItems(context,"Discover Carer",_carerData,"carer"),
                     Container(
                       margin: EdgeInsets.only(top: 5),
                       height: 15,color: Colors.grey[400],),
