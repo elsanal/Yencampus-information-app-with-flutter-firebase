@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:yencampus/Database/sqflite.dart';
 import 'package:yencampus/Decoration/Fonts.dart';
 import 'package:yencampus/Function/HtmlParser.dart';
+import 'package:yencampus/Function/sharePost.dart';
+import 'package:yencampus/Function/urlLauncher.dart';
+import 'package:yencampus/Models/SavedClass.dart';
 
 
 
@@ -29,11 +34,12 @@ Widget title2(String title){
 Widget body(String body){
   return Container(
     padding: EdgeInsets.all(ScreenUtil().setWidth(10)),
-    child: Text(parseHtmlString(body),style: textStyle,textAlign: TextAlign.justify,),
+    child: Html(data: body,style: bodyStyle,),
   );
 }
 
-Widget actionButton(String title,IconData icon, Color iconColor, final doc){
+Widget actionButton(BuildContext context,String title,IconData icon,
+                    Color iconColor, final doc, String type){
   return Padding(
     padding: const EdgeInsets.all(8.0),
     child: new ElevatedButton(
@@ -42,17 +48,29 @@ Widget actionButton(String title,IconData icon, Color iconColor, final doc){
           elevation: MaterialStateProperty.all(5.0),
         ),
         onPressed:(){
-          // sharePost(
-          //     SharePost(
-          //       name: doc.name_fr,
-          //       country: doc.country_fr,
-          //       level: doc.level_fr,
-          //       amount : doc.amount,
-          //       duration : doc.duration,
-          //       deadline: doc.deadline,
-          //       file: doc.apply_link,
-          //     )
-          // );
+         switch(title){
+           case "Share":
+             sharePost(doc, type);
+             break;
+           case "Save" :
+             localDB(tableName: "YENCAMPUS").saveOndB(SavePost(type: type, id: doc.id));
+             final snackBar = SnackBar(
+               content: Text("Saved"),);
+             ScaffoldMessenger.of(context).showSnackBar(snackBar);
+             break;
+           case "Apply" :
+             if(type!="carer"){
+               return UlrLauncher(context,doc.official_web);
+             }
+             break;
+           case "Delete" :
+             localDB(tableName: "YENCAMPUS").delete(int.parse(doc.id));
+             final snackBar = SnackBar(
+               content: Text("Deleted"),);
+             ScaffoldMessenger.of(context).showSnackBar(snackBar);
+             Navigator.of(context).pop(true);
+             break;
+         }
         },
         child: Padding(
           padding: const EdgeInsets.all(4.0),

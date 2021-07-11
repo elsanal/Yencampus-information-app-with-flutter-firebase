@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:yencampus/Components/DetailsComp.dart';
+import 'package:yencampus/Database/sqflite.dart';
+import 'package:yencampus/Function/sharePost.dart';
+import 'package:yencampus/Models/SavedClass.dart';
 import 'package:yencampus/Models/ScholarshipClass.dart';
 
-
-
-Widget detailScholar(BuildContext context, ScholarshipGnClass doc){
+Widget detailScholar(BuildContext context, ScholarshipGnClass doc,bool isLocal){
   var height = MediaQuery.of(context).size.height;
   var width = MediaQuery.of(context).size.width;
   return SliverToBoxAdapter(
@@ -51,9 +52,10 @@ Widget detailScholar(BuildContext context, ScholarshipGnClass doc){
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  actionButton("Apply",Icons.web_rounded,Colors.green,doc),
-                  actionButton("Save",Icons.save_rounded,Colors.blue,doc),
-                  actionButton("Share",Icons.share_rounded,Colors.red,doc)
+                  actionButton(context,"Apply",Icons.web_rounded,Colors.green,doc,"scholar"),
+                  isLocal?actionButton(context,"Delete",Icons.save_rounded,Colors.blue,doc,"scholar"):
+                  actionButton(context,"Save",Icons.save_rounded,Colors.blue,doc,"scholar"),
+                  actionButton(context,"Share",Icons.share_rounded,Colors.red,doc,"scholar")
                 ],
               ),
             ),

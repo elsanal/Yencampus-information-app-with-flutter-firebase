@@ -4,16 +4,17 @@ import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:yencampus/Components/Details.dart';
 import 'package:yencampus/Components/DetailsComp.dart';
+import 'package:yencampus/Database/sqflite.dart';
 import 'package:yencampus/Decoration/Fonts.dart';
 import 'package:yencampus/Function/HtmlParser.dart';
 import 'package:yencampus/Function/sharePost.dart';
 import 'package:yencampus/Models/JobClass.dart';
+import 'package:yencampus/Models/SavedClass.dart';
 import 'package:yencampus/Models/ScholarshipClass.dart';
 import 'package:yencampus/Models/SharePostClass.dart';
 
-import '../ShareArticle.dart';
 
-Widget detailJob(BuildContext context, JobClass doc){
+Widget detailJob(BuildContext context, JobClass doc,bool isLocal){
   var height = MediaQuery.of(context).size.height;
   var width = MediaQuery.of(context).size.width;
   return SliverToBoxAdapter(
@@ -51,9 +52,10 @@ Widget detailJob(BuildContext context, JobClass doc){
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  actionButton("Apply",Icons.web_rounded,Colors.green,doc),
-                  actionButton("Save",Icons.save_rounded,Colors.blue,doc),
-                  actionButton("Share",Icons.share_rounded,Colors.red,doc)
+                  actionButton(context,"Apply",Icons.web_rounded,Colors.green,doc,"job"),
+                  isLocal?actionButton(context,"Delete",Icons.save_rounded,Colors.blue,doc,"job"):
+                  actionButton(context,"Save",Icons.save_rounded,Colors.blue,doc,"job"),
+                  actionButton(context,"Share",Icons.share_rounded,Colors.red,doc,"job")
                 ],
               ),
             ),

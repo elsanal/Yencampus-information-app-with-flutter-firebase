@@ -34,10 +34,10 @@ Future<List<JobClass>> getJob()async{
   return data;
 }
 
-Future<List<JobClass>> getTargetJob(final date)async{
+Future<List<JobClass>> getTargetJob(String target, final filter)async{
   List<JobClass> data= [];
   await FirebaseFirestore.instance.collection("job")
-      .where('deadline',isNotEqualTo: date)
+      .where(target,isGreaterThanOrEqualTo: filter)
       .get()
       .then((QuerySnapshot snapshot){
     snapshot.docs.forEach((doc){

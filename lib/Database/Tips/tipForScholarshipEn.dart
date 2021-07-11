@@ -1,4 +1,4 @@
-var getScholarship  = [
+var getScholarship_en  = [
   {
     "title" : "Finding a scholarship is easier than many people think. Here are our tips for your scholarship application so you know what you" +
         "must target in your request to quickly obtain the financing of" +

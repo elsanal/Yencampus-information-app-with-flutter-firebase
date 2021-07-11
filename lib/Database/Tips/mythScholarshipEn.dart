@@ -1,4 +1,4 @@
-var getMyth = [
+var getMyth_en = [
   {
     "title" : "Many high school students after graduation do not even try to apply to" +
         "only one scholarship. Most of them received misconceptions" +

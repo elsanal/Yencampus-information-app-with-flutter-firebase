@@ -2,22 +2,24 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:yencampus/Components/PagesBody.dart';
 import 'package:yencampus/Components/PagesSliverBar.dart';
+import 'package:yencampus/Database/sqflite.dart';
 import 'package:yencampus/Decoration/FormField.dart';
-import 'package:yencampus/Function/Date.dart';
+import 'package:yencampus/Models/SavedClass.dart';
 
-class University extends StatefulWidget {
-  const University({Key? key}) : super(key: key);
+class Saved extends StatefulWidget {
+  const Saved({Key? key}) : super(key: key);
 
   @override
-  _UniversityState createState() => _UniversityState();
+  _SavedState createState() => _SavedState();
 }
 
-class _UniversityState extends State<University> {
-  List<String> _items = ["All","Most recent","Popular","Free tuition fees","More"];
-  var _selected = 'All';
-  String _target = '';
-  String _input = '';
-  int _selectedIndex=0;
+class _SavedState extends State<Saved> {
+
+  List<String> _items = ["All","Scholarships","Universities","Jobs","Carer"];
+  List docs =[];
+  String _selected = 'all';
+  String input = '';
+  int _selectedIndex=-1;
 
   @override
   void initState() {
@@ -25,8 +27,8 @@ class _UniversityState extends State<University> {
     super.initState();
   }
 
-  @override
 
+  @override
   Widget build(BuildContext context) {
     var height = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;
@@ -37,9 +39,7 @@ class _UniversityState extends State<University> {
               pageAppBar(
                   appBarBackground(
                       context,_formField(width),_menuBar(width, _items))),
-              _selected=="All"?pageBody(context,_selected,"univ"):
-              _selected=="true"?filterBody(context, 'univ', _target, true):
-              filterBody(context, 'univ', _target, _selected),
+              SavedBody(context),
             ],
           )
       ),
@@ -55,15 +55,14 @@ class _UniversityState extends State<University> {
           decoration: formFieldDeco,
           onChanged: (value){
             setState(() {
-              _input = value;
+              input = value;
             });
-
+            print(input);
           },
         ),
       ),
     );
   }
-
   Widget _menuBar(double width, List<String> items){
 
     return Container(
@@ -81,8 +80,8 @@ class _UniversityState extends State<University> {
             onTap: (){
               setState(() {
                 _selectedIndex = index;
+                _selected = items[index];
               });
-              onSelected(items[index]);
             },
             child: pageMenuBar(items[index],index,_selectedIndex),
           );
@@ -90,34 +89,5 @@ class _UniversityState extends State<University> {
       ),
     );
   }
-
-  onSelected(String item){
-    switch(item){
-      case "Most recent":
-        setState(() {
-          _selected = getDate();
-          _target = "deadline";
-        });
-        break;
-      case "Popular":
-        setState(() {
-          _selected = "true";
-          _target = "isTopUniversity";
-        });
-        break;
-      case "Free tuition fees":
-        setState(() {
-          _selected = "free";
-          _target = "school_fee";
-        });
-        break;
-      case "All":
-        setState(() {
-          _selected = "All";
-        });
-        break;
-      case "More":
-        break;
-    }
-  }
 }
+

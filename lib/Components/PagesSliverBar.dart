@@ -84,12 +84,12 @@ Widget searchBarWithHome(BuildContext context,Widget formField){
   );
 }
 
-Widget pageMenuBar(String item){
+Widget pageMenuBar(String item, int index, int selectedIndex){
   return new Container(
-    padding: EdgeInsets.all(ScreenUtil().setWidth(10)),
+    padding: EdgeInsets.all(ScreenUtil().setWidth(15)),
     margin: EdgeInsets.all(ScreenUtil().setWidth(10)),
     decoration: BoxDecoration(
-        color: Colors.grey[200],
+        color: index == selectedIndex?Colors.blue:Colors.grey[200],
         borderRadius: BorderRadius.all(
             Radius.circular(ScreenUtil().setWidth(40))
         )

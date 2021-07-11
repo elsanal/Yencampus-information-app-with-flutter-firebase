@@ -1,4 +1,4 @@
-var getMyth = [
+var getMyth_fr = [
   {
     "title" : "Plusieurs lycéens après leur diplôme n'essayent meme pas de postuler à "+
         "une seule bourse. Ils/elles ont la plupart reçu des idées fausses "+

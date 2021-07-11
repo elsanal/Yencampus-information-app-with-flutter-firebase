@@ -2,9 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:yencampus/Components/DetailsComp.dart';
 import 'package:yencampus/Models/UniversityClass.dart';
 
-import '../ShareArticle.dart';
 
-Widget detailUniv(BuildContext context, UniversityClass doc){
+Widget detailUniv(BuildContext context, UniversityClass doc, bool isLocal){
   var height = MediaQuery.of(context).size.height;
   var width = MediaQuery.of(context).size.width;
   return SliverToBoxAdapter(
@@ -41,9 +40,9 @@ Widget detailUniv(BuildContext context, UniversityClass doc){
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  actionButton("Apply",Icons.web_rounded,Colors.green,doc),
-                  actionButton("Save",Icons.save_rounded,Colors.blue,doc),
-                  actionButton("Share",Icons.share_rounded,Colors.red,doc)
+                  actionButton(context,"Apply",Icons.web_rounded,Colors.green,doc,"univ"),
+                  actionButton(context,"Save",Icons.save_rounded,Colors.blue,doc,"univ"),
+                  actionButton(context,"Share",Icons.share_rounded,Colors.red,doc,"univ")
                 ],
               ),
             ),

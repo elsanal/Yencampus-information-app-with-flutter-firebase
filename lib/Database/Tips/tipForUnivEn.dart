@@ -1,4 +1,4 @@
-var getUniversity = [
+var getUniversity_en = [
   {
     "title" : "Our time at university not only allows us to acquire" +
         "training and skills necessary for our career" +

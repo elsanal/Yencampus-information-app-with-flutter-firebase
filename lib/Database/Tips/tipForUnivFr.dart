@@ -1,4 +1,4 @@
-var getUniversity = [
+var getUniversity_fr = [
   {
     "title" : "Notre passage à l’université nous permet non seulement d’acquérir "+
         "une formation et des compétences nécessaires à notre carrière "+

@@ -5,11 +5,13 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
 import 'package:yencampus/Components/HomeAppBar.dart';
 import 'package:yencampus/Components/HomePageContent.dart';
+import 'package:yencampus/Components/Loading.dart';
 import 'package:yencampus/Components/PagesDetails/DetailScholar.dart';
 import 'package:yencampus/Components/HomePageItems.dart';
 import 'package:yencampus/Components/PagesSliverBar.dart';
 import 'package:yencampus/Decoration/Fonts.dart';
 import 'package:yencampus/Decoration/FormField.dart';
+import 'package:yencampus/Function/Date.dart';
 import 'package:yencampus/Function/getCareerData.dart';
 import 'package:yencampus/Function/getJobData.dart';
 import 'package:yencampus/Function/getScholarshipData.dart';
@@ -19,7 +21,7 @@ import 'package:yencampus/Models/JobClass.dart';
 import 'package:yencampus/Models/ScholarshipClass.dart';
 import 'package:yencampus/Models/UniversityClass.dart';
 import 'package:yencampus/Pages/Carrer.dart';
-import 'package:yencampus/Pages/Exams.dart';
+import 'package:yencampus/Pages/Saved.dart';
 import 'package:yencampus/Pages/Job.dart';
 import 'package:yencampus/Pages/Scholarship.dart';
 import 'package:yencampus/Pages/Tips.dart';
@@ -35,8 +37,8 @@ class Homepage extends StatefulWidget {
 
 class _HomepageState extends State<Homepage> {
 
-  List<String> _items = ["Scholarships","Universities","Jobs","Carer","Tips"];
-  List<Widget> _pages = [Scholarship(),University(),Job(),Carer(),Tips()];
+  List<String> _items = ["Scholarships","Universities","Jobs","Carer","Tips","Saved"];
+  List<Widget> _pages = [Scholarship(),University(),Job(),Carer(),Tips(),Saved()];
 
   late Future<List<ScholarshipGnClass>> _scholarData;
   late Future<List<UniversityClass>> _univData;
@@ -44,22 +46,20 @@ class _HomepageState extends State<Homepage> {
   late Future<List<CarerClass>> _carerData;
   String selected = 'all';
   String input = '';
+  int _selectedIndex=-1;
+
 
   @override
   void initState(){
     // TODO: implement initState
-    _scholarData =  getTargetScholarship(_getDate());
-    _univData = getTargetUniversity('free');
-    _jobData = getTargetJob(_getDate());
+    _scholarData =  getTargetScholarship("deadline",getDate());
+    _univData = getTargetUniversity("school_fee",'free');
+    _jobData = getTargetJob("deadline",getDate());
     _carerData = getCarer();
     super.initState();
   }
-  String _getDate(){
-    DateTime _time = DateTime.now();
-    var formatDate = DateFormat('yyyy-MM-dd');
-    String date = formatDate.format(_time);
-    return date;
-  }
+
+
   @override
   Widget build(BuildContext context) {
     var height = MediaQuery.of(context).size.height;
@@ -76,7 +76,7 @@ class _HomepageState extends State<Homepage> {
                   homeAppBarBackground(
                       context,_formField(width),_menuBar(width, _items))),
               SliverToBoxAdapter(
-                child: ListView(
+                child:ListView(
                   physics: NeverScrollableScrollPhysics(),
                   shrinkWrap: true,
                   children: [
@@ -93,22 +93,6 @@ class _HomepageState extends State<Homepage> {
                       margin: EdgeInsets.only(top: 5),
                       height: 15,color: Colors.grey[400],),
                     homePageItems(context,"Discover Carer",_carerData,"carer"),
-                    Container(
-                      margin: EdgeInsets.only(top: 5),
-                      height: 15,color: Colors.grey[400],),
-                    // category("Tips to get Scholarship"),
-                    // Container(
-                    //     height: ScreenUtil().setHeight(height),
-                    //     width: ScreenUtil().setWidth(width),
-                    //     child: homepageContent(context,docs)),
-                    // Container(height: 15,),
-                    // category("Get admission in University"),
-                    // Container(
-                    //     height: ScreenUtil().setHeight(height),
-                    //     width: ScreenUtil().setWidth(width),
-                    //     child: homepageContent(context,docs)),
-                    // Container(height: 15,),
-                    Center(child: category("All right reserved")),
                     Container(height: 20,)
                   ],
                 ),
@@ -138,6 +122,7 @@ class _HomepageState extends State<Homepage> {
     );
   }
   Widget _menuBar(double width, List<String> items){
+
     return Container(
       height: ScreenUtil().setHeight(90),
       width: width,
@@ -152,12 +137,16 @@ class _HomepageState extends State<Homepage> {
           return InkWell(
             onTap: (){
               setState(() {
+                _selectedIndex = index;
                 selected = items[index];
               });
               Navigator.push(context, new MaterialPageRoute(
                   builder: (context)=>_pages[index]));
+              Future.delayed(Duration(seconds: 1),(){setState(() {
+                _selectedIndex = -1;
+              });});
             },
-            child: pageMenuBar(items[index]),
+            child: pageMenuBar(items[index],index,_selectedIndex),
           );
         },
       ),

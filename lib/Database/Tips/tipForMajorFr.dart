@@ -1,4 +1,4 @@
-var chooseMajor = [
+var chooseMajor_fr = [
   {
     "title" :"Choisir sa filière à l'université est une decision très importante. Plusieurs universités"+
         "ou institutions offrent des centaines de filieres dans differents domaines. Pour choisir sa filière, plusiers "+

@@ -20,7 +20,7 @@ Widget homepageContent(BuildContext context, final docs, String type){
         child: InkWell(
           onTap: (){
             Navigator.push(context, new MaterialPageRoute(
-                builder: (context)=>Details(doc: docs[index], type: type,)));
+                builder: (context)=>Details(doc: docs[index], type: type,isLocal: false,)));
           },
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,

@@ -48,10 +48,10 @@ import 'package:yencampus/Models/ScholarshipClass.dart';
   return data;
 }
 /// get Scholarships by targets
-Future<List<ScholarshipGnClass>> getTargetScholarship(final date)async{
+Future<List<ScholarshipGnClass>> getTargetScholarship(String target, final filter)async{
   List<ScholarshipGnClass> data= [];
   await FirebaseFirestore.instance.collection("scholarship")
-      .where('deadline', isGreaterThanOrEqualTo: date)
+      .where(target, isGreaterThanOrEqualTo: filter)
       .get()
       .then((QuerySnapshot snapshot){
     snapshot.docs.forEach((doc){

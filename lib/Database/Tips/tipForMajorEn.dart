@@ -1,4 +1,4 @@
-var chooseMajor = [
+var chooseMajor_en = [
   {
     "title" : "Choosing your course at the university is a very important decision. Several universities" +
         "or institutions offer hundreds of courses in different fields. To choose a branch, several" +

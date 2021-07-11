@@ -33,10 +33,10 @@ Future<List<UniversityClass>> getUniversity()async{
   return data;
 }
 /// get Scholarships by targets
-Future<List<UniversityClass>> getTargetUniversity(String fee)async{
+Future<List<UniversityClass>> getTargetUniversity(String target, final filter)async{
   List<UniversityClass> data= [];
   await FirebaseFirestore.instance.collection("university")
-      .where('school_fee', isNotEqualTo: fee)
+      .where(target, isGreaterThanOrEqualTo: filter)
       .get()
       .then((QuerySnapshot snapshot){
     snapshot.docs.forEach((doc){

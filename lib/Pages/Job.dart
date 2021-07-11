@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:yencampus/Components/PagesBody.dart';
 import 'package:yencampus/Components/PagesSliverBar.dart';
 import 'package:yencampus/Decoration/FormField.dart';
+import 'package:yencampus/Function/Date.dart';
 import 'package:yencampus/Function/getUniversityData.dart';
 import 'package:yencampus/Models/UniversityClass.dart';
 
@@ -14,10 +15,11 @@ class Job extends StatefulWidget {
 }
 
 class _JobState extends State<Job> {
-  List<String> _items = ["All","Most recent","Popular","Fully funded",
-    "Partially funded","More"];
-  String selected = 'all';
-  String input = '';
+  List<String> _items = ["All","Most recent","Salary","Country","More"];
+  var _selected = 'All';
+  String _target = '';
+  String _input = '';
+  int _selectedIndex=0;
 
   @override
   void initState() {
@@ -37,7 +39,8 @@ class _JobState extends State<Job> {
               pageAppBar(
                   appBarBackground(
                       context,_formField(width),_menuBar(width, _items))),
-              pageBody(context,selected,"job"),
+              _selected=="All"?pageBody(context,_selected,"job"):
+              filterBody(context, 'job', _target, true),
             ],
           )
       ),
@@ -53,15 +56,16 @@ class _JobState extends State<Job> {
           decoration: formFieldDeco,
           onChanged: (value){
             setState(() {
-              input = value;
+              _input = value;
             });
-            print(input);
+
           },
         ),
       ),
     );
   }
   Widget _menuBar(double width, List<String> items){
+
     return Container(
       height: ScreenUtil().setHeight(90),
       width: width,
@@ -76,13 +80,44 @@ class _JobState extends State<Job> {
           return InkWell(
             onTap: (){
               setState(() {
-                selected = items[index];
+                _selectedIndex = index;
               });
+              onSelected(items[index]);
             },
-            child: pageMenuBar(items[index]),
+            child: pageMenuBar(items[index],index,_selectedIndex),
           );
         },
       ),
     );
   }
+  onSelected(String item){
+    switch(item){
+      case "Most recent":
+        setState(() {
+          _selected = getDate();
+          _target = "deadline";
+        });
+        break;
+      case "Country":
+        setState(() {
+          _selected = "All";
+        });
+        break;
+      case "Salary":
+        setState(() {
+          _selected = "0";
+          _target = "salary";
+        });
+        break;
+      case "All":
+        setState(() {
+          _selected = "All";
+        });
+        break;
+      case "More":
+        break;
+    }
+  }
+
+
 }

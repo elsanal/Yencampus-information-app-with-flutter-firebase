@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:yencampus/Decoration/Fonts.dart';
 
-Widget sliverAppBar(BuildContext context,String title, String imgUrl){
+Widget sliverAppBar(BuildContext context,String title, String imgUrl, bool isTip){
   return SliverAppBar(
     floating: true,
     pinned: false,
@@ -18,11 +18,11 @@ Widget sliverAppBar(BuildContext context,String title, String imgUrl){
       collapseMode: CollapseMode.parallax,
       title: Text(title,style: titleStyle.copyWith(
         backgroundColor: Colors.white.withOpacity(0.5),
-        fontSize: ScreenUtil().setSp(80)
+        fontSize: isTip?ScreenUtil().setSp(40):ScreenUtil().setSp(80),
       ),textAlign: TextAlign.center,),
       background: FittedBox(
         fit: BoxFit.contain,
-        child: Image.network(imgUrl),
+        child: !isTip?Image.network(imgUrl):Image.asset('assets/hat2.jpeg'),
       ),
     ),
   );

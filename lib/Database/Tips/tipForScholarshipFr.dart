@@ -1,4 +1,4 @@
-var getScholarship  = [
+var getScholarship_fr  = [
   {
     "title" : "Trouver une bourse d'étude est plus facile que ce que beaucoup de gens pensent.Voici nos conseils pour votre demande de bourse afin de savoir ce que vous" +
         "devez cibler dans votre demande pour obtenir rapidement le financement de"+
