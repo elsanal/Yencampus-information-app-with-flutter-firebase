@@ -9,20 +9,10 @@ class JobClass{
 
 
   //////////////// English /////////////
-
-
-  String description_en;
-  String name_en;
-  String country_en;
-  String required_en;
-
-  ////////////////// French //////////////
-  String description_fr;
-  String name_fr;
-  String country_fr;
-  String required_fr;
-
-
+  String description;
+  String name;
+  String country;
+  String required;
 
   JobClass({
     required this.id,
@@ -33,15 +23,11 @@ class JobClass{
     required this.salary,
     required this.duration,
     /// english
-    required this.country_en,
-    required this.description_en,
-    required this.name_en,
-    required this.required_en,
-    /// french
-    required this.country_fr,
-    required this.description_fr,
-    required this.name_fr,
-    required this.required_fr,
+    required this.country,
+    required this.description,
+    required this.name,
+    required this.required,
+
 
   });
 }

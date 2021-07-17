@@ -4,6 +4,7 @@ import 'package:yencampus/Components/PagesBody.dart';
 import 'package:yencampus/Components/PagesSliverBar.dart';
 import 'package:yencampus/Database/sqflite.dart';
 import 'package:yencampus/Decoration/FormField.dart';
+import 'package:yencampus/Function/translation.dart';
 import 'package:yencampus/Models/SavedClass.dart';
 
 class Saved extends StatefulWidget {
@@ -15,7 +16,7 @@ class Saved extends StatefulWidget {
 
 class _SavedState extends State<Saved> {
 
-  List<String> _items = ["All","Scholarships","Universities","Jobs","Carer"];
+  List<String> _items = ["all","scholar","univ","job","carer"];
   List docs =[];
   String _selected = 'all';
   String input = '';
@@ -38,7 +39,7 @@ class _SavedState extends State<Saved> {
             slivers: [
               pageAppBar(
                   appBarBackground(
-                      context,_formField(width),_menuBar(width, _items))),
+                      context,_formField(width),_menuBar(width, _items),'saved')),
               SavedBody(context),
             ],
           )
@@ -83,7 +84,7 @@ class _SavedState extends State<Saved> {
                 _selected = items[index];
               });
             },
-            child: pageMenuBar(items[index],index,_selectedIndex),
+            child: pageMenuBar(translate(context, items[index]),index,_selectedIndex),
           );
         },
       ),

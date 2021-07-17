@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:yencampus/Components/DetailsComp.dart';
+import 'package:yencampus/Function/convertListString.dart';
+import 'package:yencampus/Function/translation.dart';
 import 'package:yencampus/Models/UniversityClass.dart';
 
 
@@ -12,13 +14,11 @@ Widget detailUniv(BuildContext context, UniversityClass doc, bool isLocal){
           shrinkWrap: true,
           physics: NeverScrollableScrollPhysics(),
           children: [
-            header("Country", doc.country_fr),
+            header(translate(context, "country"), doc.country),
             new SizedBox(height: 10,),
-            header("Level", doc.major_fr[0].toString()),
+            header(translate(context, "school_fee"), doc.school_fee),
             new SizedBox(height: 10,),
-            header("School fee", doc.school_fee),
-            new SizedBox(height: 10,),
-            header("Deadline", doc.deadline),
+            header(translate(context, "deadline"), doc.deadline),
             new SizedBox(height: 10,),
 
 
@@ -26,23 +26,26 @@ Widget detailUniv(BuildContext context, UniversityClass doc, bool isLocal){
               doc.images[0]['src']['src'], fit: BoxFit.fill,),),
             new SizedBox(height: 10,),
 
-            body(doc.description_fr),
+            body(doc.description),
             new SizedBox(height: 20,),
 
             new Container(child: Image.network(
               doc.images[1]['src']['src'], fit: BoxFit.fill,),),
             new SizedBox(height: 10,),
 
+            title2(translate(context, "depart_majors")),
+            embListToString(doc.major),
+            new SizedBox(height: 20,),
 
             new Container(
               width: width,
               color: Colors.grey,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
+              child: Wrap(
+
                 children: [
-                  actionButton(context,"Apply",Icons.web_rounded,Colors.green,doc,"univ"),
-                  actionButton(context,"Save",Icons.save_rounded,Colors.blue,doc,"univ"),
-                  actionButton(context,"Share",Icons.share_rounded,Colors.red,doc,"univ")
+                  actionButton(context,"apply",Icons.web_rounded,Colors.green,doc,"univ"),
+                  actionButton(context,"save",Icons.save_rounded,Colors.blue,doc,"univ"),
+                  actionButton(context,"share",Icons.share_rounded,Colors.red,doc,"univ")
                 ],
               ),
             ),

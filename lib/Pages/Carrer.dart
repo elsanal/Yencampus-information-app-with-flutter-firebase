@@ -3,7 +3,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:yencampus/Components/PagesBody.dart';
 import 'package:yencampus/Components/PagesSliverBar.dart';
 import 'package:yencampus/Decoration/FormField.dart';
-import 'package:yencampus/Function/Date.dart';
+import 'package:yencampus/Function/translation.dart';
+
 
 class Carer extends StatefulWidget {
   const Carer({Key? key}) : super(key: key);
@@ -14,8 +15,8 @@ class Carer extends StatefulWidget {
 
 class _CarerState extends State<Carer> {
 
-  List<String> _items = ["Domain","Trends","Carer of future"];
-  var _selected = 'All';
+  List<String> _items = ["domain","trend","carer_of_future"];
+  var _selected = '';
   String _target = '';
   String _input = '';
   int _selectedIndex=0;
@@ -37,7 +38,7 @@ class _CarerState extends State<Carer> {
             slivers: [
               pageAppBar(
                   appBarBackground(
-                      context,_formField(width),_menuBar(width, _items))),
+                      context,_formField(width),_menuBar(width, _items),'carer')),
               pageBody(context,_selected,"carer"),
             ],
           )
@@ -84,39 +85,11 @@ class _CarerState extends State<Carer> {
                 _selected = items[index];
               });
             },
-            child: pageMenuBar(items[index],index,_selectedIndex),
+            child: pageMenuBar(translate(context, items[index]),index,_selectedIndex),
           );
         },
       ),
     );
   }
 
-  onSelected(String item){
-    switch(item){
-      case "Most recent":
-        setState(() {
-          _selected = getDate();
-          _target = "deadline";
-        });
-        break;
-      case "Country":
-        setState(() {
-          _selected = "All";
-        });
-        break;
-      case "Salary":
-        setState(() {
-          _selected = "0";
-          _target = "salary";
-        });
-        break;
-      case "All":
-        setState(() {
-          _selected = "All";
-        });
-        break;
-      case "More":
-        break;
-    }
-  }
 }

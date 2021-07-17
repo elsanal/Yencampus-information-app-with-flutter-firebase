@@ -4,6 +4,7 @@ import 'package:yencampus/Components/Loading.dart';
 import 'package:yencampus/Function/getJobData.dart';
 import 'package:yencampus/Function/getScholarshipData.dart';
 import 'package:yencampus/Function/getUniversityData.dart';
+import 'package:yencampus/Function/translation.dart';
 import 'package:yencampus/Models/CarerClass.dart';
 import 'package:yencampus/Models/JobClass.dart';
 import 'package:yencampus/Models/ScholarshipClass.dart';
@@ -30,7 +31,7 @@ import 'HomePageContent.dart';
              if (!snapshot.hasData) {
                return Loading();
              } else if (snapshot.hasError) {
-               return Center(child: Text("Error occured"),);
+               return Center(child: Text(translate(context,"error")),);
              } else {
                List<ScholarshipGnClass> docs = snapshot.data!;
                return Column(
@@ -54,7 +55,7 @@ import 'HomePageContent.dart';
              if (!snapshot.hasData) {
                return Container();
              } else if (snapshot.hasError) {
-               return Center(child: Text("Error occured"),);
+               return Center(child: Text(translate(context,"error")),);
              } else {
                List<UniversityClass> docs = snapshot.data!;
                return Column(
@@ -79,7 +80,7 @@ import 'HomePageContent.dart';
                if (!snapshot.hasData) {
                  return Container();
                } else if (snapshot.hasError) {
-                 return Center(child: Text("Error occured"),);
+                 return Center(child: Text(translate(context,"error")),);
                } else {
                  List<JobClass> docs = snapshot.data!;
                  return Column(
@@ -105,7 +106,7 @@ import 'HomePageContent.dart';
                if (!snapshot.hasData) {
                  return Container();
                } else if (snapshot.hasError) {
-                 return Center(child: Text("Error occured"),);
+                 return Center(child: Text(translate(context,"error")),);
                } else {
                  List<CarerClass> docs = snapshot.data!;
                  return Column(

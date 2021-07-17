@@ -5,15 +5,14 @@ import 'package:yencampus/Database/sqflite.dart';
 import 'package:yencampus/Decoration/Fonts.dart';
 import 'package:yencampus/Function/HtmlParser.dart';
 import 'package:yencampus/Function/sharePost.dart';
+import 'package:yencampus/Function/translation.dart';
 import 'package:yencampus/Function/urlLauncher.dart';
 import 'package:yencampus/Models/SavedClass.dart';
 
 
 
 
-save(int value){
-  print("save");
-}
+
 
 Widget header(String title, String result){
   return Container(
@@ -33,7 +32,7 @@ Widget title2(String title){
 
 Widget body(String body){
   return Container(
-    padding: EdgeInsets.all(ScreenUtil().setWidth(10)),
+    // padding: EdgeInsets.all(ScreenUtil().setWidth(5)),
     child: Html(data: body,style: bodyStyle,),
   );
 }
@@ -63,10 +62,10 @@ Widget actionButton(BuildContext context,String title,IconData icon,
                return UlrLauncher(context,doc.official_web);
              }
              break;
-           case "Delete" :
+           case "Delete":
              localDB(tableName: "YENCAMPUS").delete(int.parse(doc.id));
              final snackBar = SnackBar(
-               content: Text("Deleted"),);
+               content: Text(translate(context, "deleted")),);
              ScaffoldMessenger.of(context).showSnackBar(snackBar);
              Navigator.of(context).pop(true);
              break;
@@ -77,7 +76,7 @@ Widget actionButton(BuildContext context,String title,IconData icon,
           child: Column(
             children: [
               Icon(icon,color: Colors.white,),
-              Text(title,style: titleStyle.copyWith(
+              Text(translate(context, title),style: titleStyle.copyWith(
                 fontSize: ScreenUtil().setSp(50),
                 color: Colors.white,
               ),),

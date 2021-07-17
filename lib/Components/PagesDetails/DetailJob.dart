@@ -8,6 +8,7 @@ import 'package:yencampus/Database/sqflite.dart';
 import 'package:yencampus/Decoration/Fonts.dart';
 import 'package:yencampus/Function/HtmlParser.dart';
 import 'package:yencampus/Function/sharePost.dart';
+import 'package:yencampus/Function/translation.dart';
 import 'package:yencampus/Models/JobClass.dart';
 import 'package:yencampus/Models/SavedClass.dart';
 import 'package:yencampus/Models/ScholarshipClass.dart';
@@ -23,11 +24,11 @@ Widget detailJob(BuildContext context, JobClass doc,bool isLocal){
           shrinkWrap: true,
           physics: NeverScrollableScrollPhysics(),
           children: [
-            header("Country", doc.country_fr),
+            header(translate(context, "country"), doc.country),
             new SizedBox(height: 10,),
-            header("salary", doc.salary),
+            header(translate(context, "salary"), doc.salary),
             new SizedBox(height: 10,),
-            header("Duration", doc.duration),
+            header(translate(context, "duration"), doc.duration),
             new SizedBox(height: 10,),
 
 
@@ -35,10 +36,10 @@ Widget detailJob(BuildContext context, JobClass doc,bool isLocal){
               doc.images[0]['src']['src'], fit: BoxFit.fill,),),
             new SizedBox(height: 10,),
 
-            body(doc.description_fr),
+            body(doc.description),
             new SizedBox(height: 20,),
-            title2("Requirement"),
-            body(doc.required_fr),
+            title2(translate(context, "req")),
+            body(doc.required),
             new SizedBox(height: 20,),
 
             new Container(child: Image.network(
@@ -49,13 +50,12 @@ Widget detailJob(BuildContext context, JobClass doc,bool isLocal){
             new Container(
               width: width,
               color: Colors.grey,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
+              child: Wrap(
                 children: [
-                  actionButton(context,"Apply",Icons.web_rounded,Colors.green,doc,"job"),
-                  isLocal?actionButton(context,"Delete",Icons.save_rounded,Colors.blue,doc,"job"):
-                  actionButton(context,"Save",Icons.save_rounded,Colors.blue,doc,"job"),
-                  actionButton(context,"Share",Icons.share_rounded,Colors.red,doc,"job")
+                  actionButton(context,"apply",Icons.web_rounded,Colors.green,doc,"job"),
+                  isLocal?actionButton(context,"delete",Icons.save_rounded,Colors.blue,doc,"job"):
+                  actionButton(context,"save",Icons.save_rounded,Colors.blue,doc,"job"),
+                  actionButton(context,"share",Icons.share_rounded,Colors.red,doc,"job")
                 ],
               ),
             ),

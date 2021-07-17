@@ -12,29 +12,19 @@ class ScholarshipGnClass{
 
   //////////////// English /////////////
 
-  String advantage_en;
-  String condition_en;
-  String description_en;
-  String name_en;
-  String other_detail_en;
-  String how_to_apply_en;
-  String req_docs_en;
-  String country_en;
-  List eligible_en;
-  List level_en;
+  String advantage;
+  String condition;
+  String description;
+  String name;
+  String other_detail;
+  String how_to_apply;
+  String req_docs;
+  String country;
+  List eligible;
+  List level;
 
   ////////////////// French //////////////
 
-  String advantage_fr;
-  String condition_fr;
-  String description_fr;
-  String name_fr;
-  String other_detail_fr;
-  String how_to_apply_fr;
-  String req_docs_fr;
-  String country_fr;
-  List eligible_fr;
-  List level_fr;
 
 
   ScholarshipGnClass({
@@ -48,27 +38,18 @@ class ScholarshipGnClass{
     required this.official_web,
     required this.duration,
     /// english
-    required this.advantage_en,
-    required this.condition_en,
-    required this.country_en,
-    required this.eligible_en,
-    required this.description_en,
-    required this.how_to_apply_en,
-    required this.level_en,
-    required this.name_en,
-    required this.other_detail_en,
-    required this.req_docs_en,
-    /// french
-    required this.advantage_fr,
-    required this.condition_fr,
-    required this.country_fr,
-    required this.eligible_fr,
-    required this.description_fr,
-    required this.how_to_apply_fr,
-    required this.level_fr,
-    required this.name_fr,
-    required this.other_detail_fr,
-    required this.req_docs_fr
+    required this.advantage,
+    required this.condition,
+    required this.country,
+    required this.eligible,
+    required this.description,
+    required this.how_to_apply,
+    required this.level,
+    required this.name,
+    required this.other_detail,
+    required this.req_docs,
+
+
 
   });
 }

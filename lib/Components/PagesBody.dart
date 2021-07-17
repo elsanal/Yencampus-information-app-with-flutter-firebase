@@ -1,17 +1,17 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:yencampus/Components/Details.dart';
 import 'package:yencampus/Components/Loading.dart';
 import 'package:yencampus/Database/sqflite.dart';
 import 'package:yencampus/Decoration/Fonts.dart';
 import 'package:yencampus/Function/HtmlParser.dart';
+import 'package:yencampus/Function/Locale.dart';
 import 'package:yencampus/Function/getCareerData.dart';
 import 'package:yencampus/Function/getJobData.dart';
 import 'package:yencampus/Function/getScholarshipData.dart';
 import 'package:yencampus/Function/getUniversityData.dart';
 import 'package:yencampus/Function/sharePost.dart';
+import 'package:yencampus/Function/translation.dart';
 import 'package:yencampus/Models/CarerClass.dart';
 import 'package:yencampus/Models/JobClass.dart';
 import 'package:yencampus/Models/SavedClass.dart';
@@ -23,6 +23,7 @@ import 'package:yencampus/Pages/Scholarship.dart';
 Widget pageBody(BuildContext context, String target, String type){
   var height = MediaQuery.of(context).size.height;
   var width = MediaQuery.of(context).size.width;
+  var lang = getLocale(context);
   return SliverToBoxAdapter(
     child: new Container(
       height:height*(3*0.53),
@@ -31,7 +32,7 @@ Widget pageBody(BuildContext context, String target, String type){
           bottom: ScreenUtil().setHeight(50),
           top: ScreenUtil().setHeight(50)
       ),
-      child: _category(type, width, height,false,'null')
+      child: _category(lang,type, width, height,false,'null')
     ),
   );
 }
@@ -39,9 +40,11 @@ Widget pageBody(BuildContext context, String target, String type){
 /// Widget to show the different saved posts
 ValueNotifier<int> length = ValueNotifier(2);
 ValueNotifier<bool> isLoading = ValueNotifier(false);
+
 Widget SavedBody(BuildContext context){
   var height = MediaQuery.of(context).size.height;
   var width = MediaQuery.of(context).size.width;
+  var lang = getLocale(context);
   return SliverToBoxAdapter(
     child: new Container(
         height:height*(length.value*0.54),
@@ -59,15 +62,15 @@ Widget SavedBody(BuildContext context){
                   if(snapshot.hasError){
                     return Container(
                         alignment: Alignment.topCenter,
-                        child: Center(child: Text("An error...",style: titleStyle,),));
+                        child: Center(child: Text(translate(context, "error"),style: titleStyle,),));
                   }else if(snapshot.connectionState == ConnectionState.waiting){
                     return Container(
                         alignment: Alignment.topCenter,
-                        child: Center(child: Text("Waiting...",style: titleStyle,),));
+                        child: Center(child: Text(translate(context, "waiting"),style: titleStyle,),));
                   }else if(!snapshot.hasData){
                     return Container(
                       alignment: Alignment.topCenter,
-                        child: Center(child: Text("There is not saved posts",style: titleStyle2,),));
+                        child: Center(child: Text(translate(context, "no_saved"),style: titleStyle2,),));
                   }else if(snapshot.hasData) {
                     List<SavePost> docs = snapshot.data;
                      length.value = docs.length;
@@ -76,14 +79,14 @@ Widget SavedBody(BuildContext context){
                         physics: NeverScrollableScrollPhysics(),
                         itemCount: docs.length,
                         itemBuilder: (context,index){
-                          return _category(docs[index].type, width, height, true, docs[index].id.toString());
+                          return _category(lang,docs[index].type, width, height, true, docs[index].id.toString());
                         }
                     );
 
                   }else{
                     return Container(
                         alignment: Alignment.topCenter,
-                        child: Center(child: Text("Waiting...",style: titleStyle,),));
+                        child: Center(child: Text(translate(context, "waiting"),style: titleStyle,),));
                   }
                 }
             ):Loading();
@@ -97,6 +100,7 @@ Widget SavedBody(BuildContext context){
  Widget filterBody(BuildContext context,String type, String target, final value){
    var height = MediaQuery.of(context).size.height;
    var width = MediaQuery.of(context).size.width;
+   var lang = getLocale(context);
    return SliverToBoxAdapter(
      child: new Container(
          height:height*(5*0.53),
@@ -105,17 +109,17 @@ Widget SavedBody(BuildContext context){
              bottom: ScreenUtil().setHeight(50),
              top: ScreenUtil().setHeight(50)
          ),
-         child: _filterCategory(type, width, height,target,value)
+         child: _filterCategory(lang,type, width, height,target,value)
      ),
    );
 }
 
 /// Identify the type of post and retrieve it data from firebase
-_category(String type,double width, double height,bool isLocal,String id){
+_category(String lang,String type,double width, double height,bool isLocal,String id){
   switch(type){
     case "scholar":
       return FutureBuilder<List<ScholarshipGnClass>>(
-          future: isLocal?getTargetScholarship("id",id):getScholarship(),
+          future: isLocal?getTargetScholarship(lang,"id",id):getScholarship(lang),
           builder: (context, snapshot){
             if(!snapshot.hasData){
               return Container(
@@ -125,7 +129,7 @@ _category(String type,double width, double height,bool isLocal,String id){
             else if(snapshot.hasError){
               return Container(
                 alignment: Alignment.topCenter,
-                child: Center(child: Text("Error ...",style: titleStyle2,),),);
+                child: Center(child: Text(translate(context, "error"),style: titleStyle2,),),);
             }
             else{
               return _listBuilder(snapshot, width, height, type,isLocal);
@@ -134,7 +138,7 @@ _category(String type,double width, double height,bool isLocal,String id){
       );
     case "univ":
       return FutureBuilder<List<UniversityClass>>(
-          future: isLocal?getTargetUniversity("id", id):getUniversity(),
+          future: isLocal?getTargetUniversity(lang,"id", id):getUniversity(lang),
           builder: (context, snapshot) {
             if(!snapshot.hasData){
               return Container(
@@ -144,7 +148,7 @@ _category(String type,double width, double height,bool isLocal,String id){
             else if(snapshot.hasError){
               return Container(
                 alignment: Alignment.topCenter,
-                child: Center(child: Text("Error ...",style: titleStyle2,),),);
+                child: Center(child: Text(translate(context, "error"),style: titleStyle2,),),);
             }
             else{
               return _listBuilder(snapshot, width, height, type,isLocal);
@@ -153,7 +157,7 @@ _category(String type,double width, double height,bool isLocal,String id){
       );
     case "job":
       return FutureBuilder<List<JobClass>>(
-          future: isLocal?getTargetJob('id', id):getJob(),
+          future: isLocal?getTargetJob(lang,'id', id):getJob(lang),
           builder: (context, snapshot) {
             if(!snapshot.hasData){
               return Container(
@@ -163,7 +167,7 @@ _category(String type,double width, double height,bool isLocal,String id){
             else if(snapshot.hasError){
               return Container(
                 alignment: Alignment.topCenter,
-                child: Center(child: Text("Error ..."),),);
+                child: Center(child: Text(translate(context, "error")),),);
             }
             else{
               return _listBuilder(snapshot, width, height, type, isLocal);
@@ -172,7 +176,7 @@ _category(String type,double width, double height,bool isLocal,String id){
       );
     case "carer":
       return FutureBuilder<List<CarerClass>>(
-          future: isLocal?getTargetCarer('id', id):getCarer(),
+          future: isLocal?getTargetCarer(lang,'id', id):getCarer(lang),
           builder: (context, snapshot) {
             if(!snapshot.hasData){
               return Container(
@@ -182,7 +186,7 @@ _category(String type,double width, double height,bool isLocal,String id){
             else if(snapshot.hasError){
               return Container(
                 alignment: Alignment.topCenter,
-                child: Center(child: Text("Error ...",style: titleStyle2,),),);
+                child: Center(child: Text(translate(context, "error"),style: titleStyle2,),),);
             }
             else{
               return _listBuilder(snapshot, width, height, type, isLocal);
@@ -192,11 +196,11 @@ _category(String type,double width, double height,bool isLocal,String id){
   }
 }
 
-_filterCategory(String type,double width, double height,String target, final value){
+_filterCategory(String lang, String type,double width, double height,String target, final value){
   switch(type){
     case "scholar":
       return FutureBuilder<List<ScholarshipGnClass>>(
-          future: getTargetScholarship(target,value),
+          future: getTargetScholarship(lang,target,value),
           builder: (context, snapshot){
             if(!snapshot.hasData){
               return Container(
@@ -206,7 +210,7 @@ _filterCategory(String type,double width, double height,String target, final val
             else if(snapshot.hasError){
               return Container(
                 alignment: Alignment.topCenter,
-                child: Center(child: Text("Error...",style: titleStyle2,),),);
+                child: Center(child: Text(translate(context, "error"),style: titleStyle2,),),);
             }
             else{
               return _listBuilder(snapshot, width, height, type, false);
@@ -215,7 +219,7 @@ _filterCategory(String type,double width, double height,String target, final val
       );
     case "univ":
       return FutureBuilder<List<UniversityClass>>(
-          future: getTargetUniversity(target,value),
+          future: getTargetUniversity(lang,target,value),
           builder: (context, snapshot) {
             if(!snapshot.hasData){
               return Container(
@@ -225,7 +229,7 @@ _filterCategory(String type,double width, double height,String target, final val
             else if(snapshot.hasError){
               return Container(
                 alignment: Alignment.topCenter,
-                child: Center(child: Text("Error...",style: titleStyle2,),),);
+                child: Center(child: Text(translate(context, "error"),style: titleStyle2,),),);
             }
             else{
               return _listBuilder(snapshot, width, height, type, false);
@@ -234,7 +238,7 @@ _filterCategory(String type,double width, double height,String target, final val
       );
     case "job":
       return FutureBuilder<List<JobClass>>(
-          future: getTargetJob(target,value),
+          future: getTargetJob(lang,target,value),
           builder: (context, snapshot) {
             if(!snapshot.hasData){
               return Container(
@@ -244,7 +248,7 @@ _filterCategory(String type,double width, double height,String target, final val
             else if(snapshot.hasError){
               return Container(
                 alignment: Alignment.topCenter,
-                child: Center(child: Text("Error ...",style: titleStyle2,),),);
+                child: Center(child: Text(translate(context, "error"),style: titleStyle2,),),);
             }
             else{
               return _listBuilder(snapshot, width, height, type, false);
@@ -253,7 +257,7 @@ _filterCategory(String type,double width, double height,String target, final val
       );
     case "carer":
       return FutureBuilder<List<CarerClass>>(
-          future: getTargetCarer(target,value),
+          future: getTargetCarer(lang,target,value),
           builder: (context, snapshot) {
             if(!snapshot.hasData){
               return Container(
@@ -263,7 +267,7 @@ _filterCategory(String type,double width, double height,String target, final val
             else if(snapshot.hasError){
               return Container(
                 alignment: Alignment.topCenter,
-                child: Center(child: Text("Error ...",style: titleStyle2,),),);
+                child: Center(child: Text(translate(context, "error"),style: titleStyle2,),),);
             }
             else{
               return _listBuilder(snapshot, width, height, type, false);
@@ -300,7 +304,7 @@ Widget _listBuilder(AsyncSnapshot snapshot, double width, double height, String 
                         fit: BoxFit.contain
                     )
                 ),
-                child: type!="carer"?Text(" Country : ${item.country_fr}\n"
+                child: type!="carer"?Text(translate(context, "country")+": ${item.country}\n"
                     ' ${item.deadline} \n',
                   textAlign: TextAlign.center,
                   style: textStyle.copyWith(
@@ -309,7 +313,7 @@ Widget _listBuilder(AsyncSnapshot snapshot, double width, double height, String 
               Expanded(
                 child: Container(
                   padding: EdgeInsets.all(5),
-                  child: Text(parseHtmlString(item.description_fr),style: textStyle,
+                  child: Text(parseHtmlString(item.description),style: textStyle,
                   maxLines: 3,overflow: TextOverflow.ellipsis,),
                 ),
               ),
@@ -331,7 +335,7 @@ Widget _listBuilder(AsyncSnapshot snapshot, double width, double height, String 
                     InkWell(
                         onTap:()=>Navigator.push(context,
                             new MaterialPageRoute(builder: (context)=>Details(doc: item,type: type,isLocal:isLocal))),
-                        child: _actionButton("Read more")),
+                        child: _actionButton(translate(context, "read_more"))),
                     new Container(height: 40,width: 1,color: Colors.grey[400],),
                     InkWell(
                       onTap: (){
@@ -339,23 +343,23 @@ Widget _listBuilder(AsyncSnapshot snapshot, double width, double height, String 
                           isLoading.value = true;
                           localDB(tableName: "YENCAMPUS").delete(int.parse(item.id));
                           final snackBar = SnackBar(
-                            content: Text("Deleted"),);
+                            content: Text(translate(context, "deleted")),);
                           ScaffoldMessenger.of(context).showSnackBar(snackBar);
                           Future.delayed(Duration(milliseconds: 100),()=>isLoading.value=false);
                         }else{
                           localDB(tableName: "YENCAMPUS").saveOndB(SavePost(type:type, id:(item.id).toString()));
                           final snackBar = SnackBar(
-                            content: Text("Saved"),);
+                            content: Text(translate(context, "saved")),);
                           ScaffoldMessenger.of(context).showSnackBar(snackBar);
                         }
                       },
-                        child: isLocal?_actionButton("Delete"):_actionButton("Save")),
+                        child: isLocal?_actionButton(translate(context, "delete")):_actionButton(translate(context, "save"))),
                     new Container(height: 40,width: 1,color: Colors.grey,),
                     InkWell(
                       onTap: (){
                         sharePost(item, type);
                       },
-                        child: _actionButton("Share")),
+                        child: _actionButton(translate(context, "share"))),
                   ],
                 ),
               ),

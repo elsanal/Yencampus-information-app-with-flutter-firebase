@@ -1,8 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:yencampus/Function/Locale.dart';
 import 'package:yencampus/Models/ScholarshipClass.dart';
 
- Future<List<ScholarshipGnClass>> getScholarship()async{
+ Future<List<ScholarshipGnClass>> getScholarship(String lang)async{
   List<ScholarshipGnClass> data= [];
   await FirebaseFirestore.instance.collection("scholarship")
       .get()
@@ -19,27 +20,17 @@ import 'package:yencampus/Models/ScholarshipClass.dart';
         images: doc['images'],
         duration:doc['duration'],
         /// english
-        advantage_en: doc['advantage_english'],
-        condition_en: doc['condition_english'],
-        country_en: doc['country_english'],
-        eligible_en: doc['eligible_english'],
-        description_en: doc['description_english'],
-        how_to_apply_en: doc['how_apply_english'],
-        level_en: doc['level_english'],
-        name_en: doc['name_english'],
-        other_detail_en: doc['other_detail_english'],
-        req_docs_en: doc['requered_doc_english'],
-        /// french
-        advantage_fr: doc['advantage_french'],
-        condition_fr: doc['condition_french'],
-        country_fr: doc['country_french'],
-        eligible_fr: doc['eligible_french'],
-        description_fr: doc['description_french'],
-        how_to_apply_fr: doc['how_apply_french'],
-        level_fr: doc['level_french'],
-        name_fr: doc['name_french'],
-        other_detail_fr: doc['other_detail_french'],
-        req_docs_fr: doc['requered_doc_french']
+        advantage: lang=="fr"?doc['advantage_french']:doc['advantage_english'],
+        condition: lang=="fr"?doc['condition_french']:doc['condition_english'],
+        country: lang=="fr"?doc['country_french']:doc['country_english'],
+        eligible: lang=="fr"?doc['eligible_french']:doc['eligible_english'],
+        description: lang=="fr"?doc['description_french']:doc['description_english'],
+        how_to_apply: lang=="fr"?doc['how_apply_french']:doc['how_apply_english'],
+        level: lang=="fr"?doc['level_french']:doc['level_english'],
+        name: lang=="fr"?doc['name_french']:doc['name_english'],
+        other_detail: lang=="fr"?doc['other_detail_french']:doc['other_detail_english'],
+        req_docs: lang=="fr"?doc['requered_doc_french']:doc['requered_doc_english'],
+
       );
       data.add(document);
       // print(data);
@@ -48,8 +39,9 @@ import 'package:yencampus/Models/ScholarshipClass.dart';
   return data;
 }
 /// get Scholarships by targets
-Future<List<ScholarshipGnClass>> getTargetScholarship(String target, final filter)async{
+Future<List<ScholarshipGnClass>> getTargetScholarship(String lang,String target, final filter)async{
   List<ScholarshipGnClass> data= [];
+
   await FirebaseFirestore.instance.collection("scholarship")
       .where(target, isGreaterThanOrEqualTo: filter)
       .get()
@@ -66,27 +58,16 @@ Future<List<ScholarshipGnClass>> getTargetScholarship(String target, final filte
           images: doc['images'],
           duration:doc['duration'],
           /// english
-          advantage_en: doc['advantage_english'],
-          condition_en: doc['condition_english'],
-          country_en: doc['country_english'],
-          eligible_en: doc['eligible_english'],
-          description_en: doc['description_english'],
-          how_to_apply_en: doc['how_apply_english'],
-          level_en: doc['level_english'],
-          name_en: doc['name_english'],
-          other_detail_en: doc['other_detail_english'],
-          req_docs_en: doc['requered_doc_english'],
-          /// french
-          advantage_fr: doc['advantage_french'],
-          condition_fr: doc['condition_french'],
-          country_fr: doc['country_french'],
-          eligible_fr: doc['eligible_french'],
-          description_fr: doc['description_french'],
-          how_to_apply_fr: doc['how_apply_french'],
-          level_fr: doc['level_french'],
-          name_fr: doc['name_french'],
-          other_detail_fr: doc['other_detail_french'],
-          req_docs_fr: doc['requered_doc_french']
+        advantage: lang=="fr"?doc['advantage_french']:doc['advantage_english'],
+        condition: lang=="fr"?doc['condition_french']:doc['condition_english'],
+        country: lang=="fr"?doc['country_french']:doc['country_english'],
+        eligible: lang=="fr"?doc['eligible_french']:doc['eligible_english'],
+        description: lang=="fr"?doc['description_french']:doc['description_english'],
+        how_to_apply: lang=="fr"?doc['how_apply_french']:doc['how_apply_english'],
+        level: lang=="fr"?doc['level_french']:doc['level_english'],
+        name: lang=="fr"?doc['name_french']:doc['name_english'],
+        other_detail: lang=="fr"?doc['other_detail_french']:doc['other_detail_english'],
+        req_docs: lang=="fr"?doc['requered_doc_french']:doc['requered_doc_english'],
       );
       data.add(document);
       // print(data);

@@ -11,15 +11,16 @@ import 'package:yencampus/Database/Tips/tipForScholarshipFr.dart';
 import 'package:yencampus/Database/Tips/tipForUnivEn.dart';
 import 'package:yencampus/Database/Tips/tipForUnivFr.dart';
 import 'package:yencampus/Decoration/Fonts.dart';
+import 'package:yencampus/Function/translation.dart';
 
 
 class Tips extends StatelessWidget {
 
   List _tipHeadline = [
-    "How to get Scholarship",
-    "How to get admission in University",
-    "The myths behind the scholarships",
-    "How to choose a major"
+    "how_scholar",
+    "how_univ",
+    "scholar_myth",
+    "how_major"
   ];
   List tipList_en = [getScholarship_en,getUniversity_en,getMyth_en,chooseMajor_en];
   List tipList_fr = [getScholarship_fr,getUniversity_fr,getMyth_fr,chooseMajor_fr];
@@ -30,7 +31,7 @@ class Tips extends StatelessWidget {
       child: Scaffold(
           body: new CustomScrollView(
             slivers: [
-             pageAppBar(_background("Some tips for you")),
+             pageAppBar(_background(translate(context, "some_tip"))),
              _body(_tipHeadline,tipList_fr)
             ],
           )
@@ -68,7 +69,6 @@ Widget _body(List tipHeadline, List tips){
         itemBuilder: (context,index){
           return InkWell(
             onTap: (){
-              print(tips[index][0]['title']);
               Navigator.push(context, new MaterialPageRoute(
                   builder: (context)=>Details(doc: tips[index], type: "tip",isLocal:false)));
             },
@@ -88,7 +88,7 @@ Widget _body(List tipHeadline, List tips){
                     fit: BoxFit.cover
                   )
                 ),
-                child: Text("${tipHeadline[index]}",
+                child: Text(translate(context, tipHeadline[index]),
                   style: titleStyle.copyWith(fontSize: ScreenUtil().setSp(120),
                       backgroundColor: Colors.white.withOpacity(0.5)),
                   textAlign: TextAlign.center,

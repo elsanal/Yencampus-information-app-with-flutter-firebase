@@ -32,7 +32,7 @@ Widget homepageContent(BuildContext context, final docs, String type){
               Expanded(
                 child: Container(
                   padding: EdgeInsets.all(8),
-                  child: Text(parseHtmlString(docs[index].description_fr,),
+                  child: Text(parseHtmlString(docs[index].description,),
                       style:textStyle, maxLines: 5,
                      overflow: TextOverflow.ellipsis,
                    textAlign: TextAlign.justify,),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:yencampus/Decoration/Fonts.dart';
+import 'package:yencampus/Function/translation.dart';
 import 'package:yencampus/Pages/Homepage.dart';
 
 
@@ -11,7 +12,7 @@ Widget pageAppBar(Widget background,){
     snap: false,
     backgroundColor: Colors.white,
     elevation: 0.0,
-    expandedHeight: ScreenUtil().setHeight(400),
+    expandedHeight: ScreenUtil().setHeight(600),
     // collapsedHeight:ScreenUtil().setHeight(300),
     excludeHeaderSemantics: true,
     leading: Container(),
@@ -25,7 +26,7 @@ Widget pageAppBar(Widget background,){
 
 Widget appBarBackground(BuildContext context,
     Widget inputField,
-    Widget menuBar){
+    Widget menuBar,String category){
   var width = MediaQuery.of(context).size.width;
   return Container(
     height: width,
@@ -59,6 +60,7 @@ Widget appBarBackground(BuildContext context,
           width: width,
           child: searchBarWithHome(context,inputField),
         ),
+        pageMenuBar(translate(context, category), 0, 0),
         menuBar
       ],
     ),

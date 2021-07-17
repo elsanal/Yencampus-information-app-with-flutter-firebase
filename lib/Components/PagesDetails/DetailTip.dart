@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:yencampus/Decoration/Fonts.dart';
+import 'package:yencampus/Function/translation.dart';
 
 class detailTip extends StatefulWidget {
   final tips;
@@ -53,7 +54,7 @@ class _detailTipState extends State<detailTip> with TickerProviderStateMixin{
             // },
             // onIndexChanged: (value)async{
             // },
-            loop: true,
+            loop: false,
             index: _swiperController.index,
             controller: _swiperController,
             autoplayDisableOnInteraction: true,
@@ -80,7 +81,7 @@ class _detailTipState extends State<detailTip> with TickerProviderStateMixin{
                             onTap: ()=>_swiperController.previous(animation: true),
                             child: Row(children: [
                               new Icon(Icons.arrow_back_rounded),
-                              new Text("Swipe left")
+                              new Text(translate(context, "previous"))
                             ],),
                           ),
                           new CircleAvatar(radius: ScreenUtil().setWidth(80),
@@ -88,7 +89,7 @@ class _detailTipState extends State<detailTip> with TickerProviderStateMixin{
                           InkWell(
                             onTap: ()=>_swiperController.next(animation: true),
                             child: Row(children: [
-                              new Text("Swipe right"),
+                              new Text(translate(context, "next")),
                               new Icon(Icons.arrow_forward_rounded),
                             ],),
                           ),

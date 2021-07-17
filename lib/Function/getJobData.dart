@@ -1,9 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:yencampus/Function/Locale.dart';
 import 'package:yencampus/Models/JobClass.dart';
 
 
-Future<List<JobClass>> getJob()async{
+Future<List<JobClass>> getJob(String lang)async{
   List<JobClass> data= [];
+
   await FirebaseFirestore.instance.collection("job")
       .get()
       .then((QuerySnapshot snapshot){
@@ -17,15 +20,10 @@ Future<List<JobClass>> getJob()async{
         duration: doc['duration'],
         images: doc['images'],
         /// english
-        country_en: doc['country_english'],
-        description_en: doc['description_english'],
-        name_en: doc['name_english'],
-        required_en: doc['requirement_english'],
-        /// french
-        country_fr: doc['country_french'],
-        description_fr: doc['description_french'],
-        name_fr: doc['name_french'],
-        required_fr: doc['requirement_french'],
+        country: lang=="fr"?doc['country_french']:doc['country_english'],
+        description: lang=="fr"?doc['description_french']:doc['description_english'],
+        name: lang=="fr"?doc['name_french']:doc['name_english'],
+        required: lang=="fr"?doc['requirement_french']:doc['requirement_english'],
       );
       data.add(document);
       print("There is a job for you");
@@ -34,7 +32,7 @@ Future<List<JobClass>> getJob()async{
   return data;
 }
 
-Future<List<JobClass>> getTargetJob(String target, final filter)async{
+Future<List<JobClass>> getTargetJob(String lang,String target, final filter)async{
   List<JobClass> data= [];
   await FirebaseFirestore.instance.collection("job")
       .where(target,isGreaterThanOrEqualTo: filter)
@@ -50,15 +48,11 @@ Future<List<JobClass>> getTargetJob(String target, final filter)async{
         duration: doc['duration'],
         images: doc['images'],
         /// english
-        country_en: doc['country_english'],
-        description_en: doc['description_english'],
-        name_en: doc['name_english'],
-        required_en: doc['requirement_english'],
-        /// french
-        country_fr: doc['country_french'],
-        description_fr: doc['description_french'],
-        name_fr: doc['name_french'],
-        required_fr: doc['requirement_french'],
+        country: lang=="fr"?doc['country_french']:doc['country_english'],
+        description: lang=="fr"?doc['description_french']:doc['description_english'],
+        name: lang=="fr"?doc['name_french']:doc['name_english'],
+        required: lang=="fr"?doc['requirement_french']:doc['requirement_english'],
+
       );
       data.add(document);
       // print(doc.data());
