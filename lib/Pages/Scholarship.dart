@@ -7,13 +7,17 @@ import 'package:yencampus/Components/Alert/menuNuttonItems.dart';
 import 'package:yencampus/Components/PagesBody.dart';
 import 'package:yencampus/Components/PagesSliverBar.dart';
 import 'package:yencampus/Database/Countries.dart';
+import 'package:yencampus/Database/LevelList.dart';
 import 'package:yencampus/Database/PopUpList.dart';
 import 'package:yencampus/Decoration/Fonts.dart';
 import 'package:yencampus/Decoration/FormField.dart';
 import 'package:yencampus/Function/Date.dart';
+import 'package:yencampus/Function/Locale.dart';
+import 'package:yencampus/Function/getImageData.dart';
 import 'package:yencampus/Function/getScholarshipData.dart';
 import 'package:yencampus/Function/menuItemSelection.dart';
 import 'package:yencampus/Function/translation.dart';
+import 'package:yencampus/Models/ImageClass.dart';
 import 'package:yencampus/Models/ScholarshipClass.dart';
 
 
@@ -25,17 +29,27 @@ class Scholarship extends StatefulWidget {
 
 class _ScholarshipState extends State<Scholarship> {
 
-  List<String> _items = ["all","most_recent","popular","full_funded",
+  List<String> _items = ["all","isOpenn","popular_scholar","full_funded",
                           "part_funded","more"];
-  var _selected = '';
+  late Future<List<ImageClass>> _imageData;
+  var _selected = "";
+  var _selectedList = [];
   String _target = '';
-  String _input = '';
   int _selectedIndex=0;
+  String lang='';
+  bool isArrayTarget=false;
 
+  @override
+  void initState() {
+    // TODO: implement initState
+    _imageData = getImage();
+    super.initState();
+  }
 
   @override
 
   Widget build(BuildContext context) {
+    lang = getLocale(context);
     var height = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;
     return SafeArea(
@@ -44,37 +58,20 @@ class _ScholarshipState extends State<Scholarship> {
           slivers: [
            pageAppBar(
                appBarBackground(
-                   context,_formField(width),_menuBar(context,width, _items),'scholar')),
-            _selected==""?pageBody(context,_selected,"scholar"):
-            _selected=="true"?filterBody(context, 'scholar', _target, true):
-            filterBody(context, 'scholar', _target, _selected),
+                   context,_imageData,_menuBar(context,width, _items),'scholar')),
+            _selected==""?pageBody(context,"scholar"):
+            _selected=="true"?filterBody(context, 'scholar', _target, true,false):
+            isArrayTarget?filterBody(context, 'scholar', _target, _selectedList,isArrayTarget)
+                :filterBody(context, 'scholar', _target, _selected,isArrayTarget),
           ],
         )
       ),
     );
   }
 
-  Widget _formField(double width){
-    return Expanded(
-      child: Container(
-        height:ScreenUtil().setHeight(100),
-        child: new TextFormField(
-            maxLines: 1,
-            decoration: formFieldDeco,
-            onChanged: (value){
-              setState(() {
-                _input = value;
-              });
-              print(_input);
-            },
-        ),
-      ),
-    );
-  }
-
   Widget _menuBar(BuildContext context,double width, List<String> items){
     return Container(
-      height: ScreenUtil().setHeight(90),
+      height: ScreenUtil().setHeight(120),
       width: width,
       padding: EdgeInsets.only(
           left: 5,
@@ -119,22 +116,33 @@ class _ScholarshipState extends State<Scholarship> {
           )
       ),
       child: PopupMenuButton(
-        child: Text(translate(context, "more"),style: titleStyle.copyWith(
+        color: Colors.grey[100],
+        child: Text(translate(context, "more"),style: titleStyle2.copyWith(
             fontSize: ScreenUtil().setSp(40),
             fontWeight: FontWeight.bold
         ),),
         itemBuilder: (_context) => scholarPopUpList
             .map<PopupMenuItem>((element) => PopupMenuItem(
-          child: Text(translate(context,element['name'])),
-          value: element['value'],
+             child: Container(
+              margin: EdgeInsets.all(8),
+              padding: EdgeInsets.all(3),
+              color: Colors.white,
+              child: Text(translate(context,element['name']),
+                style: titleStyle2,
+              )),
+                value: element['value'],
         ))
             .toList(),
         onSelected: (result){
           var value = (result.toString());
           var index = int.parse(value);
           if(scholarPopUpList[index]['name']=="country"){
-              selectCountry(context, countryList);
-          }else{
+            lang=="fr"?selectCountry(context, countries['fr'],scholarPopUpList[index]['name']):
+            selectCountry(context, countries['en'],scholarPopUpList[index]['name']);
+          }else if(scholarPopUpList[index]['name']=="level"){
+            lang=="fr"?selectCountry(context, Level['fr'],scholarPopUpList[index]['name']):
+            selectCountry(context, Level['en'],scholarPopUpList[index]['name']);
+          } else{
             List result = [];
             result = switchItem(scholarPopUpList[index]['name']);
             setState(() {
@@ -147,7 +155,7 @@ class _ScholarshipState extends State<Scholarship> {
     );
   }
 
-  selectCountry(BuildContext context,List items){
+  selectCountry(BuildContext context,var items,String type){
     var height = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;
 
@@ -155,33 +163,46 @@ class _ScholarshipState extends State<Scholarship> {
       title: translate(context,'select'),
       context: context,
       style: AlertStyle(
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.grey[100],
         titleStyle: titleStyle2,
       ),
       buttons: [
         DialogButton(
-            color: Colors.white.withOpacity(0.3),
+            color: Colors.red.withOpacity(0.3),
             child: Text(translate(context,'cancel'),style: titleStyle2,),
             onPressed: (){
               Navigator.of(context).pop(true);
             }),
       ],
       content: Container(
-        height: height*(2/5),
+        height: ScreenUtil().setHeight(height),
         width: width,
         child: ListView.builder(
           itemCount: items.length,
             itemBuilder: (context,index){
-              return ListTile(
-                onTap: (){
-                  setState(() {
-                    _selected = items[index];
-                    _target = "country_french";
-                  });
-                  print(_selected);
-                  Navigator.of(context).pop(true);
-                },
-                title: Text("${items[index]}",style: textStyle,),
+              return Container(
+                margin: EdgeInsets.all(8),
+                color: Colors.white,
+                child: ListTile(
+                  onTap: (){
+                    if(type=="country"){
+                      setState(() {
+                        _selected = items[index];
+                        _target = lang=="fr"?"country_french":"country_english";
+                      });
+                    }else if(type=="level"){
+                      _selectedList.clear();
+                      setState(() {
+                        isArrayTarget = true;
+                        _selectedList.add(items[index]);
+                        _target = lang=="fr"?"level_french":"level_english";
+                      });
+                    }
+                    print(_selected);
+                    Navigator.of(context).pop(true);
+                  },
+                  title: Text("${items[index]}",style: textStyle,),
+                ),
               );
             }
         ),

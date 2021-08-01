@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:yencampus/Components/appBarImageSwiper.dart';
 import 'package:yencampus/Decoration/Fonts.dart';
 import 'package:yencampus/Function/translation.dart';
 import 'package:yencampus/Pages/Homepage.dart';
@@ -12,7 +13,7 @@ Widget pageAppBar(Widget background,){
     snap: false,
     backgroundColor: Colors.white,
     elevation: 0.0,
-    expandedHeight: ScreenUtil().setHeight(600),
+    expandedHeight: ScreenUtil().setHeight(920),
     // collapsedHeight:ScreenUtil().setHeight(300),
     excludeHeaderSemantics: true,
     leading: Container(),
@@ -25,8 +26,7 @@ Widget pageAppBar(Widget background,){
 }
 
 Widget appBarBackground(BuildContext context,
-    Widget inputField,
-    Widget menuBar,String category){
+    final data,Widget menuBar,String title){
   var width = MediaQuery.of(context).size.width;
   return Container(
     height: width,
@@ -56,11 +56,7 @@ Widget appBarBackground(BuildContext context,
             ],
           ),
         ),
-        Container(
-          width: width,
-          child: searchBarWithHome(context,inputField),
-        ),
-        pageMenuBar(translate(context, category), 0, 0),
+        AppBarImageSwiper(images: data, title: title,),
         menuBar
       ],
     ),
@@ -88,19 +84,24 @@ Widget searchBarWithHome(BuildContext context,Widget formField){
 
 Widget pageMenuBar(String item, int index, int selectedIndex){
   return new Container(
-    padding: EdgeInsets.all(ScreenUtil().setWidth(15)),
+    padding: EdgeInsets.only(
+      left:ScreenUtil().setWidth(25),
+      right:ScreenUtil().setWidth(25),
+      top:ScreenUtil().setWidth(5),
+      bottom:ScreenUtil().setWidth(5),
+    ),
     margin: EdgeInsets.all(ScreenUtil().setWidth(10)),
     decoration: BoxDecoration(
-        color: index == selectedIndex?Colors.blue:Colors.grey[200],
+        color: index == selectedIndex?Colors.blue:Colors.grey[300],
         borderRadius: BorderRadius.all(
-            Radius.circular(ScreenUtil().setWidth(40))
+            Radius.circular(ScreenUtil().setWidth(55))
         )
     ),
     child: FittedBox(
       fit: BoxFit.contain,
       child: Center(
-        child: Text(item,style: titleStyle.copyWith(
-            fontSize: ScreenUtil().setSp(80),
+        child: Text(item,style: titleStyle2.copyWith(
+            fontSize: ScreenUtil().setSp(60),
             fontWeight: FontWeight.bold
         ),
         ),

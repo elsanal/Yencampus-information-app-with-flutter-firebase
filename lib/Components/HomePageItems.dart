@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:yencampus/Components/Loading.dart';
-import 'package:yencampus/Function/getJobData.dart';
-import 'package:yencampus/Function/getScholarshipData.dart';
-import 'package:yencampus/Function/getUniversityData.dart';
 import 'package:yencampus/Function/translation.dart';
 import 'package:yencampus/Models/CarerClass.dart';
 import 'package:yencampus/Models/JobClass.dart';

@@ -7,6 +7,7 @@ Future<List<UniversityClass>> getUniversity(String lang)async{
   List<UniversityClass> data= [];
 
   await FirebaseFirestore.instance.collection("university")
+      .orderBy('lastupdate',descending: true)
       .get()
       .then((QuerySnapshot snapshot){
     snapshot.docs.forEach((doc){
@@ -18,6 +19,11 @@ Future<List<UniversityClass>> getUniversity(String lang)async{
         deadline: doc['deadline'],
         isTopUniversity: doc['isTopUniversity'],
         images: doc['images'],
+        city: doc['city'],
+        isOpen: doc['isOpen'],
+        isPublic: doc['isPublic'],
+        world_ranking: doc['world_ranking'],
+        national_ranking: doc['national_ranking'],
         /// english
         country: lang=="fr"?doc['country_french']:doc['country_english'],
         description: lang=="fr"?doc['description_french']:doc['description_english'],
@@ -36,7 +42,8 @@ Future<List<UniversityClass>> getTargetUniversity(String lang,String target, fin
   List<UniversityClass> data= [];
 
   await FirebaseFirestore.instance.collection("university")
-      .where(target, isGreaterThanOrEqualTo: filter)
+      .orderBy('lastupdate',descending: true)
+      .where(target, isEqualTo: filter)
       .get()
       .then((QuerySnapshot snapshot){
     snapshot.docs.forEach((doc){
@@ -47,7 +54,12 @@ Future<List<UniversityClass>> getTargetUniversity(String lang,String target, fin
         official_web: doc['official_web'],
         deadline: doc['deadline'],
         isTopUniversity: doc['isTopUniversity'],
+        city: doc['city'],
         images: doc['images'],
+        isOpen: doc['isOpen'],
+        isPublic: doc['isPublic'],
+        world_ranking: doc['world_ranking'],
+        national_ranking: doc['national_ranking'],
         /// english
         country: lang=="fr"?doc['country_french']:doc['country_english'],
         description: lang=="fr"?doc['description_french']:doc['description_english'],

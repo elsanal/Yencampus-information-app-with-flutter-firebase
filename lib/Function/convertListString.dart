@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:yencampus/Components/DetailsComp.dart';
 import 'package:yencampus/Components/PagesBody.dart';
+import 'package:yencampus/Decoration/Fonts.dart';
 
 
 listToString(List items){
@@ -16,7 +17,7 @@ listToString(List items){
   return result;
 }
 
-embListToString(List items){
+embListToString(BuildContext context,List items){
  return ListView.builder(
    shrinkWrap: true,
    physics: NeverScrollableScrollPhysics(),
@@ -25,8 +26,30 @@ embListToString(List items){
        return Column(
          children: [
            SizedBox(height: ScreenUtil().setHeight(40),),
-           title2(items[index]['depart_name_french']),
-           embListToString2(items[index]['major_french'])
+           Container(
+             width: MediaQuery.of(context).size.width,
+             child: Row(
+               children: [
+                 Icon(Icons.ac_unit_rounded),
+                 Expanded(
+                   child: Container(
+                     padding: EdgeInsets.all(ScreenUtil().setWidth(5)),
+                     child: new Text(items[index]['depart_name'],style: titleStyle2.copyWith(
+                         fontSize: ScreenUtil().setSp(60),
+                         // backgroundColor: Colors.black87,
+                         color: Colors.black
+                     ),
+                       overflow: TextOverflow.ellipsis,
+                       maxLines: 10,
+                     ),
+                   ),
+                 ),
+               ],
+             ),
+           ),
+           items[index]['major']!=null?
+           embListToString2(items[index]['major']):
+               Container()
          ],
        );
      }
@@ -42,7 +65,7 @@ embListToString2(List items){
         return Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            body("<p> - "+ items[index]['major_name_french']+"</p>"),
+            body("<p> - "+ items[index]['major_name']+"</p>"),
           ],
         );
       }

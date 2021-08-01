@@ -11,10 +11,12 @@ import 'package:yencampus/Database/Tips/tipForScholarshipFr.dart';
 import 'package:yencampus/Database/Tips/tipForUnivEn.dart';
 import 'package:yencampus/Database/Tips/tipForUnivFr.dart';
 import 'package:yencampus/Decoration/Fonts.dart';
+import 'package:yencampus/Function/Locale.dart';
 import 'package:yencampus/Function/translation.dart';
 
 
 class Tips extends StatelessWidget {
+
 
   List _tipHeadline = [
     "how_scholar",
@@ -27,12 +29,13 @@ class Tips extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final lang = getLocale(context);
     return SafeArea(
       child: Scaffold(
           body: new CustomScrollView(
             slivers: [
              pageAppBar(_background(translate(context, "some_tip"))),
-             _body(_tipHeadline,tipList_fr)
+             lang=="fr"?_body(_tipHeadline,tipList_fr):_body(_tipHeadline,tipList_en),
             ],
           )
       ),
@@ -43,7 +46,7 @@ class Tips extends StatelessWidget {
 
 Widget _background(String title){
   return Container(
-    margin: EdgeInsets.all(ScreenUtil().setWidth(20)),
+    margin: EdgeInsets.all(ScreenUtil().setWidth(10)),
     decoration: BoxDecoration(
       color: Colors.deepPurple.shade600,
       borderRadius: BorderRadius.all(

@@ -12,14 +12,14 @@ TextStyle titleStyle = GoogleFonts.comfortaa(
   color: Colors.black,
 );
 
-TextStyle titleStyle2 = GoogleFonts.comfortaa(
-  fontSize: ScreenUtil().setSp(80),
-  fontWeight: FontWeight.bold,
+TextStyle titleStyle2 = GoogleFonts.martelSans(
+  fontSize: ScreenUtil().setSp(40),
+  fontWeight: FontWeight.w400,
   color: Colors.black,
 );
 
 TextStyle textStyle = GoogleFonts.lato(
-  fontSize: ScreenUtil().setSp(45),
+  fontSize: ScreenUtil().setSp(40),
   fontWeight: FontWeight.w400,
   color: Colors.black,
 );
@@ -28,14 +28,14 @@ Map<String, Style> bodyStyle = {
   "table": Style(backgroundColor: Colors.black),
   "p": Style(
     fontSize: FontSize(ScreenUtil().setSp(45)),
-    fontWeight: FontWeight.w600,
+    fontWeight: FontWeight.w400,
     color: Colors.black,),
   "li": Style(
-    fontSize: FontSize(ScreenUtil().setSp(45)),
+    fontSize: FontSize(ScreenUtil().setSp(40)),
     fontWeight: FontWeight.w400,
     color: Colors.black,),
   "ul": Style(
     fontSize: FontSize(ScreenUtil().setSp(45)),
-    fontWeight: FontWeight.w600,
+    fontWeight: FontWeight.w400,
     color: Colors.black,),
 };

@@ -20,13 +20,13 @@ import 'package:yencampus/Models/UniversityClass.dart';
 import 'package:yencampus/Pages/Scholarship.dart';
 
 /// Widget to show the posts of each category
-Widget pageBody(BuildContext context, String target, String type){
+Widget pageBody(BuildContext context, String type){
   var height = MediaQuery.of(context).size.height;
   var width = MediaQuery.of(context).size.width;
   var lang = getLocale(context);
   return SliverToBoxAdapter(
     child: new Container(
-      height:height*(3*0.53),
+      height:height*(length.value*0.53),
       width: width,
       padding: EdgeInsets.only(
           bottom: ScreenUtil().setHeight(50),
@@ -41,7 +41,7 @@ Widget pageBody(BuildContext context, String target, String type){
 ValueNotifier<int> length = ValueNotifier(2);
 ValueNotifier<bool> isLoading = ValueNotifier(false);
 
-Widget SavedBody(BuildContext context){
+Widget SavedBody(BuildContext context, String type){
   var height = MediaQuery.of(context).size.height;
   var width = MediaQuery.of(context).size.width;
   var lang = getLocale(context);
@@ -79,6 +79,9 @@ Widget SavedBody(BuildContext context){
                         physics: NeverScrollableScrollPhysics(),
                         itemCount: docs.length,
                         itemBuilder: (context,index){
+                          if((type!=docs[index].type)&&(type!='all')){
+                            return Container();
+;                          }
                           return _category(lang,docs[index].type, width, height, true, docs[index].id.toString());
                         }
                     );
@@ -97,19 +100,19 @@ Widget SavedBody(BuildContext context){
 }
 
 /// widget to show the filter posts
- Widget filterBody(BuildContext context,String type, String target, final value){
+ Widget filterBody(BuildContext context,String type,String target, final value, bool isArrayTarget){
    var height = MediaQuery.of(context).size.height;
    var width = MediaQuery.of(context).size.width;
    var lang = getLocale(context);
    return SliverToBoxAdapter(
      child: new Container(
-         height:height*(5*0.53),
+         height:height*(length.value*0.53),
          width: width,
          padding: EdgeInsets.only(
              bottom: ScreenUtil().setHeight(50),
              top: ScreenUtil().setHeight(50)
          ),
-         child: _filterCategory(lang,type, width, height,target,value)
+         child: _filterCategory(lang,type, width, height,target,value,isArrayTarget)
      ),
    );
 }
@@ -196,11 +199,12 @@ _category(String lang,String type,double width, double height,bool isLocal,Strin
   }
 }
 
-_filterCategory(String lang, String type,double width, double height,String target, final value){
+_filterCategory(String lang, String type,double width, double height,String target, final value, bool isArrayTarget){
   switch(type){
     case "scholar":
       return FutureBuilder<List<ScholarshipGnClass>>(
-          future: getTargetScholarship(lang,target,value),
+          future: isArrayTarget?getArrayTargetScholarship(lang, target, value)
+              :getTargetScholarship(lang,target,value),
           builder: (context, snapshot){
             if(!snapshot.hasData){
               return Container(
@@ -213,6 +217,7 @@ _filterCategory(String lang, String type,double width, double height,String targ
                 child: Center(child: Text(translate(context, "error"),style: titleStyle2,),),);
             }
             else{
+              // return Container(child: Text("scholar"),);
               return _listBuilder(snapshot, width, height, type, false);
             }
           }
@@ -238,7 +243,8 @@ _filterCategory(String lang, String type,double width, double height,String targ
       );
     case "job":
       return FutureBuilder<List<JobClass>>(
-          future: getTargetJob(lang,target,value),
+          future: isArrayTarget?getArrayTargetJob(lang, target, value)
+              :getTargetJob(lang,target,value),
           builder: (context, snapshot) {
             if(!snapshot.hasData){
               return Container(
@@ -278,93 +284,108 @@ _filterCategory(String lang, String type,double width, double height,String targ
 }
 
 Widget _listBuilder(AsyncSnapshot snapshot, double width, double height, String type,bool isLocal){
-  return ListView.builder(
+  return GridView.builder(
     shrinkWrap: true,
     physics: NeverScrollableScrollPhysics(),
     itemCount: snapshot.data!.length,
+    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+      crossAxisCount: 2,
+      childAspectRatio: 0.7,
+      crossAxisSpacing: 1,
+      mainAxisSpacing: 1
+    ),
     itemBuilder: (context,index){
       final item = snapshot.data![index];
-      return Container(
-        margin: EdgeInsets.only(
-            bottom: ScreenUtil().setHeight(60)
-        ),
+      length.value = snapshot.data!.length;
+      return Card(
         child: Container(
-          height: height*(2/4.1),
-          width: width,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              new Container(
-                height: height/3,
-                width: width,
-                alignment: Alignment.bottomCenter,
-                decoration:BoxDecoration(
-                    image: DecorationImage(
-                        image: NetworkImage("${item.images[0]['src']['src']}"),
-                        fit: BoxFit.contain
-                    )
-                ),
-                child: type!="carer"?Text(translate(context, "country")+": ${item.country}\n"
-                    ' ${item.deadline} \n',
-                  textAlign: TextAlign.center,
-                  style: textStyle.copyWith(
-                    backgroundColor: Colors.white.withOpacity(0.5),
-                  ),):Container(),),
-              Expanded(
-                child: Container(
-                  padding: EdgeInsets.all(5),
-                  child: Text(parseHtmlString(item.description),style: textStyle,
-                  maxLines: 3,overflow: TextOverflow.ellipsis,),
-                ),
-              ),
-              new Container(
-                width: width,
-                height: 40,
-                // color: Colors.red,
-                decoration: BoxDecoration(
-                  border: Border(
-                    top: BorderSide(
-                        color: Colors.grey.shade500,width: 1,style: BorderStyle.solid),
-                    bottom: BorderSide(
-                        color: Colors.white,width: 1,style: BorderStyle.solid),
+          child: GestureDetector(
+            onTap: ()=>Navigator.push(context,
+                new MaterialPageRoute(builder: (context)=>Details(doc: item,type: type,isLocal:isLocal))),
+            child: Container(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  new Container(
+                    height: ScreenUtil().setHeight(310),
+                    width: width,
+                    alignment: Alignment.bottomCenter,
+                    decoration:BoxDecoration(
+                        image: DecorationImage(
+                            image: NetworkImage("${item.images[0]['src']['src']}"),
+                            fit: BoxFit.contain
+                        )
+                    ),
+                    child: type!="carer"?Text(translate(context, "country")+": ${item.country}\n"
+                        ' ${item.deadline} \n',
+                      textAlign: TextAlign.center,
+                      style: titleStyle.copyWith(
+                        backgroundColor: Colors.white.withOpacity(0.9),
+                        fontSize: ScreenUtil().setSp(40)
+                      ),):Container(),),
+                Text(item.name,
+                  textAlign: TextAlign.left,
+                  style: titleStyle2.copyWith(
+                    fontWeight: FontWeight.bold,
+                    fontSize: ScreenUtil().setSp(35)
+                  )),
+                  Expanded(
+                    child: Container(
+                      padding: EdgeInsets.all(5),
+                      child: Text(parseHtmlString(item.description),style: textStyle,
+                      maxLines: 4,overflow: TextOverflow.ellipsis,),
+                    ),
                   ),
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    InkWell(
-                        onTap:()=>Navigator.push(context,
-                            new MaterialPageRoute(builder: (context)=>Details(doc: item,type: type,isLocal:isLocal))),
-                        child: _actionButton(translate(context, "read_more"))),
-                    new Container(height: 40,width: 1,color: Colors.grey[400],),
-                    InkWell(
-                      onTap: (){
-                        if(isLocal){
-                          isLoading.value = true;
-                          localDB(tableName: "YENCAMPUS").delete(int.parse(item.id));
-                          final snackBar = SnackBar(
-                            content: Text(translate(context, "deleted")),);
-                          ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                          Future.delayed(Duration(milliseconds: 100),()=>isLoading.value=false);
-                        }else{
-                          localDB(tableName: "YENCAMPUS").saveOndB(SavePost(type:type, id:(item.id).toString()));
-                          final snackBar = SnackBar(
-                            content: Text(translate(context, "saved")),);
-                          ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                        }
-                      },
-                        child: isLocal?_actionButton(translate(context, "delete")):_actionButton(translate(context, "save"))),
-                    new Container(height: 40,width: 1,color: Colors.grey,),
-                    InkWell(
-                      onTap: (){
-                        sharePost(item, type);
-                      },
-                        child: _actionButton(translate(context, "share"))),
-                  ],
-                ),
+                  new Container(
+                    width: width,
+                    height: 40,
+                    // color: Colors.red,
+                    decoration: BoxDecoration(
+                      border: Border(
+                        top: BorderSide(
+                            color: Colors.grey.shade500,width: 1,style: BorderStyle.solid),
+                        bottom: BorderSide(
+                            color: Colors.white,width: 1,style: BorderStyle.solid),
+                      ),
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        InkWell(
+                            onTap:()=>Navigator.push(context,
+                                new MaterialPageRoute(builder: (context)=>Details(doc: item,type: type,isLocal:isLocal))),
+                            child: _actionButton(translate(context, "read_more"))),
+                        new Container(height: 40,width: 1,color: Colors.grey[400],),
+                        InkWell(
+                          onTap: (){
+                            if(isLocal){
+                              isLoading.value = true;
+                              localDB(tableName: "YENCAMPUS").delete(int.parse(item.id));
+                              final snackBar = SnackBar(
+                                content: Text(translate(context, "deleted")),);
+                              ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                              Future.delayed(Duration(milliseconds: 100),()=>isLoading.value=false);
+                            }else{
+                              localDB(tableName: "YENCAMPUS").saveOndB(SavePost(type:type, id:(item.id).toString()));
+                              final snackBar = SnackBar(
+                                content: Text(translate(context, "saved")),);
+                              ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                            }
+                          },
+                            child: isLocal?_actionButton(translate(context, "delete")):_actionButton(translate(context, "save"))),
+                        new Container(height: 40,width: 1,color: Colors.grey,),
+                        InkWell(
+                          onTap: (){
+                            sharePost(context,item, type);
+                          },
+                            child: _actionButton(translate(context, "share"))),
+                      ],
+                    ),
+                  ),
+                  // new Container(height: 5,color: Colors.grey[500],)
+                ],
               ),
-              new Container(height: 5,color: Colors.grey[500],)
-            ],
+            ),
           ),
         ),
       );
@@ -375,7 +396,7 @@ Widget _listBuilder(AsyncSnapshot snapshot, double width, double height, String 
 
 Widget _actionButton(String action,){
   return Text(action,style: titleStyle.copyWith(
-    fontSize: ScreenUtil().setSp(50),
+    fontSize: ScreenUtil().setSp(30),
     color: Colors.grey[800],
   ),);
 }

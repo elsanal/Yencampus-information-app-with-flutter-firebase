@@ -17,6 +17,9 @@ translate(BuildContext context,String item){
     case "apply":
       _selected = AppLocalizations.of(context)!.apply;
       break;
+    case "available":
+      _selected = AppLocalizations.of(context)!.available;
+      break;
     case "av_job":
       _selected = AppLocalizations.of(context)!.av_job;
       break;
@@ -31,6 +34,9 @@ translate(BuildContext context,String item){
       break;
     case "category":
       _selected = AppLocalizations.of(context)!.category;
+      break;
+    case "city":
+      _selected = AppLocalizations.of(context)!.city;
       break;
     case "condition":
       _selected = AppLocalizations.of(context)!.condition;
@@ -62,8 +68,8 @@ translate(BuildContext context,String item){
     case "duration":
       _selected = AppLocalizations.of(context)!.duration;
       break;
-    case "disco_carer":
-      _selected = AppLocalizations.of(context)!.disco_carer;
+    case "disco_major":
+      _selected = AppLocalizations.of(context)!.disco_major;
       break;
     case "eligible":
       _selected = AppLocalizations.of(context)!.eligible;
@@ -73,6 +79,9 @@ translate(BuildContext context,String item){
       break;
     case "enterprise":
       _selected = AppLocalizations.of(context)!.enterprise;
+      break;
+    case "experience":
+      _selected = AppLocalizations.of(context)!.experience;
       break;
     case "free":
       _selected = AppLocalizations.of(context)!.free;
@@ -101,8 +110,26 @@ translate(BuildContext context,String item){
     case "how_univ":
     _selected = AppLocalizations.of(context)!.how_univ;
       break;
+    case "info_general":
+      _selected = AppLocalizations.of(context)!.info_gel;
+      break;
+    case "isClose":
+      _selected = AppLocalizations.of(context)!.isClose;
+      break;
+    case "isOpen":
+      _selected = AppLocalizations.of(context)!.isOpen;
+      break;
+    case "isOpenn":
+      _selected = AppLocalizations.of(context)!.isOpenn;
+      break;
     case "level":
       _selected = AppLocalizations.of(context)!.level;
+      break;
+    case "level_lang":
+      _selected = AppLocalizations.of(context)!.level_lang;
+      break;
+    case "majors":
+      _selected = AppLocalizations.of(context)!.majors;
       break;
     case "more":
       _selected = AppLocalizations.of(context)!.more;
@@ -113,8 +140,17 @@ translate(BuildContext context,String item){
     case "most_recent":
       _selected = AppLocalizations.of(context)!.most_recent;
       break;
+    case "national_rank":
+      _selected = AppLocalizations.of(context)!.national_rank;
+      break;
     case "nb_of_place":
       _selected = AppLocalizations.of(context)!.nb_of_place;
+      break;
+    case "nb_poste":
+      _selected = AppLocalizations.of(context)!.nb_of_place;
+      break;
+    case "next":
+      _selected = AppLocalizations.of(context)!.next;
       break;
     case "univ":
       _selected = AppLocalizations.of(context)!.univ;
@@ -122,11 +158,38 @@ translate(BuildContext context,String item){
     case "job":
       _selected = AppLocalizations.of(context)!.job;
       break;
+    case "job_type":
+      _selected = AppLocalizations.of(context)!.job_type;
+      break;
     case "part_funded":
       _selected = AppLocalizations.of(context)!.part_funded;
       break;
     case "popular":
     _selected = AppLocalizations.of(context)!.popular;
+      break;
+    case "popular_scholar":
+      _selected = AppLocalizations.of(context)!.popular_scholar;
+      break;
+    case "popular_univ":
+      _selected = AppLocalizations.of(context)!.popular_univ;
+      break;
+    case "public":
+      _selected = AppLocalizations.of(context)!.public;
+      break;
+    case "publicc":
+      _selected = AppLocalizations.of(context)!.publicc;
+      break;
+    case "public_univ":
+      _selected = AppLocalizations.of(context)!.public_univ;
+      break;
+    case "previous":
+      _selected = AppLocalizations.of(context)!.previous;
+      break;
+    case "private":
+      _selected = AppLocalizations.of(context)!.private;
+      break;
+    case "privatee":
+      _selected = AppLocalizations.of(context)!.privatee;
       break;
     case "read_more":
       _selected = AppLocalizations.of(context)!.read_more;
@@ -161,6 +224,12 @@ translate(BuildContext context,String item){
     case "some_tip":
       _selected = AppLocalizations.of(context)!.some_tip;
       break;
+    case "state":
+      _selected = AppLocalizations.of(context)!.state;
+      break;
+    case "std_level":
+      _selected = AppLocalizations.of(context)!.std_level;
+      break;
     case "tel":
       _selected = AppLocalizations.of(context)!.tel;
       break;
@@ -176,11 +245,17 @@ translate(BuildContext context,String item){
     case "type_contract":
       _selected = AppLocalizations.of(context)!.type_contract;
       break;
+    case "waiting":
+      _selected = AppLocalizations.of(context)!.waiting;
+      break;
     case "web":
       _selected = AppLocalizations.of(context)!.web;
       break;
     case "work_place":
     _selected = AppLocalizations.of(context)!.job;
+      break;
+    case "world_rank":
+      _selected = AppLocalizations.of(context)!.world_rank;
       break;
     default:
       _selected = item;

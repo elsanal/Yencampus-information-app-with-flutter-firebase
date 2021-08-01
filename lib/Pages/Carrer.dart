@@ -3,7 +3,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:yencampus/Components/PagesBody.dart';
 import 'package:yencampus/Components/PagesSliverBar.dart';
 import 'package:yencampus/Decoration/FormField.dart';
+import 'package:yencampus/Function/getImageData.dart';
 import 'package:yencampus/Function/translation.dart';
+import 'package:yencampus/Models/ImageClass.dart';
 
 
 class Carer extends StatefulWidget {
@@ -14,8 +16,8 @@ class Carer extends StatefulWidget {
 }
 
 class _CarerState extends State<Carer> {
-
-  List<String> _items = ["domain","trend","carer_of_future"];
+  late Future<List<ImageClass>> _imageData;
+  List<String> _items = [];
   var _selected = '';
   String _target = '';
   String _input = '';
@@ -24,6 +26,7 @@ class _CarerState extends State<Carer> {
   @override
   void initState() {
     // TODO: implement initState
+    _imageData = getImage();
     super.initState();
   }
 
@@ -38,8 +41,8 @@ class _CarerState extends State<Carer> {
             slivers: [
               pageAppBar(
                   appBarBackground(
-                      context,_formField(width),_menuBar(width, _items),'carer')),
-              pageBody(context,_selected,"carer"),
+                      context,_imageData,_menuBar(width, _items),'carer')),
+              pageBody(context,"carer"),
             ],
           )
       ),

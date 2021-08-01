@@ -9,6 +9,7 @@ class ScholarshipGnClass{
   String year;
   List images;
   String duration;
+  bool isOpen;
 
   //////////////// English /////////////
 
@@ -48,6 +49,7 @@ class ScholarshipGnClass{
     required this.name,
     required this.other_detail,
     required this.req_docs,
+    required this.isOpen,
 
 
 

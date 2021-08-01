@@ -5,16 +5,17 @@ import 'package:yencampus/Function/Date.dart';
 switchItem(String item){
   String _selected = '';
   String _target = '';
+  print(item);
   switch(item){
     case "most_recent":
       _selected = getDate();
       _target = "deadline";
       break;
-    case "most_popular":
+    case "popular_scholar":
       _selected = "true";
       _target = "isTopScholar";
       break;
-    case "popular":
+    case "popular_univ":
       _selected = "true";
       _target = "isTopUniv";
       break;
@@ -33,6 +34,30 @@ switchItem(String item){
     case "free_tuition":
       _selected = "free";
       _target = "school_fee";
+      break;
+    case "isOpen":
+      _selected = "true";
+      _target = "isOpen";
+      break;
+    case "isOpenn":
+      _selected = "true";
+      _target = "isOpen";
+      break;
+    case "private":
+      _selected = "false";
+      _target = "isPublic";
+      break;
+    case "privatee":
+      _selected = "false";
+      _target = "isPublic";
+      break;
+    case "public":
+      _selected = "true";
+      _target = "isPublic";
+      break;
+    case "publicc":
+      _selected = "true";
+      _target = "isPublic";
       break;
     case "all":
       _selected = "";

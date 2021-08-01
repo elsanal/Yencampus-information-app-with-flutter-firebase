@@ -5,13 +5,18 @@ import 'package:yencampus/Components/Alert/ShowSelectionList.dart';
 import 'package:yencampus/Components/PagesBody.dart';
 import 'package:yencampus/Components/PagesSliverBar.dart';
 import 'package:yencampus/Database/Countries.dart';
+import 'package:yencampus/Database/JobType.dart';
 import 'package:yencampus/Database/PopUpList.dart';
+import 'package:yencampus/Database/JobCategories.dart';
 import 'package:yencampus/Decoration/Fonts.dart';
 import 'package:yencampus/Decoration/FormField.dart';
 import 'package:yencampus/Function/Date.dart';
+import 'package:yencampus/Function/Locale.dart';
+import 'package:yencampus/Function/getImageData.dart';
 import 'package:yencampus/Function/getUniversityData.dart';
 import 'package:yencampus/Function/menuItemSelection.dart';
 import 'package:yencampus/Function/translation.dart';
+import 'package:yencampus/Models/ImageClass.dart';
 import 'package:yencampus/Models/UniversityClass.dart';
 
 class Job extends StatefulWidget {
@@ -22,21 +27,26 @@ class Job extends StatefulWidget {
 }
 
 class _JobState extends State<Job> {
-  List<String> _items = ["all","most_recent","salary","country","more"];
+  List<String> _items = ["all","isOpenn","category","country","job_type"];
+  late Future<List<ImageClass>> _imageData;
   var _selected = '';
+  var _selectedList = [];
   String _target = '';
-  String _input = '';
+  bool isArrayTarget = false;
   int _selectedIndex=0;
+  String lang = '';
 
   @override
   void initState() {
     // TODO: implement initState
+    _imageData = getImage();
     super.initState();
   }
 
   @override
 
   Widget build(BuildContext context) {
+    lang = getLocale(context);
     var height = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;
     return SafeArea(
@@ -45,36 +55,21 @@ class _JobState extends State<Job> {
             slivers: [
               pageAppBar(
                   appBarBackground(
-                      context,_formField(width),_menuBar(width, _items),'job')),
-              _selected==""?pageBody(context,_selected,"job"):
-              filterBody(context, 'job', _target, true),
+                      context,_imageData,_menuBar(width, _items),'job')),
+              _selected==""?pageBody(context,"job"):
+              _selected=="true"?filterBody(context, 'job', _target, true,false):
+              isArrayTarget?filterBody(context, 'job', _target, _selectedList,isArrayTarget):
+              filterBody(context, 'job', _target, _selected,isArrayTarget),
             ],
           )
       ),
     );
   }
 
-  Widget _formField(double width){
-    return Expanded(
-      child: Container(
-        height:ScreenUtil().setHeight(100),
-        child: new TextFormField(
-          maxLines: 1,
-          decoration: formFieldDeco,
-          onChanged: (value){
-            setState(() {
-              _input = value;
-            });
-
-          },
-        ),
-      ),
-    );
-  }
   Widget _menuBar(double width, List<String> items){
 
     return Container(
-      height: ScreenUtil().setHeight(90),
+      height: ScreenUtil().setHeight(120),
       width: width,
       padding: EdgeInsets.only(
           left: 5,
@@ -90,7 +85,16 @@ class _JobState extends State<Job> {
               setState(() {
                 _selectedIndex = index;
               });
-              if(items[index]!="more"){
+              if(items[index]=="category"){
+                lang=="fr"?selectCountry(context, jobCategory['fr'],items[index]):
+                selectCountry(context, jobCategory['en'],items[index]);
+              }else if(items[index]=="country"){
+                lang=="fr"?selectCountry(context, countries['fr'],items[index]):
+                selectCountry(context, countries['en'],items[index]);
+              }else if(items[index]=="job_type"){
+                lang=="fr"?selectCountry(context, jobType['fr'],items[index]):
+                selectCountry(context, jobType['en'],items[index]);
+              } else{
                 result = switchItem(items[index]);
                 setState(() {
                   _selected = result[0];
@@ -99,54 +103,15 @@ class _JobState extends State<Job> {
               }
               print(result);
             },
-            child: items[index]=="more"?popUpMenuItems(context):
-            pageMenuBar(translate(context,items[index]),index,_selectedIndex),
+            child: pageMenuBar(translate(context,items[index]),index,_selectedIndex),
           );
         },
       ),
     );
   }
 
-  popUpMenuItems(BuildContext _context){
-    return Container(
-      padding: EdgeInsets.all(ScreenUtil().setWidth(15)),
-      margin: EdgeInsets.all(ScreenUtil().setWidth(10)),
-      decoration: BoxDecoration(
-          color: Colors.grey[200],
-          borderRadius: BorderRadius.all(
-              Radius.circular(ScreenUtil().setWidth(40))
-          )
-      ),
-      child: PopupMenuButton(
-        child: Text(translate(context,"more"),style: titleStyle.copyWith(
-            fontSize: ScreenUtil().setSp(40),
-            fontWeight: FontWeight.bold
-        ),),
-        itemBuilder: (_context) => jobPopUpList
-            .map<PopupMenuItem>((element) => PopupMenuItem(
-             child: Text(translate(context, element['name'])),
-          value: element['value'],
-        ))
-            .toList(),
-        onSelected: (result){
-          var value = (result.toString());
-          var index = int.parse(value);
-          if(jobPopUpList[index]['name']=="country"){
-            selectCountry(context, countryList);
-          }else{
-            List result = [];
-            result = switchItem(jobPopUpList[index]['name']);
-            setState(() {
-              _selected = result[0];
-              _target = result[1];
-            });
-          }
-        },
-      ),
-    );
-  }
 
-  selectCountry(BuildContext context,List items){
+  selectCountry(BuildContext context,var items, String type){
     var height = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;
 
@@ -154,33 +119,54 @@ class _JobState extends State<Job> {
       title: translate(context, "select"),
       context: context,
       style: AlertStyle(
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.grey[100],
         titleStyle: titleStyle2,
       ),
       buttons: [
         DialogButton(
-            color: Colors.white.withOpacity(0.3),
+            color: Colors.red.withOpacity(0.3),
             child: Text(translate(context, "cancel"),style: titleStyle2,),
             onPressed: (){
               Navigator.of(context).pop(true);
             }),
       ],
       content: Container(
-        height: height*(2/5),
+        height: ScreenUtil().setHeight(height),
         width: width,
         child: ListView.builder(
             itemCount: items.length,
             itemBuilder: (context,index){
-              return ListTile(
-                onTap: (){
-                  setState(() {
-                    _selected = items[index];
-                    _target = "country_french";
-                  });
-                  print(_selected);
-                  Navigator.of(context).pop(true);
-                },
-                title: Text("${items[index]}",style: textStyle,),
+              return Container(
+                margin: EdgeInsets.all(8),
+                color: Colors.white,
+                child: ListTile(
+                  onTap: (){
+                    if(type=="country"){
+                      setState(() {
+                        _selected = items[index];
+                        _target = lang=="fr"?"country_french":"country_english";
+                      });
+                    }else if(type=="category"){
+                      _selectedList.clear();
+                      setState(() {
+                        isArrayTarget = true;
+                        _selectedList.add(items[index]);
+                        _target = lang=="fr"?"category_french":"category_english";
+                      });
+                    }else if(type=="job_type"){
+                      _selectedList.clear();
+                      setState(() {
+                        isArrayTarget = true;
+                        _selectedList.add(items[index]);
+                        _target = lang=="fr"?"contrat_type_french":"contrat_type_english";
+                      });
+                    }
+
+                    print(_selected);
+                    Navigator.of(context).pop(true);
+                  },
+                  title: Text("${items[index]}",style: textStyle,),
+                ),
               );
             }
         ),

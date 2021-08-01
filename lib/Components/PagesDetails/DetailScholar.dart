@@ -16,23 +16,30 @@ Widget detailScholar(BuildContext context, ScholarshipGnClass doc,bool isLocal){
           shrinkWrap: true,
           physics: NeverScrollableScrollPhysics(),
           children: [
-            header(translate(context, "country"), doc.country),
+            header(context,translate(context, "country"), doc.country),
             new SizedBox(height: 10,),
-            header(translate(context, "level"), listToString(doc.level)),
+            header(context,translate(context, "level"), listToString(doc.level)),
             new SizedBox(height: 10,),
-            header(translate(context, "amount"), doc.amount),
+            header(context,translate(context, "deadline"), doc.deadline),
             new SizedBox(height: 10,),
-            header(translate(context, "duration"), doc.duration),
+            header(context,translate(context, "amount"), doc.amount),
             new SizedBox(height: 10,),
-            header(translate(context, "eligible"), listToString(doc.eligible)),
+            header(context,translate(context, "duration"), doc.duration),
+            new SizedBox(height: 10,),
+            header(context,translate(context, "eligible"), listToString(doc.eligible)),
             new SizedBox(height: 10,),
 
             new Container(child: Image.network(
-              doc.images[0]['src']['src'], fit: BoxFit.fill,),),
+              doc.images[1]['src']['src'], fit: BoxFit.fill,),),
             new SizedBox(height: 10,),
 
             body(doc.description),
             new SizedBox(height: 20,),
+
+            new Container(child: Image.network(
+              doc.images[2]['src']['src'], fit: BoxFit.fill,),),
+            new SizedBox(height: 10,),
+
             title2(translate(context, "condition")),
             body(doc.condition),
             new SizedBox(height: 20,),
@@ -41,7 +48,7 @@ Widget detailScholar(BuildContext context, ScholarshipGnClass doc,bool isLocal){
             new SizedBox(height: 20,),
 
             new Container(child: Image.network(
-              doc.images[1]['src']['src'], fit: BoxFit.fill,),),
+              doc.images[3]['src']['src'], fit: BoxFit.fill,),),
             new SizedBox(height: 10,),
 
             title2(translate(context, "how_apply")),
@@ -52,12 +59,14 @@ Widget detailScholar(BuildContext context, ScholarshipGnClass doc,bool isLocal){
               width: width,
               color: Colors.grey,
               child: Wrap(
-                // mainAxisAlignment: MainAxisAlignment.spaceAround,
+                alignment: WrapAlignment.spaceAround,
+                crossAxisAlignment: WrapCrossAlignment.center,
                 children: [
-                  actionButton(context,"apply",Icons.web_rounded,Colors.green,doc,"scholar"),
+                  actionButton(context,"apply",Icons.web_rounded,Colors.red,doc,"scholar"),
+                  actionButton(context,"web",Icons.web_rounded,Colors.blue,doc,"scholar"),
                   isLocal?actionButton(context,"delete",Icons.save_rounded,Colors.blue,doc,"scholar"):
-                  actionButton(context,"save",Icons.save_rounded,Colors.blue,doc,"scholar"),
-                  actionButton(context,"share",Icons.share_rounded,Colors.red,doc,"scholar")
+                  actionButton(context,"save",Icons.save_rounded,Colors.green,doc,"scholar"),
+                  actionButton(context,"share",Icons.share_rounded,Colors.deepOrange,doc,"scholar")
                 ],
               ),
             ),

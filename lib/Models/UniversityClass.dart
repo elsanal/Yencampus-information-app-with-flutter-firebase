@@ -6,7 +6,11 @@ class UniversityClass{
   String apply_link;
   String official_web;
   String deadline;
+  int world_ranking;
+  int national_ranking;
   bool isTopUniversity;
+  bool isOpen;
+  bool isPublic;
   List images;
 
 
@@ -15,6 +19,7 @@ class UniversityClass{
   String description;
   String name;
   String country;
+  String city;
   List major;
 
 
@@ -27,6 +32,11 @@ class UniversityClass{
     required this.school_fee,
     required this.isTopUniversity,
     required this.official_web,
+    required this.city,
+    required this.isOpen,
+    required this.isPublic,
+    required this.national_ranking,
+    required this.world_ranking,
     /// english
     required this.country,
     required this.description,

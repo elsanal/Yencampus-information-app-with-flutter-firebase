@@ -8,6 +8,7 @@ Future<List<CarerClass>> getCarer(String lang)async{
   List<CarerClass> data= [];
 
   await FirebaseFirestore.instance.collection("career")
+      .orderBy('lastupdate',descending: true)
       .get()
       .then((QuerySnapshot snapshot){
     snapshot.docs.forEach((doc){
@@ -31,6 +32,7 @@ Future<List<CarerClass>> getTargetCarer(String lang,String target, final filter)
   List<CarerClass> data= [];
   await FirebaseFirestore.instance.collection("career")
       .where(target, isEqualTo: filter)
+      .orderBy('lastupdate',descending: true)
       .get()
       .then((QuerySnapshot snapshot){
     snapshot.docs.forEach((doc){

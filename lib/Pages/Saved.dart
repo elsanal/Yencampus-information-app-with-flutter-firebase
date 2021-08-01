@@ -4,7 +4,9 @@ import 'package:yencampus/Components/PagesBody.dart';
 import 'package:yencampus/Components/PagesSliverBar.dart';
 import 'package:yencampus/Database/sqflite.dart';
 import 'package:yencampus/Decoration/FormField.dart';
+import 'package:yencampus/Function/getImageData.dart';
 import 'package:yencampus/Function/translation.dart';
+import 'package:yencampus/Models/ImageClass.dart';
 import 'package:yencampus/Models/SavedClass.dart';
 
 class Saved extends StatefulWidget {
@@ -15,7 +17,7 @@ class Saved extends StatefulWidget {
 }
 
 class _SavedState extends State<Saved> {
-
+  late Future<List<ImageClass>> _imageData;
   List<String> _items = ["all","scholar","univ","job","carer"];
   List docs =[];
   String _selected = 'all';
@@ -25,6 +27,7 @@ class _SavedState extends State<Saved> {
   @override
   void initState() {
     // TODO: implement initState
+    _imageData = getImage();
     super.initState();
   }
 
@@ -39,35 +42,18 @@ class _SavedState extends State<Saved> {
             slivers: [
               pageAppBar(
                   appBarBackground(
-                      context,_formField(width),_menuBar(width, _items),'saved')),
-              SavedBody(context),
+                      context,_imageData,_menuBar(width, _items),'saved')),
+              SavedBody(context,_selected),
             ],
           )
       ),
     );
   }
 
-  Widget _formField(double width){
-    return Expanded(
-      child: Container(
-        height:ScreenUtil().setHeight(100),
-        child: new TextFormField(
-          maxLines: 1,
-          decoration: formFieldDeco,
-          onChanged: (value){
-            setState(() {
-              input = value;
-            });
-            print(input);
-          },
-        ),
-      ),
-    );
-  }
   Widget _menuBar(double width, List<String> items){
 
     return Container(
-      height: ScreenUtil().setHeight(90),
+      height: ScreenUtil().setHeight(120),
       width: width,
       padding: EdgeInsets.only(
           left: 5,

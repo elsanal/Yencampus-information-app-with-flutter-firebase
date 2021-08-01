@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:yencampus/Components/PagesSliverBar.dart';
+import 'package:yencampus/Components/appBarImageSwiper.dart';
 import 'package:yencampus/Decoration/Fonts.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:yencampus/Function/translation.dart';
 
 Widget homeAppBarBackground(BuildContext context,
-    Widget inputField,
-    Widget menuBar,String category){
+    Widget menuBar,final data,String title){
   var width = MediaQuery.of(context).size.width;
+  var height = MediaQuery.of(context).size.height;
   return Container(
     height: width,
     width: width,
@@ -37,15 +35,7 @@ Widget homeAppBarBackground(BuildContext context,
             ],
           ),
         ),
-        Container(
-          width: width*(3/4),
-          child: Row(
-            children: [
-              inputField,
-            ],
-          ),
-        ),
-        pageMenuBar(translate(context, category), 0, 0),
+        AppBarImageSwiper(images: data, title: title,),
         menuBar
       ],
     ),
@@ -56,7 +46,9 @@ Widget homeAppBarBackground(BuildContext context,
 Widget category(String cat){
   return Container(
     padding: EdgeInsets.all(ScreenUtil().setWidth(15)),
-    child: Text(cat,style: titleStyle2,),
+    child: Text(cat,style: titleStyle2.copyWith(
+      fontSize: ScreenUtil().setSp(70)
+    ),),
   );
 }
 

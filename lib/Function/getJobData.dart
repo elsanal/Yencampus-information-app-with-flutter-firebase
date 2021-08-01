@@ -12,21 +12,32 @@ Future<List<JobClass>> getJob(String lang)async{
       .then((QuerySnapshot snapshot){
     snapshot.docs.forEach((doc){
       JobClass document = new JobClass(
-        id: doc['id'],
-        salary: doc['salary'],
-        apply_link: doc['apply_link'],
-        official_web: doc['official_web'],
-        deadline: doc['deadline'],
-        duration: doc['duration'],
-        images: doc['images'],
-        /// english
-        country: lang=="fr"?doc['country_french']:doc['country_english'],
-        description: lang=="fr"?doc['description_french']:doc['description_english'],
-        name: lang=="fr"?doc['name_french']:doc['name_english'],
-        required: lang=="fr"?doc['requirement_french']:doc['requirement_english'],
+          id: doc['id'],
+          salary: doc['salary'],
+          apply_link: doc['apply_link'],
+          official_web: doc['official_web'],
+          deadline: doc['deadline'],
+          duration: doc['duration'],
+          images: doc['images'],
+          city: doc['city'],
+          email: doc['email'],
+          tel: doc['tel'],
+          isOpen: doc['isOpen'],
+          experience: doc['experience'],
+          nb_poste: doc['nb_poste'],
+          /// english
+          ///
+          language: lang=="fr"?doc['language_french']:doc['language_english'],
+          contrat_type: lang=="fr"?doc['contrat_type_french']:doc['contrat_type_english'],
+          category: lang=="fr"?doc['category_french']:doc['category_english'],
+          level: lang=="fr"?doc['level_french']:doc['level_english'],
+          country: lang=="fr"?doc['country_french']:doc['country_english'],
+          description: lang=="fr"?doc['description_french']:doc['description_english'],
+          name: lang=="fr"?doc['name_french']:doc['name_english'],
+          required: lang=="fr"?doc['requirement_french']:doc['requirement_english'],
       );
-      data.add(document);
-      print("There is a job for you");
+          data.add(document);
+      print(document);
     });
   });
   return data;
@@ -35,7 +46,7 @@ Future<List<JobClass>> getJob(String lang)async{
 Future<List<JobClass>> getTargetJob(String lang,String target, final filter)async{
   List<JobClass> data= [];
   await FirebaseFirestore.instance.collection("job")
-      .where(target,isGreaterThanOrEqualTo: filter)
+      .where(target,isEqualTo: filter)
       .get()
       .then((QuerySnapshot snapshot){
     snapshot.docs.forEach((doc){
@@ -47,15 +58,64 @@ Future<List<JobClass>> getTargetJob(String lang,String target, final filter)asyn
         deadline: doc['deadline'],
         duration: doc['duration'],
         images: doc['images'],
+        city: doc['city'],
+        email: doc['email'],
+        tel: doc['tel'],
+        isOpen: doc['isOpen'],
+        experience: doc['experience'],
+        nb_poste: doc['nb_poste'],
         /// english
+        ///
+        language: lang=="fr"?doc['language_french']:doc['language_english'],
+        contrat_type: lang=="fr"?doc['contrat_type_french']:doc['contrat_type_english'],
+        category: lang=="fr"?doc['category_french']:doc['category_english'],
+        level: lang=="fr"?doc['level_french']:doc['level_english'],
         country: lang=="fr"?doc['country_french']:doc['country_english'],
         description: lang=="fr"?doc['description_french']:doc['description_english'],
         name: lang=="fr"?doc['name_french']:doc['name_english'],
         required: lang=="fr"?doc['requirement_french']:doc['requirement_english'],
-
       );
       data.add(document);
-      // print(doc.data());
+      print(document);
+    });
+  });
+  return data;
+}
+
+Future<List<JobClass>> getArrayTargetJob(String lang,String target, final filter)async{
+  List<JobClass> data= [];
+  await FirebaseFirestore.instance.collection("job")
+      .where(target,arrayContainsAny: filter)
+      .get()
+      .then((QuerySnapshot snapshot){
+    snapshot.docs.forEach((doc){
+      JobClass document = new JobClass(
+        id: doc['id'],
+        salary: doc['salary'],
+        apply_link: doc['apply_link'],
+        official_web: doc['official_web'],
+        deadline: doc['deadline'],
+        duration: doc['duration'],
+        images: doc['images'],
+        city: doc['city'],
+        email: doc['email'],
+        tel: doc['tel'],
+        isOpen: doc['isOpen'],
+        experience: doc['experience'],
+        nb_poste: doc['nb_poste'],
+        /// english
+        ///
+        language: lang=="fr"?doc['language_french']:doc['language_english'],
+        contrat_type: lang=="fr"?doc['contrat_type_french']:doc['contrat_type_english'],
+        category: lang=="fr"?doc['category_french']:doc['category_english'],
+        level: lang=="fr"?doc['level_french']:doc['level_english'],
+        country: lang=="fr"?doc['country_french']:doc['country_english'],
+        description: lang=="fr"?doc['description_french']:doc['description_english'],
+        name: lang=="fr"?doc['name_french']:doc['name_english'],
+        required: lang=="fr"?doc['requirement_french']:doc['requirement_english'],
+      );
+      data.add(document);
+      print(document);
     });
   });
   return data;

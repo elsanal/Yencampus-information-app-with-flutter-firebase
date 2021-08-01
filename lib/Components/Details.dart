@@ -39,7 +39,7 @@ class _DetailsState extends State<Details> {
       body: CustomScrollView(
        physics: ScrollPhysics(),
         slivers: [
-          type != "tip"?sliverAppBar(context,doc.name,doc.images[1]['src']['src'],false):
+          type != "tip"?sliverAppBar(context,doc.name,doc.images[0]['src']['src'],false):
           sliverAppBar(context,doc[0]['title'],'',true),
           _type()
         ],

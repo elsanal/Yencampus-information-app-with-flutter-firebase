@@ -6,13 +6,24 @@ class JobClass{
   String deadline;
   String salary;
   List images;
+  bool isOpen;
+  List contrat_type;
+  String experience;
+  String nb_poste;
 
 
   //////////////// English /////////////
   String description;
   String name;
+  String city;
+  String email;
+  String tel;
   String country;
   String required;
+  List level;
+  List language;
+  List category;
+
 
   JobClass({
     required this.id,
@@ -26,8 +37,16 @@ class JobClass{
     required this.country,
     required this.description,
     required this.name,
+    required this.city,
+    required this.tel,
+    required this.email,
     required this.required,
-
-
+    required this.isOpen,
+    required this.contrat_type,
+    required this.category,
+    required this.language,
+    required this.level,
+    required this.experience,
+    required this.nb_poste,
   });
 }

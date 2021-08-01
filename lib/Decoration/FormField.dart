@@ -24,5 +24,4 @@ InputDecoration formFieldDeco = InputDecoration(
     ),
     // suffix: Text("Search"),
     suffixIcon: Icon(Icons.search),
-    hintText: "Search"
 );

@@ -19,17 +19,22 @@ Widget detailCarer(BuildContext context, CarerClass doc, bool isLocal){
           children: [
 
             new Container(child: Image.network(
-              doc.images[0]['src']['src'], fit: BoxFit.fill,),),
+              doc.images[1]['src']['src'], fit: BoxFit.fill,),),
             new SizedBox(height: 10,),
 
             body(doc.description),
             new SizedBox(height: 20,),
+
+            new Container(child: Image.network(
+              doc.images[2]['src']['src'], fit: BoxFit.fill,),),
+            new SizedBox(height: 10,),
+
             title2(translate(context, "advantage")),
             body(doc.advantage),
             new SizedBox(height: 20,),
 
             new Container(child: Image.network(
-              doc.images[1]['src']['src'], fit: BoxFit.fill,),),
+              doc.images[3]['src']['src'], fit: BoxFit.fill,),),
             new SizedBox(height: 10,),
 
             title2(translate(context, "disadvantage")),
@@ -37,18 +42,19 @@ Widget detailCarer(BuildContext context, CarerClass doc, bool isLocal){
             new SizedBox(height: 20,),
 
             new Container(child: Image.network(
-              doc.images[2]['src']['src'], fit: BoxFit.fill,),),
+              doc.images[0]['src']['src'], fit: BoxFit.fill,),),
             new SizedBox(height: 10,),
 
             new Container(
               width: width,
               color: Colors.grey,
               child: Wrap(
+                alignment: WrapAlignment.spaceAround,
+                crossAxisAlignment: WrapCrossAlignment.center,
                 children: [
-                  actionButton(context,"apply",Icons.web_rounded,Colors.green,doc,"carer"),
                   isLocal?actionButton(context,"delete",Icons.save_rounded,Colors.blue,doc,"carer"):
-                  actionButton(context,"save",Icons.save_rounded,Colors.blue,doc,"carer"),
-                  actionButton(context,"share",Icons.share_rounded,Colors.red,doc,"carer")
+                  actionButton(context,"save",Icons.save_rounded,Colors.green,doc,"carer"),
+                  actionButton(context,"share",Icons.share_rounded,Colors.deepOrange,doc,"carer")
                 ],
               ),
             ),

@@ -9,24 +9,31 @@ import 'package:yencampus/Function/translation.dart';
 import 'package:yencampus/Function/urlLauncher.dart';
 import 'package:yencampus/Models/SavedClass.dart';
 
-
-
-
-
-
-Widget header(String title, String result){
+Widget header(BuildContext context,String title, String result){
   return Container(
     padding: EdgeInsets.all(ScreenUtil().setWidth(10)),
-    child: new Text("$title : $result",style: titleStyle2.copyWith(
-        fontSize: ScreenUtil().setSp(50)
-    ),),
+    width: MediaQuery.of(context).size.width,
+    child: Wrap(
+      children: [
+        new Text("$title : ",style: titleStyle2.copyWith(
+            fontSize: ScreenUtil().setSp(50),
+          fontWeight: FontWeight.bold
+        ),maxLines: 5,),
+        new Text("$result",style: titleStyle2.copyWith(
+            fontSize: ScreenUtil().setSp(50),
+            fontWeight: FontWeight.w400
+        ),maxLines: 5,),
+      ],
+    ),
   );
 }
 
 Widget title2(String title){
   return Container(
     padding: EdgeInsets.all(ScreenUtil().setWidth(10)),
-    child: new Text(title,style: titleStyle2),
+    child: new Text(title,style: titleStyle2.copyWith(
+      fontSize: ScreenUtil().setSp(90)
+    )),
   );
 }
 
@@ -48,21 +55,26 @@ Widget actionButton(BuildContext context,String title,IconData icon,
         ),
         onPressed:(){
          switch(title){
-           case "Share":
-             sharePost(doc, type);
+           case "share":
+             return sharePost(context,doc, type);
              break;
-           case "Save" :
+           case "save" :
              localDB(tableName: "YENCAMPUS").saveOndB(SavePost(type: type, id: doc.id));
              final snackBar = SnackBar(
                content: Text("Saved"),);
              ScaffoldMessenger.of(context).showSnackBar(snackBar);
              break;
-           case "Apply" :
+           case "apply" :
+             if(type!="carer"){
+               return UlrLauncher(context,doc.apply_link);
+             }
+             break;
+           case "web" :
              if(type!="carer"){
                return UlrLauncher(context,doc.official_web);
              }
              break;
-           case "Delete":
+           case "delete":
              localDB(tableName: "YENCAMPUS").delete(int.parse(doc.id));
              final snackBar = SnackBar(
                content: Text(translate(context, "deleted")),);
@@ -77,7 +89,7 @@ Widget actionButton(BuildContext context,String title,IconData icon,
             children: [
               Icon(icon,color: Colors.white,),
               Text(translate(context, title),style: titleStyle.copyWith(
-                fontSize: ScreenUtil().setSp(50),
+                fontSize: ScreenUtil().setSp(40),
                 color: Colors.white,
               ),),
             ],
