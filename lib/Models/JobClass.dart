@@ -10,10 +10,11 @@ class JobClass{
   List contrat_type;
   String experience;
   String nb_poste;
-
+  String enterprise;
 
   //////////////// English /////////////
   String description;
+  String responsibility;
   String name;
   String city;
   String email;
@@ -36,6 +37,7 @@ class JobClass{
     /// english
     required this.country,
     required this.description,
+    required this.responsibility,
     required this.name,
     required this.city,
     required this.tel,
@@ -48,5 +50,6 @@ class JobClass{
     required this.level,
     required this.experience,
     required this.nb_poste,
+    required this.enterprise,
   });
 }

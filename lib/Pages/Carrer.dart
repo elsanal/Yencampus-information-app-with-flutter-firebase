@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:yencampus/Components/PagesBody.dart';
 import 'package:yencampus/Components/PagesSliverBar.dart';
 import 'package:yencampus/Decoration/FormField.dart';
+import 'package:yencampus/Function/Locale.dart';
 import 'package:yencampus/Function/getImageData.dart';
 import 'package:yencampus/Function/translation.dart';
 import 'package:yencampus/Models/ImageClass.dart';
@@ -18,22 +19,20 @@ class Carer extends StatefulWidget {
 class _CarerState extends State<Carer> {
   late Future<List<ImageClass>> _imageData;
   List<String> _items = [];
-  var _selected = '';
-  String _target = '';
-  String _input = '';
+  String lang='en';
   int _selectedIndex=0;
 
   @override
   void initState() {
     // TODO: implement initState
-    _imageData = getImage();
+    _imageData = getImage(lang);
     super.initState();
   }
 
   @override
 
   Widget build(BuildContext context) {
-    var height = MediaQuery.of(context).size.height;
+    lang = getLocale(context);
     var width = MediaQuery.of(context).size.width;
     return SafeArea(
       child: Scaffold(
@@ -49,23 +48,7 @@ class _CarerState extends State<Carer> {
     );
   }
 
-  Widget _formField(double width){
-    return Expanded(
-      child: Container(
-        height:ScreenUtil().setHeight(100),
-        child: new TextFormField(
-          maxLines: 1,
-          decoration: formFieldDeco,
-          onChanged: (value){
-            setState(() {
-              _input = value;
-            });
 
-          },
-        ),
-      ),
-    );
-  }
   Widget _menuBar(double width, List<String> items){
 
     return Container(
@@ -85,7 +68,6 @@ class _CarerState extends State<Carer> {
                 setState(() {
                   _selectedIndex = index;
                 });
-                _selected = items[index];
               });
             },
             child: pageMenuBar(translate(context, items[index]),index,_selectedIndex),

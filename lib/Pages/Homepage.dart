@@ -55,7 +55,7 @@ class _HomepageState extends State<Homepage> {
       _carerData = getCarer(lang);
       _univData = getTargetUniversity(lang,"isPublic",true);
       _jobData = getTargetJob(lang,"isOpen",true);
-      _imageData = getImage();
+      _imageData = getImage(lang);
       print("initailized");
     }
     super.initState();

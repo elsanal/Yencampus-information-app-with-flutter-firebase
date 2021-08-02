@@ -17,32 +17,27 @@ Widget detailScholar(BuildContext context, ScholarshipGnClass doc,bool isLocal){
           physics: NeverScrollableScrollPhysics(),
           children: [
             header(context,translate(context, "country"), doc.country),
-            new SizedBox(height: 10,),
             header(context,translate(context, "level"), listToString(doc.level)),
-            new SizedBox(height: 10,),
-            header(context,translate(context, "deadline"), doc.deadline),
-            new SizedBox(height: 10,),
             header(context,translate(context, "amount"), doc.amount),
-            new SizedBox(height: 10,),
+            header(context,translate(context, "yearr"), doc.year),
             header(context,translate(context, "duration"), doc.duration),
-            new SizedBox(height: 10,),
+            header(context,translate(context, "deadline"), doc.deadline),
             header(context,translate(context, "eligible"), listToString(doc.eligible)),
-            new SizedBox(height: 10,),
 
             new Container(child: Image.network(
               doc.images[1]['src']['src'], fit: BoxFit.fill,),),
             new SizedBox(height: 10,),
-
             body(doc.description),
-            new SizedBox(height: 20,),
+            new SizedBox(height: 10,),
 
             new Container(child: Image.network(
               doc.images[2]['src']['src'], fit: BoxFit.fill,),),
             new SizedBox(height: 10,),
-
             title2(translate(context, "condition")),
             body(doc.condition),
-            new SizedBox(height: 20,),
+            new Container(child: Image.network(
+              doc.images[0]['src']['src'], fit: BoxFit.fill,),),
+            new SizedBox(height: 10,),
             title2(translate(context, "document")),
             body(doc.req_docs),
             new SizedBox(height: 20,),
@@ -53,7 +48,7 @@ Widget detailScholar(BuildContext context, ScholarshipGnClass doc,bool isLocal){
 
             title2(translate(context, "how_apply")),
             body(doc.how_to_apply),
-            new SizedBox(height: 20,),
+            new SizedBox(height: 10,),
 
             new Container(
               width: width,

@@ -1,6 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:yencampus/Function/Locale.dart';
 import 'package:yencampus/Models/JobClass.dart';
 
 
@@ -25,6 +23,7 @@ Future<List<JobClass>> getJob(String lang)async{
           isOpen: doc['isOpen'],
           experience: doc['experience'],
           nb_poste: doc['nb_poste'],
+          enterprise: doc['enterprise'],
           /// english
           ///
           language: lang=="fr"?doc['language_french']:doc['language_english'],
@@ -32,12 +31,12 @@ Future<List<JobClass>> getJob(String lang)async{
           category: lang=="fr"?doc['category_french']:doc['category_english'],
           level: lang=="fr"?doc['level_french']:doc['level_english'],
           country: lang=="fr"?doc['country_french']:doc['country_english'],
-          description: lang=="fr"?doc['description_french']:doc['description_english'],
+          description: lang=="fr"?doc['summary_french']:doc['summary_english'],
+          responsibility:lang=="fr"?doc['responsibility_french']:doc['responsibility_english'],
           name: lang=="fr"?doc['name_french']:doc['name_english'],
           required: lang=="fr"?doc['requirement_french']:doc['requirement_english'],
       );
           data.add(document);
-      print(document);
     });
   });
   return data;
@@ -64,6 +63,7 @@ Future<List<JobClass>> getTargetJob(String lang,String target, final filter)asyn
         isOpen: doc['isOpen'],
         experience: doc['experience'],
         nb_poste: doc['nb_poste'],
+        enterprise: doc['enterprise'],
         /// english
         ///
         language: lang=="fr"?doc['language_french']:doc['language_english'],
@@ -71,12 +71,12 @@ Future<List<JobClass>> getTargetJob(String lang,String target, final filter)asyn
         category: lang=="fr"?doc['category_french']:doc['category_english'],
         level: lang=="fr"?doc['level_french']:doc['level_english'],
         country: lang=="fr"?doc['country_french']:doc['country_english'],
-        description: lang=="fr"?doc['description_french']:doc['description_english'],
+        description: lang=="fr"?doc['summary_french']:doc['summary_english'],
+        responsibility:lang=="fr"?doc['responsibility_french']:doc['responsibility_english'],
         name: lang=="fr"?doc['name_french']:doc['name_english'],
         required: lang=="fr"?doc['requirement_french']:doc['requirement_english'],
       );
       data.add(document);
-      print(document);
     });
   });
   return data;
@@ -103,6 +103,7 @@ Future<List<JobClass>> getArrayTargetJob(String lang,String target, final filter
         isOpen: doc['isOpen'],
         experience: doc['experience'],
         nb_poste: doc['nb_poste'],
+        enterprise: doc['enterprise'],
         /// english
         ///
         language: lang=="fr"?doc['language_french']:doc['language_english'],
@@ -110,12 +111,12 @@ Future<List<JobClass>> getArrayTargetJob(String lang,String target, final filter
         category: lang=="fr"?doc['category_french']:doc['category_english'],
         level: lang=="fr"?doc['level_french']:doc['level_english'],
         country: lang=="fr"?doc['country_french']:doc['country_english'],
-        description: lang=="fr"?doc['description_french']:doc['description_english'],
+        description: lang=="fr"?doc['summary_french']:doc['summary_english'],
+        responsibility:lang=="fr"?doc['responsibility_french']:doc['responsibility_english'],
         name: lang=="fr"?doc['name_french']:doc['name_english'],
         required: lang=="fr"?doc['requirement_french']:doc['requirement_english'],
       );
       data.add(document);
-      print(document);
     });
   });
   return data;

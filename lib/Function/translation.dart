@@ -5,6 +5,9 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 translate(BuildContext context,String item){
   String _selected = '';
   switch(item){
+    case "about":
+      _selected = AppLocalizations.of(context)!.about;
+      break;
     case "all":
       _selected = AppLocalizations.of(context)!.all;
       break;
@@ -80,6 +83,9 @@ translate(BuildContext context,String item){
     case "enterprise":
       _selected = AppLocalizations.of(context)!.enterprise;
       break;
+    case "enterprise_summary":
+      _selected = AppLocalizations.of(context)!.enterprise_summary;
+      break;
     case "experience":
       _selected = AppLocalizations.of(context)!.experience;
       break;
@@ -133,6 +139,9 @@ translate(BuildContext context,String item){
       break;
     case "more":
       _selected = AppLocalizations.of(context)!.more;
+      break;
+    case "more_apps":
+      _selected = AppLocalizations.of(context)!.more_apps;
       break;
     case "most_popular":
       _selected = AppLocalizations.of(context)!.most_popular;
@@ -191,8 +200,14 @@ translate(BuildContext context,String item){
     case "privatee":
       _selected = AppLocalizations.of(context)!.privatee;
       break;
+    case "qualification":
+      _selected = AppLocalizations.of(context)!.qualification;
+      break;
     case "read_more":
       _selected = AppLocalizations.of(context)!.read_more;
+      break;
+    case "responsibility":
+      _selected = AppLocalizations.of(context)!.responsibility;
       break;
     case "req":
       _selected = AppLocalizations.of(context)!.req;
@@ -244,6 +259,15 @@ translate(BuildContext context,String item){
       break;
     case "type_contract":
       _selected = AppLocalizations.of(context)!.type_contract;
+      break;
+    case "year":
+      _selected = AppLocalizations.of(context)!.year;
+      break;
+    case "yearr":
+      _selected = AppLocalizations.of(context)!.yearr;
+      break;
+    case "yentech":
+      _selected = AppLocalizations.of(context)!.yentech;
       break;
     case "waiting":
       _selected = AppLocalizations.of(context)!.waiting;

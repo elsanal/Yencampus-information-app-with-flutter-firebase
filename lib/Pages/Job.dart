@@ -34,12 +34,12 @@ class _JobState extends State<Job> {
   String _target = '';
   bool isArrayTarget = false;
   int _selectedIndex=0;
-  String lang = '';
+  String lang = 'en';
 
   @override
   void initState() {
     // TODO: implement initState
-    _imageData = getImage();
+    _imageData = getImage(lang);
     super.initState();
   }
 

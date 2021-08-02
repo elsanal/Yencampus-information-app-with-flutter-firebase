@@ -1,4 +1,6 @@
 
+import 'package:flutter/material.dart';
+
 List scholarPopUpList = [
   {"name":"all","value":0},
   {"name":"country","value":1},
@@ -27,4 +29,10 @@ List jobPopUpList = [
   {"name":"isOpenn","value":3},
 ];
 
+List settingPopUpList = [
+  {"name":"about","value":0,"icon":Icons.home_rounded},
+  {"name":"share","value":1,"icon":Icons.share_rounded},
+  {"name":"more_apps","value":2,"icon":Icons.category_rounded},
+  {"name":"yentech","value":3,"icon":Icons.account_circle_rounded},
+];
 

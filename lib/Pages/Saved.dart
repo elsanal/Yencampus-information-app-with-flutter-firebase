@@ -4,6 +4,7 @@ import 'package:yencampus/Components/PagesBody.dart';
 import 'package:yencampus/Components/PagesSliverBar.dart';
 import 'package:yencampus/Database/sqflite.dart';
 import 'package:yencampus/Decoration/FormField.dart';
+import 'package:yencampus/Function/Locale.dart';
 import 'package:yencampus/Function/getImageData.dart';
 import 'package:yencampus/Function/translation.dart';
 import 'package:yencampus/Models/ImageClass.dart';
@@ -19,23 +20,22 @@ class Saved extends StatefulWidget {
 class _SavedState extends State<Saved> {
   late Future<List<ImageClass>> _imageData;
   List<String> _items = ["all","scholar","univ","job","carer"];
-  List docs =[];
-  String _selected = 'all';
-  String input = '';
+  String _selected = '';
+  String lang='en';
   int _selectedIndex=-1;
 
   @override
   void initState() {
     // TODO: implement initState
-    _imageData = getImage();
+    _imageData = getImage(lang);
     super.initState();
   }
 
 
   @override
   Widget build(BuildContext context) {
-    var height = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;
+    lang = getLocale(context);
     return SafeArea(
       child: Scaffold(
           body: new CustomScrollView(

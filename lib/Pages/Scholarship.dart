@@ -36,13 +36,13 @@ class _ScholarshipState extends State<Scholarship> {
   var _selectedList = [];
   String _target = '';
   int _selectedIndex=0;
-  String lang='';
+  String lang='en';
   bool isArrayTarget=false;
 
   @override
   void initState() {
     // TODO: implement initState
-    _imageData = getImage();
+    _imageData = getImage(lang);
     super.initState();
   }
 

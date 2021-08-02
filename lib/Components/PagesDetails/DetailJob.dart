@@ -25,48 +25,40 @@ Widget detailJob(BuildContext context, JobClass doc,bool isLocal){
           shrinkWrap: true,
           physics: NeverScrollableScrollPhysics(),
           children: [
-            header(context,translate(context, "category"), listToString(doc.category)),
-            new SizedBox(height: 10,),
+            header(context,translate(context, "enterprise"), doc.enterprise),
+            header(context,translate(context, "domain"), listToString(doc.category)),
             doc.nb_poste!="N/A"?header(context,translate(context, "nb_poste"), doc.nb_poste):Container(),
-            doc.nb_poste!="N/A"?new SizedBox(height: 10,):Container(),
             doc.salary!="N/A"?header(context,translate(context, "salary"), doc.salary):Container(),
-            doc.salary!="N/A"?new SizedBox(height: 10,):Container(),
+            header(context,translate(context, "experience"), doc.experience + " "+translate(context, "year")),
+            header(context,translate(context, "std_level"), listToString(doc.level)),
+            header(context,translate(context, "level_lang"), listToString(doc.language)),
             header(context,translate(context, "country"), doc.country),
-            new SizedBox(height: 10,),
             header(context,translate(context, "city"), doc.city),
-            new SizedBox(height: 10,),
             doc.deadline!="N/A"?header(context,translate(context, "deadline"), doc.deadline):Container(),
-            doc.deadline!="N/A"?new SizedBox(height: 10,):Container(),
-
             doc.email!="N/A"?header(context,translate(context, "email"), doc.email):Container(),
-            doc.email!="N/A"?new SizedBox(height: 10,):Container(),
+            
 
             new Container(child: Image.network(
               doc.images[1]['src']['src'], fit: BoxFit.fill,),),
             new SizedBox(height: 10,),
 
-            title2(translate(context, "condition")+" :"),
-            header(context,translate(context, "experience"), doc.experience),
-            new SizedBox(height: 10,),
-            header(context,translate(context, "std_level"), listToString(doc.level)),
-            new SizedBox(height: 10,),
-            header(context,translate(context, "level_lang"), listToString(doc.language)),
-            new SizedBox(height: 10,),
-
+            title2(translate(context, "enterprise_summary")+" :"),
+            body(doc.description),
+            new SizedBox(height: 20,),
             new Container(child: Image.network(
               doc.images[2]['src']['src'], fit: BoxFit.fill,),),
             new SizedBox(height: 10,),
 
-            title2(translate(context, "Mission : ")),
-            body(doc.description),
+            title2(translate(context, "responsibility")+" :"),
+            body(doc.responsibility),
             new SizedBox(height: 20,),
             new Container(child: Image.network(
               doc.images[0]['src']['src'], fit: BoxFit.fill,),),
             new SizedBox(height: 10,),
-            title2(translate(context, "req")+" :"),
+
+            title2(translate(context, "qualification")+" :"),
             body(doc.required),
             new SizedBox(height: 20,),
-
             new Container(child: Image.network(
               doc.images[3]['src']['src'], fit: BoxFit.fill,),),
             new SizedBox(height: 10,),

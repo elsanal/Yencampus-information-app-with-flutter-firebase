@@ -4,6 +4,7 @@ import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:yencampus/Decoration/Fonts.dart';
 import 'package:yencampus/Function/Locale.dart';
 import 'package:yencampus/Function/translation.dart';
+import 'package:yencampus/Function/urlLauncher.dart';
 import 'package:yencampus/Models/ImageClass.dart';
 
 
@@ -128,44 +129,46 @@ class _AppBarImageSwiperState extends State<AppBarImageSwiper> with TickerProvid
                 containerHeight: width,
                 containerWidth: width,
                 itemBuilder: (context,index){
-                var image = snapshot.data[index];
-                return Container(
-                  width: width,
-                  height: ScreenUtil().setHeight(height/2),
-                  decoration: BoxDecoration(
-                      image: DecorationImage(
-                          image: NetworkImage(image.images[0]['src']['src']),
-                          fit: BoxFit.cover
-                      ),
-                      borderRadius: BorderRadius.all(
-                          Radius.circular(10)
-                      )
-                  ),
-                  child: Stack(
-                    fit: StackFit.loose,
-                    children: [
-                      Center(
-                        child: Container(
-                          padding: EdgeInsets.all(5),
-                          decoration: BoxDecoration(
-                              color: Colors.white.withOpacity(0.5),
-                              borderRadius: BorderRadius.all(
-                                  Radius.circular(10)
-                              )
+                var doc = snapshot.data[index];
+                return InkWell(
+                  onTap: ()=>UlrLauncher(context, doc.url),
+                  child: Container(
+                    width: width,
+                    height: ScreenUtil().setHeight(height/2),
+                    decoration: BoxDecoration(
+                        image: DecorationImage(
+                            image: NetworkImage(doc.image),
+                            fit: BoxFit.cover
+                        ),
+                        borderRadius: BorderRadius.all(
+                            Radius.circular(10)
+                        )
+                    ),
+                    child: Stack(
+                      fit: StackFit.loose,
+                      children: [
+                        Center(
+                          child: Container(
+                            padding: EdgeInsets.all(5),
+                            decoration: BoxDecoration(
+                                color: Colors.white.withOpacity(0.5),
+                                borderRadius: BorderRadius.all(
+                                    Radius.circular(10)
+                                )
+                            ),
+                            child: Text(translate(context, _title),style: titleStyle.copyWith(
+                            ),),
                           ),
-                          child: Text(translate(context, _title),style: titleStyle.copyWith(
+                        ),
+                        Container(
+                          alignment: Alignment.bottomCenter,
+                          padding: EdgeInsets.all(5),
+                          child: Text(doc.title,style: titleStyle2.copyWith(
+                            backgroundColor: Colors.grey[100]
                           ),),
                         ),
-                      ),
-                      Container(
-                        alignment: Alignment.bottomCenter,
-                        padding: EdgeInsets.all(5),
-                        child: Text(lang=="fr"?image.images[0]['name_french']:
-                        image.images[0]['name_english'],style: titleStyle2.copyWith(
-                          backgroundColor: Colors.grey[100]
-                        ),),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 );
               },

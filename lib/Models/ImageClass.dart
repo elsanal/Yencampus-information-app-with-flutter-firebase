@@ -1,10 +1,14 @@
 class ImageClass{
   String id;
-  List images;
+  String image;
+  String url;
+  String title;
 
 
   ImageClass({
     required this.id,
-    required this.images,
+    required this.image,
+    required this.url,
+    required this.title,
   });
 }
