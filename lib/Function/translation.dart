@@ -47,6 +47,9 @@ translate(BuildContext context,String item){
     case "country":
       _selected = AppLocalizations.of(context)!.country;
       break;
+    case "contact":
+      _selected = AppLocalizations.of(context)!.contact;
+      break;
     case "deadline":
       _selected = AppLocalizations.of(context)!.deadline;
       break;

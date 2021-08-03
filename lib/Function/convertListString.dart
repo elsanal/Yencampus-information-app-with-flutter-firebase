@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:yencampus/Components/DetailsComp.dart';
+import 'package:yencampus/Components/PagesDetails/DetailsComp.dart';
 import 'package:yencampus/Components/PagesBody.dart';
 import 'package:yencampus/Decoration/Fonts.dart';
 

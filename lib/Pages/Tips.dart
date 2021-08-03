@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:yencampus/Components/Details.dart';
+import 'package:yencampus/Components/PagesDetails/Details.dart';
 import 'package:yencampus/Components/PagesSliverBar.dart';
 import 'package:yencampus/Database/Tips/mythScholarshipEn.dart';
 import 'package:yencampus/Database/Tips/mythScholarshipFr.dart';
@@ -55,7 +55,9 @@ Widget _background(String title){
     ),
     alignment: Alignment.center,
     child: Text(title,style: titleStyle2.copyWith(
-      color: Colors.white
+      color: Colors.white,
+      fontSize: ScreenUtil().setSp(80),
+      fontWeight: FontWeight.bold
     ),textAlign: TextAlign.center,),
   );
 }

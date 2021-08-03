@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:yencampus/Components/HomeAppBar.dart';
-import 'package:yencampus/Components/HomePageItems.dart';
+import 'package:yencampus/Components/Home/HomeAppBar.dart';
+import 'package:yencampus/Components/Home/HomePageItems.dart';
 import 'package:yencampus/Components/PagesSliverBar.dart';
 import 'package:yencampus/Function/getCareerData.dart';
 import 'package:yencampus/Function/getImageData.dart';

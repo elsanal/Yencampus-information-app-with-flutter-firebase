@@ -1,7 +1,7 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:yencampus/Components/DetailAppbar.dart';
+import 'package:yencampus/Components/PagesDetails/DetailAppbar.dart';
 import 'package:yencampus/Components/PagesDetails/DetailCarer.dart';
 import 'package:yencampus/Components/PagesDetails/DetailScholar.dart';
 import 'package:yencampus/Components/PagesDetails/DetailJob.dart';

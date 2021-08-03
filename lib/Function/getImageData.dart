@@ -15,7 +15,6 @@ Future<List<ImageClass>> getImage(String lang)async{
         title: lang=="fr"?doc["name_french"]:doc["name_english"]
       );
       data.add(document);
-      print(document.url);
     });
   });
   return data;

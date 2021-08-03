@@ -23,17 +23,15 @@ class University extends StatefulWidget {
 
 class _UniversityState extends State<University> {
   List<String> _items = ["all",'isOpenn',"privatee","publicc","country","majors"];
-  late Future<List<ImageClass>> _imageData;
   var _selected = '';
   String _target = '';
   int _selectedIndex=0;
-  String lang='en';
+  String lang='';
   bool isArrayTarget = false;
 
   @override
   void initState() {
     // TODO: implement initState
-    _imageData = getImage(lang);
     super.initState();
   }
 
@@ -41,7 +39,6 @@ class _UniversityState extends State<University> {
 
   Widget build(BuildContext context) {
     lang = getLocale(context);
-    var height = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;
     return SafeArea(
       child: Scaffold(
@@ -49,7 +46,7 @@ class _UniversityState extends State<University> {
             slivers: [
               pageAppBar(
                   appBarBackground(
-                      context,_imageData,_menuBar(width, _items),'univ')),
+                      context,_menuBar(width, _items),'univ')),
               _selected==""?pageBody(context,"univ"):
               _selected=="true"?filterBody(context, 'univ', _target, true,false):
               _selected=="false"?filterBody(context, 'univ', _target, false,false):

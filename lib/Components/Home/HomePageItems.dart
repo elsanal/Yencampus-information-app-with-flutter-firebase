@@ -4,7 +4,7 @@ import 'package:yencampus/Function/translation.dart';
 import 'package:yencampus/Models/CarerClass.dart';
 import 'package:yencampus/Models/JobClass.dart';
 import 'package:yencampus/Models/ScholarshipClass.dart';
-import 'package:yencampus/Components/HomeAppBar.dart';
+import 'package:yencampus/Components/Home/HomeAppBar.dart';
 import 'package:yencampus/Models/UniversityClass.dart';
 import 'HomePageContent.dart';
 

@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:yencampus/Components/appBarImageSwiper.dart';
+import 'package:yencampus/Components/SettingPopUpMenu.dart';
 import 'package:yencampus/Decoration/Fonts.dart';
-import 'package:yencampus/Function/translation.dart';
-import 'package:yencampus/Pages/Homepage.dart';
+import 'package:yencampus/Function/Locale.dart';
+import 'package:yencampus/Function/getImageData.dart';
+import 'package:yencampus/Models/ImageClass.dart';
+
 
 
 Widget pageAppBar(Widget background,){
@@ -26,8 +29,10 @@ Widget pageAppBar(Widget background,){
 }
 
 Widget appBarBackground(BuildContext context,
-    final data,Widget menuBar,String title){
-  var width = MediaQuery.of(context).size.width;
+    Widget menuBar,String title){
+    var width = MediaQuery.of(context).size.width;
+    String _lang = getLocale(context);
+    Future<List<ImageClass>> _data = getImage(_lang);
   return Container(
     height: width,
     width: width,
@@ -52,11 +57,19 @@ Widget appBarBackground(BuildContext context,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text("Campus+",style: titleStyle,),
-              Icon(Icons.notifications_active_sharp,color: Colors.black87,)
+              Container(child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                new IconButton(
+                    onPressed:()=>Navigator.of(context).pop(),
+                    icon: Icon(Icons.home_rounded,size: ScreenUtil().setWidth(100),)),
+                settingPopUpMenu(context),
+              ],),),
+
             ],
           ),
         ),
-        AppBarImageSwiper(images: data, title: title,),
+        AppBarImageSwiper(images: _data, title: title,),
         menuBar
       ],
     ),

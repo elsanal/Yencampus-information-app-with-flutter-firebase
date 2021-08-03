@@ -19,7 +19,7 @@ class Carer extends StatefulWidget {
 class _CarerState extends State<Carer> {
   late Future<List<ImageClass>> _imageData;
   List<String> _items = [];
-  String lang='en';
+  String lang='';
   int _selectedIndex=0;
 
   @override
@@ -40,7 +40,7 @@ class _CarerState extends State<Carer> {
             slivers: [
               pageAppBar(
                   appBarBackground(
-                      context,_imageData,_menuBar(width, _items),'carer')),
+                      context,_menuBar(width, _items),'carer')),
               pageBody(context,"carer"),
             ],
           )

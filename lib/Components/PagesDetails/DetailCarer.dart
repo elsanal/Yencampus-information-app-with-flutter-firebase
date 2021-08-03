@@ -1,6 +1,6 @@
 
 import 'package:flutter/material.dart';
-import 'package:yencampus/Components/DetailsComp.dart';
+import 'package:yencampus/Components/PagesDetails/DetailsComp.dart';
 import 'package:yencampus/Database/sqflite.dart';
 import 'package:yencampus/Function/sharePost.dart';
 import 'package:yencampus/Function/translation.dart';

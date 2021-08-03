@@ -36,7 +36,7 @@ class _ScholarshipState extends State<Scholarship> {
   var _selectedList = [];
   String _target = '';
   int _selectedIndex=0;
-  String lang='en';
+  String lang='';
   bool isArrayTarget=false;
 
   @override
@@ -50,7 +50,6 @@ class _ScholarshipState extends State<Scholarship> {
 
   Widget build(BuildContext context) {
     lang = getLocale(context);
-    var height = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;
     return SafeArea(
       child: Scaffold(
@@ -58,7 +57,7 @@ class _ScholarshipState extends State<Scholarship> {
           slivers: [
            pageAppBar(
                appBarBackground(
-                   context,_imageData,_menuBar(context,width, _items),'scholar')),
+                   context,_menuBar(context,width, _items),'scholar')),
             _selected==""?pageBody(context,"scholar"):
             _selected=="true"?filterBody(context, 'scholar', _target, true,false):
             isArrayTarget?filterBody(context, 'scholar', _target, _selectedList,isArrayTarget)

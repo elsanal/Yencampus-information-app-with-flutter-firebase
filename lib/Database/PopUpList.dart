@@ -30,9 +30,10 @@ List jobPopUpList = [
 ];
 
 List settingPopUpList = [
-  {"name":"about","value":0,"icon":Icons.home_rounded},
-  {"name":"share","value":1,"icon":Icons.share_rounded},
-  {"name":"more_apps","value":2,"icon":Icons.category_rounded},
-  {"name":"yentech","value":3,"icon":Icons.account_circle_rounded},
+  {"name":"contact","value":0,"icon":Icons.contacts_rounded},
+  {"name":"about","value":1,"icon":Icons.home_rounded},
+  {"name":"share","value":2,"icon":Icons.share_rounded},
+  {"name":"more_apps","value":3,"icon":Icons.category_rounded},
+  {"name":"yentech","value":4,"icon":Icons.business_rounded},
 ];
 

@@ -21,7 +21,7 @@ class _SavedState extends State<Saved> {
   late Future<List<ImageClass>> _imageData;
   List<String> _items = ["all","scholar","univ","job","carer"];
   String _selected = '';
-  String lang='en';
+  String lang='';
   int _selectedIndex=-1;
 
   @override
@@ -42,7 +42,7 @@ class _SavedState extends State<Saved> {
             slivers: [
               pageAppBar(
                   appBarBackground(
-                      context,_imageData,_menuBar(width, _items),'saved')),
+                      context,_menuBar(width, _items),'saved')),
               SavedBody(context,_selected),
             ],
           )

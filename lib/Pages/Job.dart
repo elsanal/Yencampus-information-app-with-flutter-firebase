@@ -34,7 +34,7 @@ class _JobState extends State<Job> {
   String _target = '';
   bool isArrayTarget = false;
   int _selectedIndex=0;
-  String lang = 'en';
+  String lang = '';
 
   @override
   void initState() {
@@ -47,7 +47,6 @@ class _JobState extends State<Job> {
 
   Widget build(BuildContext context) {
     lang = getLocale(context);
-    var height = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;
     return SafeArea(
       child: Scaffold(
@@ -55,7 +54,7 @@ class _JobState extends State<Job> {
             slivers: [
               pageAppBar(
                   appBarBackground(
-                      context,_imageData,_menuBar(width, _items),'job')),
+                      context,_menuBar(width, _items),'job')),
               _selected==""?pageBody(context,"job"):
               _selected=="true"?filterBody(context, 'job', _target, true,false):
               isArrayTarget?filterBody(context, 'job', _target, _selectedList,isArrayTarget):

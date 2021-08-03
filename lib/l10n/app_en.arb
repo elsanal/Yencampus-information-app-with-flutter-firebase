@@ -13,6 +13,7 @@
   "category": "Category",
   "city": "City",
   "condition": "Conditions",
+  "contact": "Contacts",
   "country": "Country",
   "deadline": "Deadline",
   "delete": "Delete",

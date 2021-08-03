@@ -13,8 +13,8 @@ import 'package:yencampus/Function/translation.dart';
       "les universités, les Jobs et bien d'autres informations sur le plan national et "
           " international. Je trouve cette application très utile, et je vous la conseille.";
 
-  String _title_en = "Campus +, the application that provides information on scholarships," +
-      "universities, jobs and much more information nationally and"
+  String _title_en = "Campus +, the application that provides information on scholarships, " +
+      "universities, jobs and much more information nationally and "
           "international. I find this application very useful, and I recommend it to you.";
 
 
@@ -27,7 +27,7 @@ import 'package:yencampus/Function/translation.dart';
       try{
         await FlutterShare.share(
           title: _title,
-          text: _title+
+          text: _title+'\n\n'+
               post.name + '\n\n'+
               translate(context, "country")+' : ' + post.country + '\n\n' +
               translate(context, "level")+' : ' + listToString(post.level) +'\n\n'+
@@ -45,7 +45,7 @@ import 'package:yencampus/Function/translation.dart';
     try{
       await FlutterShare.share(
         title: _title,
-        text: _title+
+        text: _title+'\n\n'+
             post.name + '\n\n'+
             translate(context, "country")+' : ' + post.country + '\n\n' +
             translate(context, "city")+' : ' +post.city + "\n\n" +
@@ -62,7 +62,7 @@ import 'package:yencampus/Function/translation.dart';
     try{
       await FlutterShare.share(
         title: _title,
-        text: _title+
+        text: _title+'\n\n'+
             post.name + '\n\n'+
             post.description + '\n\n',
 
@@ -75,7 +75,7 @@ import 'package:yencampus/Function/translation.dart';
     try{
       await FlutterShare.share(
         title: _title,
-        text: _title+
+        text: _title+'\n\n'+
             post.name + '\n\n'+
             translate(context, "country")+' : ' + post.country + '\n\n' +
             translate(context, "city")+' : ' + post.city + '\n\n' +
@@ -91,7 +91,17 @@ import 'package:yencampus/Function/translation.dart';
     }catch(e){
       print('error : $e');
     }
-  }else {
+  } else if(type=="app"){
+    try{
+      await FlutterShare.share(
+        title: _title,
+        text: _title,
+        linkUrl: campusapp,
+      );
+    }catch(e){
+      print('error : $e');
+    }
+  } else {
     try{
       await FlutterShare.share(
         title: _title,

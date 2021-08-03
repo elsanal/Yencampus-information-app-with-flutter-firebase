@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:yencampus/Decoration/Fonts.dart';
 import 'package:yencampus/Function/Locale.dart';
+import 'package:yencampus/Function/getImageData.dart';
 import 'package:yencampus/Function/translation.dart';
 import 'package:yencampus/Function/urlLauncher.dart';
 import 'package:yencampus/Models/ImageClass.dart';
@@ -22,8 +23,10 @@ class _AppBarImageSwiperState extends State<AppBarImageSwiper> with TickerProvid
   var _images;
   var _title ;
   List<String> _localImage = [
-    "assets/hat0.jpeg","assets/hat1.jpeg","assets/hat3.jpeg",
-    "assets/hat4.jpeg","assets/hat5.jpeg"
+    "assets/menuSwiper/hat0.jpeg",
+    "assets/menuSwiper/hat1.jpeg",
+    "assets/menuSwiper/hat3.jpeg",
+    "assets/menuSwiper/hat4.jpeg",
   ];
   late AnimationController _animationController = AnimationController(vsync: this, duration: Duration(seconds:10));
   late SwiperController _swiperController;
@@ -53,7 +56,6 @@ class _AppBarImageSwiperState extends State<AppBarImageSwiper> with TickerProvid
   Widget build(BuildContext context) {
     var height = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;
-    String lang = getLocale(context);
     return Container(
         width: width,
         height: ScreenUtil().setHeight(height/1.2),

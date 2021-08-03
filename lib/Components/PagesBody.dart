@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:yencampus/Components/Details.dart';
+import 'package:yencampus/Components/PagesDetails/Details.dart';
 import 'package:yencampus/Components/Loading.dart';
 import 'package:yencampus/Database/sqflite.dart';
 import 'package:yencampus/Decoration/Fonts.dart';
@@ -26,7 +26,7 @@ Widget pageBody(BuildContext context, String type){
   var lang = getLocale(context);
   return SliverToBoxAdapter(
     child: new Container(
-      height:height*(length.value*0.53),
+      height:height*(length.value*0.4),
       width: width,
       padding: EdgeInsets.only(
           bottom: ScreenUtil().setHeight(50),
@@ -47,7 +47,7 @@ Widget SavedBody(BuildContext context, String type){
   var lang = getLocale(context);
   return SliverToBoxAdapter(
     child: new Container(
-        height:height*(length.value*0.54),
+        height:height*(length.value*0.4),
         width: width,
         padding: EdgeInsets.only(
             bottom: ScreenUtil().setHeight(50),
@@ -106,7 +106,7 @@ Widget SavedBody(BuildContext context, String type){
    var lang = getLocale(context);
    return SliverToBoxAdapter(
      child: new Container(
-         height:height*(length.value*0.53),
+         height:height*(length.value*0.4),
          width: width,
          padding: EdgeInsets.only(
              bottom: ScreenUtil().setHeight(50),
@@ -296,7 +296,7 @@ Widget _listBuilder(AsyncSnapshot snapshot, double width, double height, String 
     ),
     itemBuilder: (context,index){
       final item = snapshot.data![index];
-      length.value = snapshot.data!.length;
+      length.value = ((snapshot.data!.length)/2).round();
       return Card(
         child: Container(
           child: GestureDetector(

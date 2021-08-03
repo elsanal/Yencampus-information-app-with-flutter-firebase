@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:yencampus/Components/DetailsComp.dart';
+import 'package:yencampus/Components/PagesDetails/DetailsComp.dart';
 import 'package:yencampus/Function/convertListString.dart';
 import 'package:yencampus/Function/translation.dart';
 import 'package:yencampus/Models/UniversityClass.dart';
