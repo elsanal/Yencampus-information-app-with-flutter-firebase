@@ -10,6 +10,7 @@ import 'package:yencampus/Pages/University.dart';
 
 
 Widget homepageContent(BuildContext context, final docs, String type){
+  final width = MediaQuery.of(context).size.width;
   return docs.length>0?GridView.builder(
       scrollDirection: Axis.horizontal,
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -34,12 +35,13 @@ Widget homepageContent(BuildContext context, final docs, String type){
                     Positioned(
                       left: ScreenUtil().setHeight(0),
                       right: ScreenUtil().setHeight(0),
+
                       bottom: ScreenUtil().setHeight(220),
                       child: Text(docs[index].name,
                         style:titleStyle2.copyWith(
                             fontWeight: FontWeight.bold,
                             fontSize: ScreenUtil().setSp(45)
-                        ), maxLines: 3,
+                        ), maxLines: 2,
                         overflow: TextOverflow.ellipsis,
                         textAlign: TextAlign.left,),
                     ),
@@ -48,7 +50,7 @@ Widget homepageContent(BuildContext context, final docs, String type){
                         left: ScreenUtil().setHeight(0),
                         right: ScreenUtil().setHeight(0),
                         child: Text(parseHtmlString(docs[index].description),
-                          style:textStyle, maxLines: 4,
+                          style:textStyle, maxLines: 3,
                           overflow: TextOverflow.ellipsis,
                           textAlign: TextAlign.justify,),
                     ),
@@ -101,11 +103,11 @@ Widget homepageContent(BuildContext context, final docs, String type){
                           style:titleStyle2.copyWith(
                             fontWeight: FontWeight.bold,
                             fontSize: ScreenUtil().setSp(45)
-                          ), maxLines: 1,
+                          ), maxLines: 2,
                          overflow: TextOverflow.ellipsis,
                        textAlign: TextAlign.left,),
                       Text(parseHtmlString(docs[index].description),
-                        style:textStyle, maxLines: 4,
+                        style:textStyle, maxLines: 3,
                         overflow: TextOverflow.ellipsis,
                         textAlign: TextAlign.justify,),
                     ],

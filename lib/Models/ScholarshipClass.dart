@@ -10,6 +10,8 @@ class ScholarshipGnClass{
   List images;
   String duration;
   bool isOpen;
+  bool isFullFunded;
+  bool isYear;
 
   //////////////// English /////////////
 
@@ -38,6 +40,7 @@ class ScholarshipGnClass{
     required this.isTopScholar,
     required this.official_web,
     required this.duration,
+    required this.isFullFunded,
     /// english
     required this.advantage,
     required this.condition,
@@ -50,8 +53,7 @@ class ScholarshipGnClass{
     required this.other_detail,
     required this.req_docs,
     required this.isOpen,
-
-
+    required this.isYear
 
   });
 }

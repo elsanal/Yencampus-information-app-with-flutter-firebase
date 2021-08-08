@@ -22,7 +22,7 @@ Widget sliverAppBar(BuildContext context,String title, String imgUrl, bool isTip
       ),textAlign: TextAlign.center,),
       background: FittedBox(
         fit: BoxFit.contain,
-        child: !isTip?Image.network(imgUrl):Image.asset('assets/hat2.jpeg'),
+        child: !isTip?Image.network(imgUrl):Image.asset('assets/menuSwiper/hat1.jpeg'),
       ),
     ),
   );

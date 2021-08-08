@@ -69,11 +69,8 @@ MoreApps(BuildContext context){
 }
 
 var _moreApp = {
-  "fr":["YenPuz est une application de jeu très interessante. "
-      "C'est un jeu de puzzle qui vous permet de vous exercer "
-      "sur vos capacités en logique.\n"
+  "fr":["YenPuz est une application de jeu très intéressant. \n"
       "Cliquez pour la Télécharger sur Google Play."],
   "en":["YenPuz is a very interesting game application."
-      "It's a puzzle game that you can use to practice"
-      " your logic skills.\n Click to download it on Google Play."]
+      "\n Click to download it on Google Play."]
 };

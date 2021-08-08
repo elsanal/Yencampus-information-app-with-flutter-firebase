@@ -10,6 +10,7 @@ import 'package:yencampus/Models/ScholarshipClass.dart';
 Widget detailScholar(BuildContext context, ScholarshipGnClass doc,bool isLocal){
   var height = MediaQuery.of(context).size.height;
   var width = MediaQuery.of(context).size.width;
+  String year = doc.isYear?translate(context, "year"):translate(context, "month");
   return SliverToBoxAdapter(
     child: Container(
         child: ListView(
@@ -19,8 +20,10 @@ Widget detailScholar(BuildContext context, ScholarshipGnClass doc,bool isLocal){
             header(context,translate(context, "country"), doc.country),
             header(context,translate(context, "level"), listToString(doc.level)),
             header(context,translate(context, "amount"), doc.amount),
+            doc.isFullFunded?header(context,translate(context, "type"), translate(context, "full_funded")):
+            header(context,translate(context, "type"), translate(context, "part_funded")),
             header(context,translate(context, "yearr"), doc.year),
-            header(context,translate(context, "duration"), doc.duration),
+            header(context,translate(context, "duration"), doc.duration + year),
             header(context,translate(context, "deadline"), doc.deadline),
             header(context,translate(context, "eligible"), listToString(doc.eligible)),
 

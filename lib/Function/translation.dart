@@ -140,6 +140,9 @@ translate(BuildContext context,String item){
     case "majors":
       _selected = AppLocalizations.of(context)!.majors;
       break;
+    case "month":
+      _selected = AppLocalizations.of(context)!.month;
+      break;
     case "more":
       _selected = AppLocalizations.of(context)!.more;
       break;

@@ -50,14 +50,14 @@ YenTech(BuildContext context){
 var _yentech = {
   "fr":["YenTech est une Start-Up du monde digital. Elle conçoit des "
       "applications android, iOS et des sites web. Elle se veut être pionnière "
-      "de la nouvelle technologie telles que les systemes intelligents,"
+      "de la nouvelle technologie tels que les systemes intelligents,"
       "la cybersecurité, les systemes ambarqués..."
       "Elle a l'ambition de conquerir le marché africain, et le reste "
       "du monde."],
-  "en":["YenTech is a Start-Up in the digital world. It designs"
-      "android, iOS applications and websites. It wants to be a pioneer"
-      "new technology such as intelligent systems,"
-      "cybersecurity, ambedded systems..."
-      "It has the ambition to conquer the African market, and the rest"
+  "en":["YenTech is a Start-Up in the digital world. It designs "
+      "android, iOS applications and websites. It wants to be a pioneer "
+      "new technology such as intelligent systems, "
+      "cyber-security, embedded systems... "
+      "It has the ambition to conquer the African market, and the rest "
       "of the world."]
 };

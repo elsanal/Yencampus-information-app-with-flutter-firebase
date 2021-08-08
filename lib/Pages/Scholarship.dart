@@ -60,6 +60,7 @@ class _ScholarshipState extends State<Scholarship> {
                    context,_menuBar(context,width, _items),'scholar')),
             _selected==""?pageBody(context,"scholar"):
             _selected=="true"?filterBody(context, 'scholar', _target, true,false):
+            _selected=="false"?filterBody(context, 'scholar', _target, false,false):
             isArrayTarget?filterBody(context, 'scholar', _target, _selectedList,isArrayTarget)
                 :filterBody(context, 'scholar', _target, _selected,isArrayTarget),
           ],

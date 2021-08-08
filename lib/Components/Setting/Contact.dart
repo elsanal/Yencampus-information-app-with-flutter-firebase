@@ -90,10 +90,24 @@ _socialUlr(BuildContext context,String url)async{
 }
 
 _sendEmail(BuildContext context,String url)async{
+  String? encodeQueryParameters(Map<String, String> params) {
+    return params.entries
+        .map((e) => '${Uri.encodeComponent(e.key)}=${Uri.encodeComponent(e.value)}')
+        .join('&');
+  }
+
+  final Uri emailLaunchUri = Uri(
+    scheme: 'mailto',
+    path: "$url",
+    query: encodeQueryParameters(<String, String>{
+      'subject': translate(context, "scholar") + ' - ' +
+                 translate(context, "univ")
+    }),
+  );
   final snackBar = SnackBar(
     content: Text("Can't open the mailbox..."),);
   final waitSnackBar = SnackBar(
     content: Text("Waiting..."),);
   ScaffoldMessenger.of(context).showSnackBar(waitSnackBar);
-  await canLaunch("mailto:$url")?launch("mailto:$url"):ScaffoldMessenger.of(context).showSnackBar(snackBar);
+  await canLaunch(emailLaunchUri.toString())?launch(emailLaunchUri.toString()):ScaffoldMessenger.of(context).showSnackBar(snackBar);
 }

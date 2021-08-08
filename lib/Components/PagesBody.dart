@@ -26,8 +26,8 @@ Widget pageBody(BuildContext context, String type){
   var lang = getLocale(context);
   return SliverToBoxAdapter(
     child: new Container(
-      height:height*(length.value*0.4),
-      width: width,
+      // height:height*(length.value*0.4),
+      // width: width,
       padding: EdgeInsets.only(
           bottom: ScreenUtil().setHeight(50),
           top: ScreenUtil().setHeight(50)
@@ -38,7 +38,7 @@ Widget pageBody(BuildContext context, String type){
 }
 
 /// Widget to show the different saved posts
-ValueNotifier<int> length = ValueNotifier(2);
+// ValueNotifier<int> length = ValueNotifier(2);
 ValueNotifier<bool> isLoading = ValueNotifier(false);
 
 Widget SavedBody(BuildContext context, String type){
@@ -47,8 +47,8 @@ Widget SavedBody(BuildContext context, String type){
   var lang = getLocale(context);
   return SliverToBoxAdapter(
     child: new Container(
-        height:height*(length.value*0.4),
-        width: width,
+        // height:height*(length.value*0.4),
+        // width: width,
         padding: EdgeInsets.only(
             bottom: ScreenUtil().setHeight(50),
             top: ScreenUtil().setHeight(50)
@@ -73,7 +73,7 @@ Widget SavedBody(BuildContext context, String type){
                         child: Center(child: Text(translate(context, "no_saved"),style: titleStyle2,),));
                   }else if(snapshot.hasData) {
                     List<SavePost> docs = snapshot.data;
-                     length.value = docs.length;
+                     // length.value = docs.length;
                     return ListView.builder(
                         shrinkWrap: true,
                         physics: NeverScrollableScrollPhysics(),
@@ -92,7 +92,7 @@ Widget SavedBody(BuildContext context, String type){
                         child: Center(child: Text(translate(context, "waiting"),style: titleStyle,),));
                   }
                 }
-            ):Loading();
+            ):Container(child: Text("Loading"),);
           }
         )
     ),
@@ -106,8 +106,8 @@ Widget SavedBody(BuildContext context, String type){
    var lang = getLocale(context);
    return SliverToBoxAdapter(
      child: new Container(
-         height:height*(length.value*0.4),
-         width: width,
+         // height:height*(length.value*0.4),
+         // width: width,
          padding: EdgeInsets.only(
              bottom: ScreenUtil().setHeight(50),
              top: ScreenUtil().setHeight(50)
@@ -284,112 +284,117 @@ _filterCategory(String lang, String type,double width, double height,String targ
 }
 
 Widget _listBuilder(AsyncSnapshot snapshot, double width, double height, String type,bool isLocal){
-  return GridView.builder(
-    shrinkWrap: true,
-    physics: NeverScrollableScrollPhysics(),
-    itemCount: snapshot.data!.length,
-    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-      crossAxisCount: 2,
-      childAspectRatio: 0.7,
-      crossAxisSpacing: 1,
-      mainAxisSpacing: 1
-    ),
-    itemBuilder: (context,index){
-      final item = snapshot.data![index];
-      length.value = ((snapshot.data!.length)/2).round();
-      return Card(
-        child: Container(
-          child: GestureDetector(
-            onTap: ()=>Navigator.push(context,
-                new MaterialPageRoute(builder: (context)=>Details(doc: item,type: type,isLocal:isLocal))),
-            child: Container(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  new Container(
-                    height: ScreenUtil().setHeight(310),
-                    width: width,
-                    alignment: Alignment.bottomCenter,
-                    decoration:BoxDecoration(
-                        image: DecorationImage(
-                            image: NetworkImage("${item.images[0]['src']['src']}"),
-                            fit: BoxFit.contain
-                        )
-                    ),
-                    child: type!="carer"?Text(translate(context, "country")+": ${item.country}\n"
-                        ' ${item.deadline} \n',
-                      textAlign: TextAlign.center,
-                      style: titleStyle.copyWith(
-                        backgroundColor: Colors.white.withOpacity(0.9),
-                        fontSize: ScreenUtil().setSp(40)
-                      ),):Container(),),
-                Text(item.name,
-                  textAlign: TextAlign.left,
-                  style: titleStyle2.copyWith(
-                    fontWeight: FontWeight.bold,
-                    fontSize: ScreenUtil().setSp(35)
-                  )),
-                  Expanded(
-                    child: Container(
-                      padding: EdgeInsets.all(5),
-                      child: Text(parseHtmlString(item.description),style: textStyle,
-                      maxLines: 4,overflow: TextOverflow.ellipsis,),
-                    ),
-                  ),
-                  new Container(
-                    width: width,
-                    height: 40,
-                    // color: Colors.red,
-                    decoration: BoxDecoration(
-                      border: Border(
-                        top: BorderSide(
-                            color: Colors.grey.shade500,width: 1,style: BorderStyle.solid),
-                        bottom: BorderSide(
-                            color: Colors.white,width: 1,style: BorderStyle.solid),
+  return Container(
+    width: width,
+    height: snapshot.data!.length==1?height*(0.5)*(snapshot.data!.length):
+            height*(0.24)*(snapshot.data!.length),
+    child: GridView.builder(
+      shrinkWrap: true,
+      physics: NeverScrollableScrollPhysics(),
+      itemCount: snapshot.data!.length,
+      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 2,
+        childAspectRatio: 0.7,
+        crossAxisSpacing: 1,
+        mainAxisSpacing: 1
+      ),
+      itemBuilder: (context,index){
+        final item = snapshot.data![index];
+        // length.value = ((snapshot.data!.length)/2).round();
+        return Card(
+          child: Container(
+            child: GestureDetector(
+              onTap: ()=>Navigator.push(context,
+                  new MaterialPageRoute(builder: (context)=>Details(doc: item,type: type,isLocal:isLocal))),
+              child: Container(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    new Container(
+                      height: ScreenUtil().setHeight(310),
+                      width: width,
+                      alignment: Alignment.bottomCenter,
+                      decoration:BoxDecoration(
+                          image: DecorationImage(
+                              image: NetworkImage("${item.images[0]['src']['src']}"),
+                              fit: BoxFit.contain
+                          )
+                      ),
+                      child: type!="carer"?Text(translate(context, "country")+": ${item.country}\n"
+                          ' ${item.deadline} \n',
+                        textAlign: TextAlign.center,
+                        style: titleStyle.copyWith(
+                          backgroundColor: Colors.white.withOpacity(0.9),
+                          fontSize: ScreenUtil().setSp(40)
+                        ),):Container(),),
+                  Text(item.name,
+                    textAlign: TextAlign.left,
+                    style: titleStyle2.copyWith(
+                      fontWeight: FontWeight.bold,
+                      fontSize: ScreenUtil().setSp(35)
+                    )),
+                    Expanded(
+                      child: Container(
+                        padding: EdgeInsets.all(5),
+                        child: Text(parseHtmlString(item.description),style: textStyle,
+                        maxLines: 4,overflow: TextOverflow.ellipsis,),
                       ),
                     ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        InkWell(
-                            onTap:()=>Navigator.push(context,
-                                new MaterialPageRoute(builder: (context)=>Details(doc: item,type: type,isLocal:isLocal))),
-                            child: _actionButton(translate(context, "read_more"))),
-                        new Container(height: 40,width: 1,color: Colors.grey[400],),
-                        InkWell(
-                          onTap: (){
-                            if(isLocal){
-                              isLoading.value = true;
-                              localDB(tableName: "YENCAMPUS").delete(int.parse(item.id));
-                              final snackBar = SnackBar(
-                                content: Text(translate(context, "deleted")),);
-                              ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                              Future.delayed(Duration(milliseconds: 100),()=>isLoading.value=false);
-                            }else{
-                              localDB(tableName: "YENCAMPUS").saveOndB(SavePost(type:type, id:(item.id).toString()));
-                              final snackBar = SnackBar(
-                                content: Text(translate(context, "saved")),);
-                              ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                            }
-                          },
-                            child: isLocal?_actionButton(translate(context, "delete")):_actionButton(translate(context, "save"))),
-                        new Container(height: 40,width: 1,color: Colors.grey,),
-                        InkWell(
-                          onTap: (){
-                            sharePost(context,item, type);
-                          },
-                            child: _actionButton(translate(context, "share"))),
-                      ],
+                    new Container(
+                      width: width,
+                      height: 40,
+                      // color: Colors.red,
+                      decoration: BoxDecoration(
+                        border: Border(
+                          top: BorderSide(
+                              color: Colors.grey.shade500,width: 1,style: BorderStyle.solid),
+                          bottom: BorderSide(
+                              color: Colors.white,width: 1,style: BorderStyle.solid),
+                        ),
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          InkWell(
+                              onTap:()=>Navigator.push(context,
+                                  new MaterialPageRoute(builder: (context)=>Details(doc: item,type: type,isLocal:isLocal))),
+                              child: _actionButton(translate(context, "read_more"))),
+                          new Container(height: 40,width: 1,color: Colors.grey[400],),
+                          InkWell(
+                            onTap: (){
+                              if(isLocal){
+                                isLoading.value = true;
+                                localDB(tableName: "YENCAMPUS").delete(int.parse(item.id));
+                                final snackBar = SnackBar(
+                                  content: Text(translate(context, "deleted")),);
+                                ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                                Future.delayed(Duration(milliseconds: 100),()=>isLoading.value=false);
+                              }else{
+                                localDB(tableName: "YENCAMPUS").saveOndB(SavePost(type:type, id:(item.id).toString()));
+                                final snackBar = SnackBar(
+                                  content: Text(translate(context, "saved")),);
+                                ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                              }
+                            },
+                              child: isLocal?_actionButton(translate(context, "delete")):_actionButton(translate(context, "save"))),
+                          new Container(height: 40,width: 1,color: Colors.grey,),
+                          InkWell(
+                            onTap: (){
+                              sharePost(context,item, type);
+                            },
+                              child: _actionButton(translate(context, "share"))),
+                        ],
+                      ),
                     ),
-                  ),
-                  // new Container(height: 5,color: Colors.grey[500],)
-                ],
+                    // new Container(height: 5,color: Colors.grey[500],)
+                  ],
+                ),
               ),
             ),
           ),
-        ),
-      );
-    },
+        );
+      },
+    ),
   );
 }
 

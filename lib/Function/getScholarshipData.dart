@@ -21,6 +21,8 @@ import 'package:yencampus/Models/ScholarshipClass.dart';
         images: doc['images'],
         duration:doc['duration'],
         isOpen: doc['isOpen'],
+        isYear: doc['isYear'],
+        isFullFunded: doc['isFull'],
         /// english
         advantage: lang=="fr"?doc['advantage_french']:doc['advantage_english'],
         condition: lang=="fr"?doc['condition_french']:doc['condition_english'],
@@ -61,6 +63,8 @@ Future<List<ScholarshipGnClass>> getTargetScholarship(String lang,String target,
           images: doc['images'],
           duration:doc['duration'],
           isOpen: doc['isOpen'],
+          isFullFunded: doc['isFull'],
+          isYear: doc['isYear'],
           /// english
         advantage: lang=="fr"?doc['advantage_french']:doc['advantage_english'],
         condition: lang=="fr"?doc['condition_french']:doc['condition_english'],
@@ -74,7 +78,7 @@ Future<List<ScholarshipGnClass>> getTargetScholarship(String lang,String target,
         req_docs: lang=="fr"?doc['requered_doc_french']:doc['requered_doc_english'],
       );
       data.add(document);
-      print(document.isOpen);
+      print(document.isFullFunded);
     });
   });
   return data;
@@ -100,6 +104,8 @@ Future<List<ScholarshipGnClass>> getArrayTargetScholarship(String lang,String ta
         images: doc['images'],
         duration:doc['duration'],
         isOpen: doc['isOpen'],
+        isFullFunded: doc['isFull'],
+        isYear: doc['isYear'],
         /// english
         advantage: lang=="fr"?doc['advantage_french']:doc['advantage_english'],
         condition: lang=="fr"?doc['condition_french']:doc['condition_english'],
@@ -113,7 +119,7 @@ Future<List<ScholarshipGnClass>> getArrayTargetScholarship(String lang,String ta
         req_docs: lang=="fr"?doc['requered_doc_french']:doc['requered_doc_english'],
       );
       data.add(document);
-      print(document.isOpen);
+      print(document.isFullFunded);
     });
   });
   return data;

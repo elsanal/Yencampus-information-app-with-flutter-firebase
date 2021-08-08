@@ -3,7 +3,7 @@
     package="com.yentech.yencampus">
     <uses-permission android:name="android.permission.INTERNET"/>
    <application
-        android:label="yencampus"
+        android:label="Campus+"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"

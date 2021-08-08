@@ -89,7 +89,7 @@ Widget _body(List tipHeadline, List tips){
                         Radius.circular(ScreenUtil().setWidth(25))
                     ),
                   image: DecorationImage(
-                    image: AssetImage('assets/hat$index.jpeg'),
+                    image: AssetImage('assets/menuSwiper/hat$index.jpeg'),
                     fit: BoxFit.cover
                   )
                 ),

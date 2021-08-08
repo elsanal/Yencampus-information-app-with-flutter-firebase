@@ -20,12 +20,12 @@ switchItem(String item){
       _target = "isTopUniv";
       break;
     case "full_funded":
-      _selected = "Full funded";
-      _target = "amount";
+      _selected = "true";
+      _target = "isFull";
       break;
     case "part_funded":
-      _selected = "Partially funded";
-      _target = "amount";
+      _selected = "false";
+      _target = "isFull";
       break;
     case "deadline":
       _selected = getDate();

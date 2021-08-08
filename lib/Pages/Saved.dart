@@ -20,7 +20,7 @@ class Saved extends StatefulWidget {
 class _SavedState extends State<Saved> {
   late Future<List<ImageClass>> _imageData;
   List<String> _items = ["all","scholar","univ","job","carer"];
-  String _selected = '';
+  String _selected = 'all';
   String lang='';
   int _selectedIndex=-1;
 

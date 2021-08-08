@@ -40,7 +40,7 @@ class _CarerState extends State<Carer> {
             slivers: [
               pageAppBar(
                   appBarBackground(
-                      context,_menuBar(width, _items),'carer')),
+                      context,_menuBar(width, _items),'majors')),
               pageBody(context,"carer"),
             ],
           )
