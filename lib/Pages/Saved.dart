@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:yencampus/Components/PagesBody.dart';
 import 'package:yencampus/Components/PagesSliverBar.dart';
+import 'package:yencampus/Components/SavedBody.dart';
 import 'package:yencampus/Database/sqflite.dart';
 import 'package:yencampus/Decoration/FormField.dart';
 import 'package:yencampus/Function/Locale.dart';
@@ -18,33 +19,32 @@ class Saved extends StatefulWidget {
 }
 
 class _SavedState extends State<Saved> {
-  late Future<List<ImageClass>> _imageData;
-  List<String> _items = ["all","scholar","univ","job","carer"];
+
+  List<String> _items = ["all","scholar","univ","job","majors"];
+
   String _selected = 'all';
   String lang='';
   int _selectedIndex=-1;
-
-  @override
-  void initState() {
-    // TODO: implement initState
-    _imageData = getImage(lang);
-    super.initState();
-  }
 
 
   @override
   Widget build(BuildContext context) {
     var width = MediaQuery.of(context).size.width;
+    var height = MediaQuery.of(context).size.height;
     lang = getLocale(context);
     return SafeArea(
       child: Scaffold(
-          body: new CustomScrollView(
-            slivers: [
-              pageAppBar(
-                  appBarBackground(
-                      context,_menuBar(width, _items),'saved')),
-              SavedBody(context,_selected),
-            ],
+          body: Container(
+            width: width,
+            height: height,
+            child: new CustomScrollView(
+              slivers: [
+                pageAppBar(
+                    appBarBackground(
+                        context,_menuBar(width, _items),'saved')),
+                savedBody(context,_selected),
+              ],
+            ),
           )
       ),
     );
@@ -65,10 +65,17 @@ class _SavedState extends State<Saved> {
         itemBuilder: (context,index){
           return InkWell(
             onTap: (){
-              setState(() {
-                _selectedIndex = index;
-                _selected = items[index];
-              });
+              if(items[index] == 'majors'){
+                setState(() {
+                  _selectedIndex = index;
+                  _selected = "carer";
+                });
+              }else{
+                setState(() {
+                  _selectedIndex = index;
+                  _selected = items[index];
+                });
+              }
             },
             child: pageMenuBar(translate(context, items[index]),index,_selectedIndex),
           );

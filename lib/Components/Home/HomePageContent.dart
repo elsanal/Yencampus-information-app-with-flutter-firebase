@@ -35,7 +35,6 @@ Widget homepageContent(BuildContext context, final docs, String type){
                     Positioned(
                       left: ScreenUtil().setHeight(0),
                       right: ScreenUtil().setHeight(0),
-
                       bottom: ScreenUtil().setHeight(220),
                       child: Text(docs[index].name,
                         style:titleStyle2.copyWith(

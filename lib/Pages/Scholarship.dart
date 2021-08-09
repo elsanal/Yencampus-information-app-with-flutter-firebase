@@ -123,13 +123,21 @@ class _ScholarshipState extends State<Scholarship> {
         ),),
         itemBuilder: (_context) => scholarPopUpList
             .map<PopupMenuItem>((element) => PopupMenuItem(
-             child: Container(
-              margin: EdgeInsets.all(8),
-              padding: EdgeInsets.all(3),
-              color: Colors.white,
-              child: Text(translate(context,element['name']),
-                style: titleStyle2,
-              )),
+             child: Row(
+               mainAxisAlignment: MainAxisAlignment.start,
+               crossAxisAlignment: CrossAxisAlignment.center,
+               children: [
+                 Expanded(
+                   child: Container(
+                    margin: EdgeInsets.all(8),
+                    padding: EdgeInsets.all(3),
+                    color: Colors.white,
+                    child: Text(translate(context,element['name']),
+                      style: titleStyle2,
+                    )),
+                 ),
+               ],
+             ),
                 value: element['value'],
         ))
             .toList(),

@@ -26,8 +26,6 @@ Widget pageBody(BuildContext context, String type){
   var lang = getLocale(context);
   return SliverToBoxAdapter(
     child: new Container(
-      // height:height*(length.value*0.4),
-      // width: width,
       padding: EdgeInsets.only(
           bottom: ScreenUtil().setHeight(50),
           top: ScreenUtil().setHeight(50)
@@ -37,67 +35,6 @@ Widget pageBody(BuildContext context, String type){
   );
 }
 
-/// Widget to show the different saved posts
-// ValueNotifier<int> length = ValueNotifier(2);
-ValueNotifier<bool> isLoading = ValueNotifier(false);
-
-Widget SavedBody(BuildContext context, String type){
-  var height = MediaQuery.of(context).size.height;
-  var width = MediaQuery.of(context).size.width;
-  var lang = getLocale(context);
-  return SliverToBoxAdapter(
-    child: new Container(
-        // height:height*(length.value*0.4),
-        // width: width,
-        padding: EdgeInsets.only(
-            bottom: ScreenUtil().setHeight(50),
-            top: ScreenUtil().setHeight(50)
-        ),
-        child: ValueListenableBuilder(
-          valueListenable: isLoading,
-          builder: (context,value,widget){
-            return value==false?FutureBuilder<List<SavePost>>(
-              future: localDB(tableName: "YENCAMPUS").readFromDB(),
-                builder: (context,AsyncSnapshot snapshot){
-                  if(snapshot.hasError){
-                    return Container(
-                        alignment: Alignment.topCenter,
-                        child: Center(child: Text(translate(context, "error"),style: titleStyle,),));
-                  }else if(snapshot.connectionState == ConnectionState.waiting){
-                    return Container(
-                        alignment: Alignment.topCenter,
-                        child: Center(child: Text(translate(context, "waiting"),style: titleStyle,),));
-                  }else if(!snapshot.hasData){
-                    return Container(
-                      alignment: Alignment.topCenter,
-                        child: Center(child: Text(translate(context, "no_saved"),style: titleStyle2,),));
-                  }else if(snapshot.hasData) {
-                    List<SavePost> docs = snapshot.data;
-                     // length.value = docs.length;
-                    return ListView.builder(
-                        shrinkWrap: true,
-                        physics: NeverScrollableScrollPhysics(),
-                        itemCount: docs.length,
-                        itemBuilder: (context,index){
-                          if((type!=docs[index].type)&&(type!='all')){
-                            return Container();
-;                          }
-                          return _category(lang,docs[index].type, width, height, true, docs[index].id.toString());
-                        }
-                    );
-
-                  }else{
-                    return Container(
-                        alignment: Alignment.topCenter,
-                        child: Center(child: Text(translate(context, "waiting"),style: titleStyle,),));
-                  }
-                }
-            ):Container(child: Text("Loading"),);
-          }
-        )
-    ),
-  );
-}
 
 /// widget to show the filter posts
  Widget filterBody(BuildContext context,String type,String target, final value, bool isArrayTarget){
@@ -122,7 +59,7 @@ _category(String lang,String type,double width, double height,bool isLocal,Strin
   switch(type){
     case "scholar":
       return FutureBuilder<List<ScholarshipGnClass>>(
-          future: isLocal?getTargetScholarship(lang,"id",id):getScholarship(lang),
+          future: getScholarship(lang),
           builder: (context, snapshot){
             if(!snapshot.hasData){
               return Container(
@@ -141,7 +78,7 @@ _category(String lang,String type,double width, double height,bool isLocal,Strin
       );
     case "univ":
       return FutureBuilder<List<UniversityClass>>(
-          future: isLocal?getTargetUniversity(lang,"id", id):getUniversity(lang),
+          future: getUniversity(lang),
           builder: (context, snapshot) {
             if(!snapshot.hasData){
               return Container(
@@ -160,7 +97,7 @@ _category(String lang,String type,double width, double height,bool isLocal,Strin
       );
     case "job":
       return FutureBuilder<List<JobClass>>(
-          future: isLocal?getTargetJob(lang,'id', id):getJob(lang),
+          future: getJob(lang),
           builder: (context, snapshot) {
             if(!snapshot.hasData){
               return Container(
@@ -179,7 +116,7 @@ _category(String lang,String type,double width, double height,bool isLocal,Strin
       );
     case "carer":
       return FutureBuilder<List<CarerClass>>(
-          future: isLocal?getTargetCarer(lang,'id', id):getCarer(lang),
+          future: getCarer(lang),
           builder: (context, snapshot) {
             if(!snapshot.hasData){
               return Container(
@@ -286,7 +223,7 @@ _filterCategory(String lang, String type,double width, double height,String targ
 Widget _listBuilder(AsyncSnapshot snapshot, double width, double height, String type,bool isLocal){
   return Container(
     width: width,
-    height: snapshot.data!.length==1?height*(0.5)*(snapshot.data!.length):
+    height: snapshot.data!.length<=1?height*(0.5)*(snapshot.data!.length):
             height*(0.24)*(snapshot.data!.length),
     child: GridView.builder(
       shrinkWrap: true,
@@ -300,7 +237,6 @@ Widget _listBuilder(AsyncSnapshot snapshot, double width, double height, String 
       ),
       itemBuilder: (context,index){
         final item = snapshot.data![index];
-        // length.value = ((snapshot.data!.length)/2).round();
         return Card(
           child: Container(
             child: GestureDetector(
@@ -362,19 +298,10 @@ Widget _listBuilder(AsyncSnapshot snapshot, double width, double height, String 
                           new Container(height: 40,width: 1,color: Colors.grey[400],),
                           InkWell(
                             onTap: (){
-                              if(isLocal){
-                                isLoading.value = true;
-                                localDB(tableName: "YENCAMPUS").delete(int.parse(item.id));
-                                final snackBar = SnackBar(
-                                  content: Text(translate(context, "deleted")),);
-                                ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                                Future.delayed(Duration(milliseconds: 100),()=>isLoading.value=false);
-                              }else{
-                                localDB(tableName: "YENCAMPUS").saveOndB(SavePost(type:type, id:(item.id).toString()));
-                                final snackBar = SnackBar(
-                                  content: Text(translate(context, "saved")),);
-                                ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                              }
+                              localDB(tableName: "YENCAMPUS").saveOndB(SavePost(type:type, id:(item.id).toString()));
+                              final snackBar = SnackBar(
+                                content: Text(translate(context, "saved")),);
+                              ScaffoldMessenger.of(context).showSnackBar(snackBar);
                             },
                               child: isLocal?_actionButton(translate(context, "delete")):_actionButton(translate(context, "save"))),
                           new Container(height: 40,width: 1,color: Colors.grey,),
