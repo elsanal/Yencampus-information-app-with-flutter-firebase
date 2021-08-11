@@ -4,8 +4,6 @@ import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-
-
 TextStyle titleStyle = GoogleFonts.comfortaa(
   fontSize: ScreenUtil().setSp(100),
   fontWeight: FontWeight.w900,

@@ -4,6 +4,7 @@
   "advantage": "Advantages",
   "amount": "Amount",
   "apply": "Apply",
+  "app_fee": "Application fee",
   "available": "Available",
   "av_job": "Available Jobs",
   "av_scholar": "Available Scholarships",
@@ -45,6 +46,7 @@
   "isOpenn": "Opened",
   "level": "Level",
   "level_lang": "Language",
+  "low_cost": "Low cost",
   "majors": "Majors",
   "month": "month",
   "more": "More",
@@ -97,5 +99,4 @@
   "web": "Website",
   "work_place": "Work place",
   "world_rank": "World rank"
-
 }

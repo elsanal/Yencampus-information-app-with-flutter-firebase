@@ -25,7 +25,6 @@ class JobClass{
   List language;
   List category;
 
-
   JobClass({
     required this.id,
     required this.apply_link,

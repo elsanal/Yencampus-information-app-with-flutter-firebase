@@ -1,34 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
-import 'package:yencampus/Components/Alert/ShowSelectionList.dart';
 import 'package:yencampus/Components/PagesBody.dart';
 import 'package:yencampus/Components/PagesSliverBar.dart';
 import 'package:yencampus/Database/Countries.dart';
 import 'package:yencampus/Database/JobType.dart';
-import 'package:yencampus/Database/PopUpList.dart';
 import 'package:yencampus/Database/JobCategories.dart';
 import 'package:yencampus/Decoration/Fonts.dart';
-import 'package:yencampus/Decoration/FormField.dart';
-import 'package:yencampus/Function/Date.dart';
 import 'package:yencampus/Function/Locale.dart';
-import 'package:yencampus/Function/getImageData.dart';
-import 'package:yencampus/Function/getUniversityData.dart';
 import 'package:yencampus/Function/menuItemSelection.dart';
 import 'package:yencampus/Function/translation.dart';
-import 'package:yencampus/Models/ImageClass.dart';
-import 'package:yencampus/Models/UniversityClass.dart';
 
 class Job extends StatefulWidget {
   const Job({Key? key}) : super(key: key);
-
   @override
   _JobState createState() => _JobState();
 }
 
 class _JobState extends State<Job> {
   List<String> _items = ["all","isOpenn","category","country","job_type"];
-  late Future<List<ImageClass>> _imageData;
   var _selected = '';
   var _selectedList = [];
   String _target = '';
@@ -37,14 +27,6 @@ class _JobState extends State<Job> {
   String lang = '';
 
   @override
-  void initState() {
-    // TODO: implement initState
-    _imageData = getImage(lang);
-    super.initState();
-  }
-
-  @override
-
   Widget build(BuildContext context) {
     lang = getLocale(context);
     var width = MediaQuery.of(context).size.width;
@@ -66,7 +48,6 @@ class _JobState extends State<Job> {
   }
 
   Widget _menuBar(double width, List<String> items){
-
     return Container(
       height: ScreenUtil().setHeight(120),
       width: width,
@@ -109,11 +90,9 @@ class _JobState extends State<Job> {
     );
   }
 
-
   selectCountry(BuildContext context,var items, String type){
     var height = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;
-
     Alert(
       title: translate(context, "select"),
       context: context,
@@ -172,5 +151,4 @@ class _JobState extends State<Job> {
       ),
     )..show();
   }
-
 }

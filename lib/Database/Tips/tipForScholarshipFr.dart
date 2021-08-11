@@ -86,5 +86,4 @@ var getScholarship_fr  = [
     "title" : "Si vous ne comprenez pas certaines procedures , demandez de l'aide.",
     "description" : " "
   },
-
 ];

@@ -2,12 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:yencampus/Components/PagesBody.dart';
 import 'package:yencampus/Components/PagesSliverBar.dart';
-import 'package:yencampus/Decoration/FormField.dart';
 import 'package:yencampus/Function/Locale.dart';
-import 'package:yencampus/Function/getImageData.dart';
 import 'package:yencampus/Function/translation.dart';
-import 'package:yencampus/Models/ImageClass.dart';
-
 
 class Carer extends StatefulWidget {
   const Carer({Key? key}) : super(key: key);
@@ -17,17 +13,10 @@ class Carer extends StatefulWidget {
 }
 
 class _CarerState extends State<Carer> {
-  late Future<List<ImageClass>> _imageData;
+
   List<String> _items = [];
   String lang='';
   int _selectedIndex=0;
-
-  @override
-  void initState() {
-    // TODO: implement initState
-    _imageData = getImage(lang);
-    super.initState();
-  }
 
   @override
 
@@ -48,9 +37,7 @@ class _CarerState extends State<Carer> {
     );
   }
 
-
   Widget _menuBar(double width, List<String> items){
-
     return Container(
       height: ScreenUtil().setHeight(90),
       width: width,
@@ -76,5 +63,4 @@ class _CarerState extends State<Carer> {
       ),
     );
   }
-
 }

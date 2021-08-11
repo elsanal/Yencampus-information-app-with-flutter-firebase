@@ -1,5 +1,3 @@
-
-
 //here goes the function
 import 'package:html/parser.dart';
 

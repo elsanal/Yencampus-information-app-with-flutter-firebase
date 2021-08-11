@@ -56,7 +56,4 @@ class localDB{
      await request.delete('$tableName',where:"id = ?",whereArgs:[id]);
     print("Deleted");
   }
-
-
-
 }

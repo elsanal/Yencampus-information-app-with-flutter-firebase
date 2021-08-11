@@ -1,28 +1,17 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
-import 'package:yencampus/Components/Alert/ShowSelectionList.dart';
-import 'package:yencampus/Components/Alert/menuNuttonItems.dart';
 import 'package:yencampus/Components/PagesBody.dart';
 import 'package:yencampus/Components/PagesSliverBar.dart';
 import 'package:yencampus/Database/Countries.dart';
 import 'package:yencampus/Database/LevelList.dart';
 import 'package:yencampus/Database/PopUpList.dart';
 import 'package:yencampus/Decoration/Fonts.dart';
-import 'package:yencampus/Decoration/FormField.dart';
-import 'package:yencampus/Function/Date.dart';
 import 'package:yencampus/Function/Locale.dart';
-import 'package:yencampus/Function/getImageData.dart';
-import 'package:yencampus/Function/getScholarshipData.dart';
 import 'package:yencampus/Function/menuItemSelection.dart';
 import 'package:yencampus/Function/translation.dart';
-import 'package:yencampus/Models/ImageClass.dart';
-import 'package:yencampus/Models/ScholarshipClass.dart';
-
 
 class Scholarship extends StatefulWidget {
-
   @override
   _ScholarshipState createState() => _ScholarshipState();
 }
@@ -31,7 +20,6 @@ class _ScholarshipState extends State<Scholarship> {
 
   List<String> _items = ["all","isOpenn","popular_scholar","full_funded",
                           "part_funded","more"];
-  late Future<List<ImageClass>> _imageData;
   var _selected = "";
   var _selectedList = [];
   String _target = '';
@@ -40,14 +28,6 @@ class _ScholarshipState extends State<Scholarship> {
   bool isArrayTarget=false;
 
   @override
-  void initState() {
-    // TODO: implement initState
-    _imageData = getImage(lang);
-    super.initState();
-  }
-
-  @override
-
   Widget build(BuildContext context) {
     lang = getLocale(context);
     var width = MediaQuery.of(context).size.width;
@@ -103,7 +83,6 @@ class _ScholarshipState extends State<Scholarship> {
       ),
     );
   }
-
 
   popUpMenuItems(BuildContext _context){
     return Container(
@@ -166,7 +145,6 @@ class _ScholarshipState extends State<Scholarship> {
   selectCountry(BuildContext context,var items,String type){
     var height = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;
-
     Alert(
       title: translate(context,'select'),
       context: context,
@@ -217,7 +195,6 @@ class _ScholarshipState extends State<Scholarship> {
       ),
     )..show();
   }
-
 }
 
 

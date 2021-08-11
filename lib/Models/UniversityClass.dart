@@ -1,8 +1,7 @@
-
-
 class UniversityClass{
   String id;
   String school_fee;
+  String app_fee;
   String apply_link;
   String official_web;
   String deadline;
@@ -12,17 +11,11 @@ class UniversityClass{
   bool isOpen;
   bool isPublic;
   List images;
-
-
-  //////////////// English /////////////
-
   String description;
   String name;
   String country;
   String city;
   List major;
-
-
 
   UniversityClass({
     required this.id,
@@ -37,12 +30,11 @@ class UniversityClass{
     required this.isPublic,
     required this.national_ranking,
     required this.world_ranking,
+    required this.app_fee,
     /// english
     required this.country,
     required this.description,
     required this.name,
     required this.major,
-
-
   });
 }

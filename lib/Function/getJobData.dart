@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:yencampus/Models/JobClass.dart';
 
-
 Future<List<JobClass>> getJob(String lang)async{
   List<JobClass> data= [];
 

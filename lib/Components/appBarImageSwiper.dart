@@ -2,12 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:yencampus/Decoration/Fonts.dart';
-import 'package:yencampus/Function/Locale.dart';
-import 'package:yencampus/Function/getImageData.dart';
 import 'package:yencampus/Function/translation.dart';
 import 'package:yencampus/Function/urlLauncher.dart';
-import 'package:yencampus/Models/ImageClass.dart';
-
 
 class AppBarImageSwiper extends StatefulWidget {
   final images;

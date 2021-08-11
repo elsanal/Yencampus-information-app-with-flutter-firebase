@@ -12,9 +12,7 @@ class ScholarshipGnClass{
   bool isOpen;
   bool isFullFunded;
   bool isYear;
-
   //////////////// English /////////////
-
   String advantage;
   String condition;
   String description;
@@ -25,10 +23,6 @@ class ScholarshipGnClass{
   String country;
   List eligible;
   List level;
-
-  ////////////////// French //////////////
-
-
 
   ScholarshipGnClass({
     required this.id,
@@ -54,6 +48,5 @@ class ScholarshipGnClass{
     required this.req_docs,
     required this.isOpen,
     required this.isYear
-
   });
 }

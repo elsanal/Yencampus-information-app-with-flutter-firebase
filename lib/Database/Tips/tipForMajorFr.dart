@@ -176,6 +176,5 @@ var chooseMajor_fr = [
         "plein dans des établissements postsecondaires de 4 ans, selon la race / l'origine ethnique, le délai "+
         "d'achèvement, le sexe et le contrôle de l'établissement: années d'entrée de la cohorte sélectionnées, "+
         "de 1996 à 2006 - National Centre for Statistiques de l'éducation."
-  }
-
-];
+   }
+  ];

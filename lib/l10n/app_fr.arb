@@ -4,6 +4,7 @@
   "advantage": "Avantages",
   "amount": "Montant",
   "apply": "Postuler",
+  "app_fee": "Frais de candidature",
   "available": "Disponibles",
   "av_job": "Emplois disponibles",
   "av_scholar": "Bourses disponibles",
@@ -45,6 +46,7 @@
   "isOpenn": "Ouvertes",
   "level": "Niveau",
   "level_lang": "Langue",
+  "low_cost": "Moins chères",
   "majors": "Filières",
   "month": "mois",
   "more": "Plus",
@@ -97,5 +99,4 @@
   "web": "Siteweb",
   "work_place": "Lieu de travail",
   "world_rank": "Classement mondial"
-
 }

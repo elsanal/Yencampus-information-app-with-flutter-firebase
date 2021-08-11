@@ -1,5 +1,3 @@
-
-
 import 'package:yencampus/Function/Date.dart';
 
 switchItem(String item){
@@ -42,6 +40,10 @@ switchItem(String item){
     case "isOpenn":
       _selected = "true";
       _target = "isOpen";
+      break;
+    case "low_cost":
+      _selected = "true";
+      _target = "isLowCost";
       break;
     case "private":
       _selected = "false";

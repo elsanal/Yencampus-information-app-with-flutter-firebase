@@ -1,8 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:yencampus/Function/Locale.dart';
 import 'package:yencampus/Models/CarerClass.dart';
-import 'package:yencampus/Models/UniversityClass.dart';
 
 Future<List<CarerClass>> getCarer(String lang)async{
   List<CarerClass> data= [];

@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-
 translate(BuildContext context,String item){
   String _selected = '';
   switch(item){
@@ -10,6 +9,9 @@ translate(BuildContext context,String item){
       break;
     case "all":
       _selected = AppLocalizations.of(context)!.all;
+      break;
+    case "app_fee":
+      _selected = AppLocalizations.of(context)!.app_fee;
       break;
     case "advantage":
       _selected = AppLocalizations.of(context)!.advantage;
@@ -136,6 +138,9 @@ translate(BuildContext context,String item){
       break;
     case "level_lang":
       _selected = AppLocalizations.of(context)!.level_lang;
+      break;
+    case "low_cost":
+      _selected = AppLocalizations.of(context)!.low_cost;
       break;
     case "majors":
       _selected = AppLocalizations.of(context)!.majors;

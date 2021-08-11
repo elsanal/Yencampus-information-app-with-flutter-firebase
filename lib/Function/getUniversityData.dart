@@ -1,11 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:yencampus/Function/Locale.dart';
 import 'package:yencampus/Models/UniversityClass.dart';
 
 Future<List<UniversityClass>> getUniversity(String lang)async{
   List<UniversityClass> data= [];
-
   await FirebaseFirestore.instance.collection("university")
       .orderBy('lastupdate',descending: true)
       .get()
@@ -24,6 +21,7 @@ Future<List<UniversityClass>> getUniversity(String lang)async{
         isPublic: doc['isPublic'],
         world_ranking: doc['world_ranking'],
         national_ranking: doc['national_ranking'],
+        app_fee: doc['app_fee'],
         /// english
         country: lang=="fr"?doc['country_french']:doc['country_english'],
         description: lang=="fr"?doc['description_french']:doc['description_english'],
@@ -60,6 +58,7 @@ Future<List<UniversityClass>> getTargetUniversity(String lang,String target, fin
         isPublic: doc['isPublic'],
         world_ranking: doc['world_ranking'],
         national_ranking: doc['national_ranking'],
+        app_fee: doc['app_fee'],
         /// english
         country: lang=="fr"?doc['country_french']:doc['country_english'],
         description: lang=="fr"?doc['description_french']:doc['description_english'],

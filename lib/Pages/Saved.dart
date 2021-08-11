@@ -1,19 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:yencampus/Components/PagesBody.dart';
 import 'package:yencampus/Components/PagesSliverBar.dart';
 import 'package:yencampus/Components/SavedBody.dart';
-import 'package:yencampus/Database/sqflite.dart';
-import 'package:yencampus/Decoration/FormField.dart';
 import 'package:yencampus/Function/Locale.dart';
-import 'package:yencampus/Function/getImageData.dart';
 import 'package:yencampus/Function/translation.dart';
-import 'package:yencampus/Models/ImageClass.dart';
-import 'package:yencampus/Models/SavedClass.dart';
 
 class Saved extends StatefulWidget {
   const Saved({Key? key}) : super(key: key);
-
   @override
   _SavedState createState() => _SavedState();
 }
@@ -21,11 +14,9 @@ class Saved extends StatefulWidget {
 class _SavedState extends State<Saved> {
 
   List<String> _items = ["all","scholar","univ","job","majors"];
-
   String _selected = 'all';
   String lang='';
   int _selectedIndex=-1;
-
 
   @override
   Widget build(BuildContext context) {
@@ -51,7 +42,6 @@ class _SavedState extends State<Saved> {
   }
 
   Widget _menuBar(double width, List<String> items){
-
     return Container(
       height: ScreenUtil().setHeight(120),
       width: width,

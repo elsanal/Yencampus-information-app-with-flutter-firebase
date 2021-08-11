@@ -4,25 +4,18 @@ import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:yencampus/Components/PagesBody.dart';
 import 'package:yencampus/Components/PagesSliverBar.dart';
 import 'package:yencampus/Database/Countries.dart';
-import 'package:yencampus/Database/PopUpList.dart';
 import 'package:yencampus/Decoration/Fonts.dart';
-import 'package:yencampus/Decoration/FormField.dart';
-import 'package:yencampus/Function/Date.dart';
 import 'package:yencampus/Function/Locale.dart';
-import 'package:yencampus/Function/getImageData.dart';
 import 'package:yencampus/Function/menuItemSelection.dart';
 import 'package:yencampus/Function/translation.dart';
-import 'package:yencampus/Models/ImageClass.dart';
-import 'package:yencampus/Models/UniversityClass.dart';
 
 class University extends StatefulWidget {
-
   @override
   _UniversityState createState() => _UniversityState();
 }
 
 class _UniversityState extends State<University> {
-  List<String> _items = ["all",'isOpenn',"privatee","publicc","country","majors"];
+  List<String> _items = ["all",'isOpenn',"privatee","publicc","country","low_cost"];
   var _selected = '';
   String _target = '';
   int _selectedIndex=0;
@@ -30,13 +23,6 @@ class _UniversityState extends State<University> {
   bool isArrayTarget = false;
 
   @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-  }
-
-  @override
-
   Widget build(BuildContext context) {
     lang = getLocale(context);
     var width = MediaQuery.of(context).size.width;
@@ -58,7 +44,6 @@ class _UniversityState extends State<University> {
   }
 
   Widget _menuBar(double width, List<String> items){
-
     return Container(
       height: ScreenUtil().setHeight(120),
       width: width,
@@ -95,11 +80,9 @@ class _UniversityState extends State<University> {
     );
   }
 
-
   selectCountry(BuildContext context,var items){
     var height = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;
-
     Alert(
       title: translate(context, "select"),
       context: context,
@@ -141,5 +124,4 @@ class _UniversityState extends State<University> {
       ),
     )..show();
   }
-
 }

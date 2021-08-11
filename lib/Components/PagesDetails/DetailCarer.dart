@@ -1,15 +1,11 @@
-
 import 'package:flutter/material.dart';
 import 'package:yencampus/Components/PagesDetails/DetailsComp.dart';
-import 'package:yencampus/Database/sqflite.dart';
-import 'package:yencampus/Function/sharePost.dart';
 import 'package:yencampus/Function/translation.dart';
 import 'package:yencampus/Models/CarerClass.dart';
-import 'package:yencampus/Models/SavedClass.dart';
+
 
 
 Widget detailCarer(BuildContext context, CarerClass doc, bool isLocal){
-  var height = MediaQuery.of(context).size.height;
   var width = MediaQuery.of(context).size.width;
   return SliverToBoxAdapter(
     child: Container(

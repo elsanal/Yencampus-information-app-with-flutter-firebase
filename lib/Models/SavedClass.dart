@@ -2,7 +2,6 @@ class SavePost{
   String id ;
   String type ;
 
-
   SavePost({required this.type, required this.id});
 
   Map<String, dynamic>toMap(){
@@ -16,5 +15,4 @@ class SavePost{
       id:map['id'],
       type:map['type']
   );
-
 }

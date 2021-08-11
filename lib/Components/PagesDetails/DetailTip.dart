@@ -36,7 +36,6 @@ class _detailTipState extends State<detailTip> with TickerProviderStateMixin{
   }
   @override
   Widget build(BuildContext context) {
-    var height = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;
     return SliverToBoxAdapter(
       child: Container(

@@ -1,23 +1,10 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_html/flutter_html.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:yencampus/Components/PagesDetails/Details.dart';
 import 'package:yencampus/Components/PagesDetails/DetailsComp.dart';
-import 'package:yencampus/Database/sqflite.dart';
-import 'package:yencampus/Decoration/Fonts.dart';
-import 'package:yencampus/Function/HtmlParser.dart';
 import 'package:yencampus/Function/convertListString.dart';
-import 'package:yencampus/Function/sharePost.dart';
 import 'package:yencampus/Function/translation.dart';
 import 'package:yencampus/Models/JobClass.dart';
-import 'package:yencampus/Models/SavedClass.dart';
-import 'package:yencampus/Models/ScholarshipClass.dart';
-import 'package:yencampus/Models/SharePostClass.dart';
-
 
 Widget detailJob(BuildContext context, JobClass doc,bool isLocal){
-  var height = MediaQuery.of(context).size.height;
   var width = MediaQuery.of(context).size.width;
   return SliverToBoxAdapter(
     child: Container(

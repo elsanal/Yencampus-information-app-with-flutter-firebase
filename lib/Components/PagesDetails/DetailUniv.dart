@@ -6,7 +6,6 @@ import 'package:yencampus/Models/UniversityClass.dart';
 
 
 Widget detailUniv(BuildContext context, UniversityClass doc, bool isLocal){
-  var height = MediaQuery.of(context).size.height;
   var width = MediaQuery.of(context).size.width;
   String type = '';
   String open = '';
@@ -19,19 +18,13 @@ Widget detailUniv(BuildContext context, UniversityClass doc, bool isLocal){
           physics: NeverScrollableScrollPhysics(),
           children: [
             header(context,translate(context, "country"), doc.country),
-            new SizedBox(height: 10,),
             header(context,translate(context, "City"), doc.city),
-            new SizedBox(height: 10,),
             header(context,translate(context, "national_rank"), doc.national_ranking.toString()),
-            new SizedBox(height: 10,),
             header(context,translate(context, "world_rank"), doc.world_ranking.toString()),
-            new SizedBox(height: 10,),
             header(context,translate(context, "type"), type),
-            new SizedBox(height: 10,),
             header(context,translate(context, "school_fee"), doc.school_fee),
-            new SizedBox(height: 10,),
+            header(context,translate(context, "app_fee"), doc.app_fee),
             header(context,translate(context, "state"), open),
-            new SizedBox(height: 10,),
             doc.isOpen?Container():header(context,translate(context, "deadline"), doc.deadline),
             new SizedBox(height: 10,),
 

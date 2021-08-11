@@ -4,7 +4,6 @@ class ImageClass{
   String url;
   String title;
 
-
   ImageClass({
     required this.id,
     required this.image,

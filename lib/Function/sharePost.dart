@@ -5,7 +5,6 @@ import 'package:yencampus/Function/Locale.dart';
 import 'package:yencampus/Function/convertListString.dart';
 import 'package:yencampus/Function/translation.dart';
 
-
  dynamic sharePost(BuildContext context,final post, String type)async{
   String campusapp = 'https://play.google.com/store/apps/details?id=com.bigfaso.campus';
 
@@ -114,5 +113,4 @@ import 'package:yencampus/Function/translation.dart';
       print('error : $e');
     }
   }
-
 }

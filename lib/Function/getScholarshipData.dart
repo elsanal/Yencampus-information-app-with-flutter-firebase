@@ -1,6 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/material.dart';
-import 'package:yencampus/Function/Locale.dart';
 import 'package:yencampus/Models/ScholarshipClass.dart';
 
  Future<List<ScholarshipGnClass>> getScholarship(String lang)async{

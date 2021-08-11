@@ -34,7 +34,6 @@ class _HomepageState extends State<Homepage> {
 
   List<String> _items = ["scholar","univ","job","majors","tip","saved"];
   List<Widget> _pages = [Scholarship(),University(),Job(),Carer(),Tips(),Saved()];
-
   late Future<List<ScholarshipGnClass>> _scholarData;
   late Future<List<UniversityClass>> _univData;
   late Future<List<JobClass>> _jobData;
@@ -44,7 +43,6 @@ class _HomepageState extends State<Homepage> {
   String input = '';
   int _selectedIndex=-1;
   String lang='';
-
 
   @override
   void initState(){
@@ -60,7 +58,6 @@ class _HomepageState extends State<Homepage> {
     }
     super.initState();
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -107,7 +104,6 @@ class _HomepageState extends State<Homepage> {
   }
 
   Widget _menuBar(double width, List<String> items){
-
     return Container(
       height: ScreenUtil().setHeight(120),
       width: width,

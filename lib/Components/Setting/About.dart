@@ -5,8 +5,6 @@ import 'package:yencampus/Decoration/Fonts.dart';
 import 'package:yencampus/Function/Locale.dart';
 import 'package:yencampus/Function/translation.dart';
 
-
-
 About(BuildContext context){
   var height = MediaQuery.of(context).size.height;
   var width = MediaQuery.of(context).size.width;

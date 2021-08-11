@@ -1,11 +1,9 @@
 //@dart=2.9
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:provider/provider.dart';
 import 'package:yencampus/Components/SplashBoard.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -26,7 +24,7 @@ class YenCampus extends StatelessWidget {
     return ScreenUtilInit(
       designSize: Size(1080,1920),
       builder:()=>MaterialApp(
-        title: 'YenCampus+',
+        title: 'Campus+',
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
           primarySwatch: Colors.blue,

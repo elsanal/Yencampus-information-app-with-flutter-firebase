@@ -4,13 +4,12 @@ import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:yencampus/Decoration/Fonts.dart';
 import 'package:yencampus/Function/Locale.dart';
 import 'package:yencampus/Function/translation.dart';
-import 'package:yencampus/Function/urlLauncher.dart';
+
 
 YenTech(BuildContext context){
   var height = MediaQuery.of(context).size.height;
   var width = MediaQuery.of(context).size.width;
   String lang = getLocale(context);
-  String url = 'https://play.google.com/store/apps/details?id=com.yentech.yenpuz';
   Alert(
     title: translate(context, "yentech"),
     context: context,

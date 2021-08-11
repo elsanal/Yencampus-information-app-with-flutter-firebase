@@ -3,9 +3,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:yencampus/Decoration/Fonts.dart';
-import 'package:yencampus/Function/Locale.dart';
 import 'package:yencampus/Function/translation.dart';
-import 'package:yencampus/Function/urlLauncher.dart';
+
 
 Contact(BuildContext context){
   var height = MediaQuery.of(context).size.height;
@@ -74,8 +73,8 @@ var _social = [
     "url":"https://www.youtube.com/channel/UCznjjnUE9kvHlg_pBobDm5Q/playlists"},
   {"name":"Instagram","icon":"assets/social/instagram.jpg",
     "url":"https://www.instagram.com/invites/contact/?i=1jiyq71lok1zw&utm_content=lk3c9oi"},
-  {"name":"yentech.corp@gmail.com","icon":"assets/social/gmail.png",
-    "url":"yentech.corp@gmail.com"},
+  {"name":"elsanal1995gmail.com","icon":"assets/social/gmail.png",
+    "url":"elsanal1995@gmail.com"},
   {"name":"WhatsApp","icon":"assets/social/whatsapp.png",
     "url":"https://chat.whatsapp.com/Hes9l5bH5Vg2xxFwU1mTBJ"},
 ];

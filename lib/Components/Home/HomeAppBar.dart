@@ -2,14 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:yencampus/Components/appBarImageSwiper.dart';
 import 'package:yencampus/Components/SettingPopUpMenu.dart';
-import 'package:yencampus/Database/PopUpList.dart';
 import 'package:yencampus/Decoration/Fonts.dart';
-import 'package:yencampus/Function/translation.dart';
+
 
 Widget homeAppBarBackground(BuildContext context,
     Widget menuBar,final data,String title){
   var width = MediaQuery.of(context).size.width;
-  var height = MediaQuery.of(context).size.height;
   return Container(
     height: width,
     width: width,

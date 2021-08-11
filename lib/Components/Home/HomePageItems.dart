@@ -10,10 +10,6 @@ import 'HomePageContent.dart';
 
 
  homePageItems(BuildContext context, String cat,final data, String type) {
-   var h = MediaQuery
-       .of(context)
-       .size
-       .height;
    var w = MediaQuery
        .of(context)
        .size

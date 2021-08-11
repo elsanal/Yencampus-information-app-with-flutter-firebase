@@ -3,7 +3,6 @@ import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:yencampus/Database/sqflite.dart';
 import 'package:yencampus/Decoration/Fonts.dart';
-import 'package:yencampus/Function/HtmlParser.dart';
 import 'package:yencampus/Function/sharePost.dart';
 import 'package:yencampus/Function/translation.dart';
 import 'package:yencampus/Function/urlLauncher.dart';
@@ -56,7 +55,7 @@ Widget actionButton(BuildContext context,String title,IconData icon,
         onPressed:(){
          switch(title){
            case "share":
-             return sharePost(context,doc, type);
+             sharePost(context,doc, type);
              break;
            case "save" :
              localDB(tableName: "YENCAMPUS").saveOndB(SavePost(type: type, id: doc.id));

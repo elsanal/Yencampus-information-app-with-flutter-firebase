@@ -17,7 +17,7 @@ import 'package:yencampus/Models/JobClass.dart';
 import 'package:yencampus/Models/SavedClass.dart';
 import 'package:yencampus/Models/ScholarshipClass.dart';
 import 'package:yencampus/Models/UniversityClass.dart';
-import 'package:yencampus/Pages/Scholarship.dart';
+
 
 /// Widget to show the posts of each category
 Widget pageBody(BuildContext context, String type){

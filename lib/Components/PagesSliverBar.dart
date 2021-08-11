@@ -7,8 +7,6 @@ import 'package:yencampus/Function/Locale.dart';
 import 'package:yencampus/Function/getImageData.dart';
 import 'package:yencampus/Models/ImageClass.dart';
 
-
-
 Widget pageAppBar(Widget background,){
   return SliverAppBar(
     floating: true,

@@ -10,7 +10,6 @@ import 'package:yencampus/Pages/University.dart';
 
 
 Widget homepageContent(BuildContext context, final docs, String type){
-  final width = MediaQuery.of(context).size.width;
   return docs.length>0?GridView.builder(
       scrollDirection: Axis.horizontal,
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(

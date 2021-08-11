@@ -1,14 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:yencampus/Components/PagesDetails/DetailsComp.dart';
-import 'package:yencampus/Database/sqflite.dart';
 import 'package:yencampus/Function/convertListString.dart';
-import 'package:yencampus/Function/sharePost.dart';
 import 'package:yencampus/Function/translation.dart';
-import 'package:yencampus/Models/SavedClass.dart';
 import 'package:yencampus/Models/ScholarshipClass.dart';
 
 Widget detailScholar(BuildContext context, ScholarshipGnClass doc,bool isLocal){
-  var height = MediaQuery.of(context).size.height;
   var width = MediaQuery.of(context).size.width;
   String year = doc.isYear?translate(context, "year"):translate(context, "month");
   return SliverToBoxAdapter(

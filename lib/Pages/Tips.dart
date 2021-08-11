@@ -14,9 +14,7 @@ import 'package:yencampus/Decoration/Fonts.dart';
 import 'package:yencampus/Function/Locale.dart';
 import 'package:yencampus/Function/translation.dart';
 
-
 class Tips extends StatelessWidget {
-
 
   List _tipHeadline = [
     "how_scholar",
@@ -42,7 +40,6 @@ class Tips extends StatelessWidget {
     );
   }
 }
-
 
 Widget _background(String title){
   return Container(

@@ -16,6 +16,5 @@ class CarerClass{
     required this.name,
     required this.advantage,
     required this.disadvantage,
-
   });
 }
