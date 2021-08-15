@@ -4,12 +4,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:yencampus/Admob.dart';
 import 'package:yencampus/Components/SplashBoard.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 Future main()async{
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+  await Admob().adInit();
   runApp(YenCampus());
 }
 

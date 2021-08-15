@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
+import 'package:yencampus/Admob.dart';
 import 'package:yencampus/Components/Home/HomeAppBar.dart';
 import 'package:yencampus/Components/Home/HomePageItems.dart';
 import 'package:yencampus/Components/PagesSliverBar.dart';
@@ -43,11 +45,20 @@ class _HomepageState extends State<Homepage> {
   String input = '';
   int _selectedIndex=-1;
   String lang='';
+  BannerAd _bannerAd = Admob().myBannerAd;
+  BannerAd _bannerAd1 = Admob().myBannerAd;
+  BannerAd _bannerAd2 = Admob().myBannerAd;
+  BannerAd _bannerAd3 = Admob().myBannerAd;
+
 
   @override
   void initState(){
     // TODO: implement initState
     lang = widget.lang;
+    _bannerAd..load();
+    _bannerAd1..load();
+    _bannerAd2..load();
+    _bannerAd3..load();
     if(lang!=''){
       _scholarData =  getTargetScholarship(lang,"isOpen",true);
       _carerData = getCarer(lang);
@@ -60,9 +71,20 @@ class _HomepageState extends State<Homepage> {
   }
 
   @override
+  void dispose() {
+    // TODO: implement dispose
+    _bannerAd.dispose();
+    _bannerAd1.dispose();
+    _bannerAd2.dispose();
+    _bannerAd3.dispose();
+    super.dispose();
+  }
+  @override
   Widget build(BuildContext context) {
     var height = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;
+    Admob().myVideoAdLoading();
+    Admob().myInterstitialAd();
     return SafeArea(
       child: Scaffold(
         body: Container(
@@ -81,18 +103,28 @@ class _HomepageState extends State<Homepage> {
                   children: [
                     homePageItems(context,translate(context, 'av_scholar'),_scholarData,"scholar"),
                     Container(
-                      margin: EdgeInsets.only(top: 5),
-                      height: 15,color: Colors.grey[400],),
+                      height: ScreenUtil().setHeight(250),
+                      width: width,
+                      child: AdWidget(ad: _bannerAd),
+                    ),
                     homePageItems(context,translate(context,"public_univ"),_univData,"univ"),
                     Container(
-                      margin: EdgeInsets.only(top: 5),
-                      height: 15,color: Colors.grey[400],),
+                      height: ScreenUtil().setHeight(250),
+                      width: width,
+                      child: AdWidget(ad: _bannerAd1),
+                    ),
                     homePageItems(context,translate(context, "av_job"),_jobData,"job"),
                     Container(
-                      margin: EdgeInsets.only(top: 5),
-                      height: 15,color: Colors.grey[400],),
+                      height: ScreenUtil().setHeight(250),
+                      width: width,
+                      child: AdWidget(ad: _bannerAd2),
+                    ),
                     homePageItems(context,translate(context,"disco_major"),_carerData,"carer"),
-                    Container(height: 20,)
+                    Container(
+                      height: ScreenUtil().setHeight(250),
+                      width: width,
+                      child: AdWidget(ad: _bannerAd3),
+                    ),
                   ],
                 ),
               ),

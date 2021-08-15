@@ -54,7 +54,9 @@ Widget appBarBackground(BuildContext context,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text("Campus+",style: titleStyle,),
+              Text("Campus+",style: titleStyle.copyWith(
+                color:Colors.green
+              ),),
               Container(child: Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
@@ -103,7 +105,7 @@ Widget pageMenuBar(String item, int index, int selectedIndex){
     ),
     margin: EdgeInsets.all(ScreenUtil().setWidth(10)),
     decoration: BoxDecoration(
-        color: index == selectedIndex?Colors.blue:Colors.grey[300],
+        color: index == selectedIndex?Colors.green:Colors.grey[300],
         borderRadius: BorderRadius.all(
             Radius.circular(ScreenUtil().setWidth(55))
         )
@@ -113,7 +115,8 @@ Widget pageMenuBar(String item, int index, int selectedIndex){
       child: Center(
         child: Text(item,style: titleStyle2.copyWith(
             fontSize: ScreenUtil().setSp(60),
-            fontWeight: FontWeight.bold
+            fontWeight: FontWeight.bold,
+            color:index == selectedIndex?Colors.white:Colors.black87
         ),
         ),
       ),

@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:yencampus/Components/PagesDetails/DetailsComp.dart';
 import 'package:yencampus/Function/convertListString.dart';
 import 'package:yencampus/Function/translation.dart';
 import 'package:yencampus/Models/JobClass.dart';
 
-Widget detailJob(BuildContext context, JobClass doc,bool isLocal){
+Widget detailJob(BuildContext context, JobClass doc,
+    bool isLocal,List<BannerAd> myBannerAd){
   var width = MediaQuery.of(context).size.width;
   return SliverToBoxAdapter(
     child: Container(
@@ -27,25 +30,40 @@ Widget detailJob(BuildContext context, JobClass doc,bool isLocal){
 
             new Container(child: Image.network(
               doc.images[1]['src']['src'], fit: BoxFit.fill,),),
-            new SizedBox(height: 10,),
-
+            Container(
+              height: ScreenUtil().setHeight(250),
+              width: width,
+              child: AdWidget(ad: myBannerAd[0]),
+            ),
             title2(translate(context, "enterprise_summary")+" :"),
             body(doc.description),
-            new SizedBox(height: 20,),
+            Container(
+              height: ScreenUtil().setHeight(250),
+              width: width,
+              child: AdWidget(ad: myBannerAd[1]),
+            ),
             new Container(child: Image.network(
               doc.images[2]['src']['src'], fit: BoxFit.fill,),),
             new SizedBox(height: 10,),
 
             title2(translate(context, "responsibility")+" :"),
             body(doc.responsibility),
-            new SizedBox(height: 20,),
+            Container(
+              height: ScreenUtil().setHeight(250),
+              width: width,
+              child: AdWidget(ad: myBannerAd[2]),
+            ),
             new Container(child: Image.network(
               doc.images[0]['src']['src'], fit: BoxFit.fill,),),
             new SizedBox(height: 10,),
 
             title2(translate(context, "qualification")+" :"),
             body(doc.required),
-            new SizedBox(height: 20,),
+            Container(
+              height: ScreenUtil().setHeight(250),
+              width: width,
+              child: AdWidget(ad: myBannerAd[3]),
+            ),
             new Container(child: Image.network(
               doc.images[3]['src']['src'], fit: BoxFit.fill,),),
             new SizedBox(height: 10,),

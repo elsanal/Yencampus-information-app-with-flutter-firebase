@@ -31,7 +31,9 @@ Widget homeAppBarBackground(BuildContext context,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text("Campus+",style: titleStyle,),
+              Text("Campus+",style: titleStyle.copyWith(
+                color: Colors.green
+              ),),
               settingPopUpMenu(context)
             ],
           ),

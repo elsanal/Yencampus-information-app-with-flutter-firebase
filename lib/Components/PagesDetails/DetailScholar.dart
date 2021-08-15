@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:yencampus/Components/PagesDetails/DetailsComp.dart';
 import 'package:yencampus/Function/convertListString.dart';
 import 'package:yencampus/Function/translation.dart';
 import 'package:yencampus/Models/ScholarshipClass.dart';
 
-Widget detailScholar(BuildContext context, ScholarshipGnClass doc,bool isLocal){
+Widget detailScholar(BuildContext context, ScholarshipGnClass doc,
+    bool isLocal,List<BannerAd> myBannerAd){
   var width = MediaQuery.of(context).size.width;
   String year = doc.isYear?translate(context, "year"):translate(context, "month");
   return SliverToBoxAdapter(
@@ -27,8 +30,11 @@ Widget detailScholar(BuildContext context, ScholarshipGnClass doc,bool isLocal){
               doc.images[1]['src']['src'], fit: BoxFit.fill,),),
             new SizedBox(height: 10,),
             body(doc.description),
-            new SizedBox(height: 10,),
-
+            Container(
+              height: ScreenUtil().setHeight(250),
+              width: width,
+              child: AdWidget(ad: myBannerAd[0]),
+            ),
             new Container(child: Image.network(
               doc.images[2]['src']['src'], fit: BoxFit.fill,),),
             new SizedBox(height: 10,),
@@ -36,19 +42,29 @@ Widget detailScholar(BuildContext context, ScholarshipGnClass doc,bool isLocal){
             body(doc.condition),
             new Container(child: Image.network(
               doc.images[0]['src']['src'], fit: BoxFit.fill,),),
-            new SizedBox(height: 10,),
+            Container(
+              height: ScreenUtil().setHeight(250),
+              width: width,
+              child: AdWidget(ad: myBannerAd[1]),
+            ),
             title2(translate(context, "document")),
             body(doc.req_docs),
             new SizedBox(height: 20,),
 
             new Container(child: Image.network(
               doc.images[3]['src']['src'], fit: BoxFit.fill,),),
-            new SizedBox(height: 10,),
-
+            Container(
+              height: ScreenUtil().setHeight(250),
+              width: width,
+              child: AdWidget(ad: myBannerAd[2]),
+            ),
             title2(translate(context, "how_apply")),
             body(doc.how_to_apply),
-            new SizedBox(height: 10,),
-
+            Container(
+              height: ScreenUtil().setHeight(250),
+              width: width,
+              child: AdWidget(ad: myBannerAd[3]),
+            ),
             new Container(
               width: width,
               color: Colors.grey,

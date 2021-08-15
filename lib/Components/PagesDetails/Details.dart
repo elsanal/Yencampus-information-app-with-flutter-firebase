@@ -1,4 +1,8 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
+import 'package:yencampus/Admob.dart';
 import 'package:yencampus/Components/PagesDetails/DetailAppbar.dart';
 import 'package:yencampus/Components/PagesDetails/DetailCarer.dart';
 import 'package:yencampus/Components/PagesDetails/DetailScholar.dart';
@@ -22,17 +26,36 @@ class _DetailsState extends State<Details> {
   late String type;
   late bool isLocal;
 
+  List<BannerAd> myBanners = [
+    Admob().myBannerAd,
+    Admob().myBannerAd1,
+    Admob().myBannerAd2,
+    Admob().myBannerAd3
+  ];
+
   @override
   void initState() {
     // TODO: implement initState
     doc = widget.doc;
     type = widget.type;
     isLocal = widget.isLocal;
+    for(int i=0;i<myBanners.length;i++){
+      myBanners[i].load();
+    }
     super.initState();
   }
   @override
+  void dispose() {
+    // TODO: implement dispose
+    for(int i=0;i<myBanners.length;i++){
+      myBanners[i].dispose();
+    }
+    super.dispose();
+  }
+  @override
   Widget build(BuildContext context) {
-
+    Admob().myRewardInterstitialAd();
+    Admob().myVideoAdLoading();
     return Scaffold(
       body: CustomScrollView(
        physics: ScrollPhysics(),
@@ -47,13 +70,13 @@ class _DetailsState extends State<Details> {
   _type(){
     switch(type){
       case "scholar":
-        return detailScholar(context,doc,isLocal);
+        return detailScholar(context,doc,isLocal,myBanners);
       case "univ":
-        return detailUniv(context,doc,isLocal);
+        return detailUniv(context,doc,isLocal,myBanners);
       case "job":
-        return detailJob(context,doc,isLocal);
+        return detailJob(context,doc,isLocal,myBanners);
       case "carer":
-        return detailCarer(context,doc,isLocal);
+        return detailCarer(context,doc,isLocal,myBanners);
       case "tip":
         return detailTip(tips: doc);
       default :

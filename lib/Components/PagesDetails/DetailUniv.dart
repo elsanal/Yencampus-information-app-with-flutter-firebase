@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:yencampus/Components/PagesDetails/DetailsComp.dart';
 import 'package:yencampus/Function/convertListString.dart';
 import 'package:yencampus/Function/translation.dart';
 import 'package:yencampus/Models/UniversityClass.dart';
 
 
-Widget detailUniv(BuildContext context, UniversityClass doc, bool isLocal){
+Widget detailUniv(BuildContext context, UniversityClass doc,
+    bool isLocal,List<BannerAd> myBannerAd){
   var width = MediaQuery.of(context).size.width;
   String type = '';
   String open = '';
@@ -27,27 +30,36 @@ Widget detailUniv(BuildContext context, UniversityClass doc, bool isLocal){
             header(context,translate(context, "state"), open),
             doc.isOpen?Container():header(context,translate(context, "deadline"), doc.deadline),
             new SizedBox(height: 10,),
-
-
             new Container(child: Image.network(
               doc.images[1]['src']['src'], fit: BoxFit.fill,),),
-            new SizedBox(height: 10,),
-
+            Container(
+              height: ScreenUtil().setHeight(250),
+              width: width,
+              child: AdWidget(ad: myBannerAd[0]),
+            ),
             body(doc.description),
-            new SizedBox(height: 20,),
-
+            Container(
+              height: ScreenUtil().setHeight(250),
+              width: width,
+              child: AdWidget(ad: myBannerAd[1]),
+            ),
             new Container(child: Image.network(
               doc.images[2]['src']['src'], fit: BoxFit.fill,),),
             new SizedBox(height: 10,),
-
             title2(translate(context, "depart_majors")+" :"),
             embListToString(context,doc.major),
-            new SizedBox(height: 20,),
-
+            Container(
+              height: ScreenUtil().setHeight(250),
+              width: width,
+              child: AdWidget(ad: myBannerAd[2]),
+            ),
             new Container(child: Image.network(
               doc.images[3]['src']['src'], fit: BoxFit.fill,),),
-            new SizedBox(height: 10,),
-
+            Container(
+              height: ScreenUtil().setHeight(250),
+              width: width,
+              child: AdWidget(ad: myBannerAd[3]),
+            ),
             new Container(
               width: width,
               color: Colors.grey,

@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
+import 'package:yencampus/Admob.dart';
 import 'package:yencampus/Components/PagesDetails/DetailsComp.dart';
 import 'package:yencampus/Function/translation.dart';
 import 'package:yencampus/Models/CarerClass.dart';
 
-
-
-Widget detailCarer(BuildContext context, CarerClass doc, bool isLocal){
+Widget detailCarer(BuildContext context, CarerClass doc, bool isLocal,List<BannerAd> myBannerAd){
   var width = MediaQuery.of(context).size.width;
   return SliverToBoxAdapter(
     child: Container(
@@ -13,30 +14,34 @@ Widget detailCarer(BuildContext context, CarerClass doc, bool isLocal){
           shrinkWrap: true,
           physics: NeverScrollableScrollPhysics(),
           children: [
-
             new Container(child: Image.network(
               doc.images[1]['src']['src'], fit: BoxFit.fill,),),
             new SizedBox(height: 10,),
-
             body(doc.description),
-            new SizedBox(height: 20,),
-
+            Container(
+              height: ScreenUtil().setHeight(250),
+              width: width,
+              child: AdWidget(ad: myBannerAd[0]),
+            ),
             new Container(child: Image.network(
               doc.images[2]['src']['src'], fit: BoxFit.fill,),),
-            new SizedBox(height: 10,),
-
             title2(translate(context, "advantage")),
             body(doc.advantage),
-            new SizedBox(height: 20,),
-
+            Container(
+              height: ScreenUtil().setHeight(250),
+              width: width,
+              child: AdWidget(ad: myBannerAd[1]),
+            ),
             new Container(child: Image.network(
               doc.images[3]['src']['src'], fit: BoxFit.fill,),),
             new SizedBox(height: 10,),
-
             title2(translate(context, "disadvantage")),
             body(doc.disadvantage),
-            new SizedBox(height: 20,),
-
+            Container(
+              height: ScreenUtil().setHeight(250),
+              width: width,
+              child: AdWidget(ad: myBannerAd[2]),
+            ),
             new Container(child: Image.network(
               doc.images[0]['src']['src'], fit: BoxFit.fill,),),
             new SizedBox(height: 10,),

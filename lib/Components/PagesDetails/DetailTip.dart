@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
+import 'package:yencampus/Admob.dart';
 import 'package:yencampus/Decoration/Fonts.dart';
 import 'package:yencampus/Function/translation.dart';
 
@@ -37,6 +38,8 @@ class _detailTipState extends State<detailTip> with TickerProviderStateMixin{
   @override
   Widget build(BuildContext context) {
     var width = MediaQuery.of(context).size.width;
+    Admob().myRewardInterstitialAd();
+    Admob().myVideoAdLoading();
     return SliverToBoxAdapter(
       child: Container(
         height: width,
