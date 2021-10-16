@@ -35,7 +35,7 @@ import 'package:yencampus/Models/ScholarshipClass.dart';
 
       );
       data.add(document);
-      // print(data);
+      print(document);
     });
   });
   return data;
@@ -51,19 +51,19 @@ Future<List<ScholarshipGnClass>> getTargetScholarship(String lang,String target,
       .then((QuerySnapshot snapshot){
     snapshot.docs.forEach((doc){
       ScholarshipGnClass document = new ScholarshipGnClass(
-          id: doc['id'],
-          amount: doc['amount'],
-          apply_link: doc['apply_link'],
-          official_web: doc['official_web'],
-          deadline: doc['deadline'],
-          isTopScholar: doc['isTopScholar'],
-          year: doc['year'],
-          images: doc['images'],
-          duration:doc['duration'],
-          isOpen: doc['isOpen'],
-          isFullFunded: doc['isFull'],
-          isYear: doc['isYear'],
-          /// english
+        id: doc['id'],
+        amount: doc['amount'],
+        apply_link: doc['apply_link'],
+        official_web: doc['official_web'],
+        deadline: doc['deadline'],
+        isTopScholar: doc['isTopScholar'],
+        year: doc['year'],
+        images: doc['images'],
+        duration:doc['duration'],
+        isOpen: doc['isOpen'],
+        isYear: doc['isYear'],
+        isFullFunded: doc['isFull'],
+        /// english
         advantage: lang=="fr"?doc['advantage_french']:doc['advantage_english'],
         condition: lang=="fr"?doc['condition_french']:doc['condition_english'],
         country: lang=="fr"?doc['country_french']:doc['country_english'],
@@ -74,9 +74,10 @@ Future<List<ScholarshipGnClass>> getTargetScholarship(String lang,String target,
         name: lang=="fr"?doc['name_french']:doc['name_english'],
         other_detail: lang=="fr"?doc['other_detail_french']:doc['other_detail_english'],
         req_docs: lang=="fr"?doc['requered_doc_french']:doc['requered_doc_english'],
+
       );
       data.add(document);
-      print(document.isFullFunded);
+      // print(document.isFullFunded);
     });
   });
   return data;
@@ -102,8 +103,8 @@ Future<List<ScholarshipGnClass>> getArrayTargetScholarship(String lang,String ta
         images: doc['images'],
         duration:doc['duration'],
         isOpen: doc['isOpen'],
-        isFullFunded: doc['isFull'],
         isYear: doc['isYear'],
+        isFullFunded: doc['isFull'],
         /// english
         advantage: lang=="fr"?doc['advantage_french']:doc['advantage_english'],
         condition: lang=="fr"?doc['condition_french']:doc['condition_english'],
@@ -115,9 +116,10 @@ Future<List<ScholarshipGnClass>> getArrayTargetScholarship(String lang,String ta
         name: lang=="fr"?doc['name_french']:doc['name_english'],
         other_detail: lang=="fr"?doc['other_detail_french']:doc['other_detail_english'],
         req_docs: lang=="fr"?doc['requered_doc_french']:doc['requered_doc_english'],
+
       );
       data.add(document);
-      print(document.isFullFunded);
+      // print(document.isFullFunded);
     });
   });
   return data;

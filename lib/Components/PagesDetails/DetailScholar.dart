@@ -65,6 +65,8 @@ Widget detailScholar(BuildContext context, ScholarshipGnClass doc,
               width: width,
               child: AdWidget(ad: myBannerAd[3]),
             ),
+            title2(translate(context, "other_detail")),
+            body(doc.other_detail),
             new Container(
               width: width,
               color: Colors.grey,

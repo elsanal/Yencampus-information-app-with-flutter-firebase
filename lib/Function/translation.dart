@@ -172,6 +172,9 @@ translate(BuildContext context,String item){
     case "next":
       _selected = AppLocalizations.of(context)!.next;
       break;
+    case "other_detail":
+      _selected = AppLocalizations.of(context)!.other_detail;
+      break;
     case "univ":
       _selected = AppLocalizations.of(context)!.univ;
       break;

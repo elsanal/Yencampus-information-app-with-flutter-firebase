@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:yencampus/Admob.dart';
 import 'package:yencampus/Components/PagesDetails/Details.dart';
 import 'package:yencampus/Components/PagesSliverBar.dart';
 import 'package:yencampus/Database/Tips/mythScholarshipEn.dart';
@@ -28,6 +29,7 @@ class Tips extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final lang = getLocale(context);
+    Admob().myInterstitialAd();
     return SafeArea(
       child: Scaffold(
           body: new CustomScrollView(

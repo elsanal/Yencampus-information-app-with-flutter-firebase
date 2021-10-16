@@ -10,7 +10,7 @@ class Admob{
   adInit()async{
     MobileAds.instance.initialize();
     await FlutterAdmobAppOpen.instance.initialize(
-      appId: "ca-app-pub-6452396354959679~7384091144",
+      // appId: "ca-app-pub-6452396354959679~7384091144",
       appAppOpenAdUnitId: "ca-app-pub-6452396354959679/7209778474",
       targetingInfo: openTargetingInfo,
     );
@@ -128,7 +128,7 @@ class Admob{
     }
 
 
-  AdRequestAppOpen openTargetingInfo = AdRequestAppOpen(
+  AdRequestAppOpen openTargetingInfo = new AdRequestAppOpen(
     keywords: <String>["game","video game","football","soccer","pandas","puzzle",
       "best game","mathematics","study","programming","Nintendo","play station",
       "virtual reality","mobile game","android game","online-game","image puzzle",
@@ -137,7 +137,7 @@ class Admob{
       "jeux videos", "beauté", "argent", "tresor", "papier","electronique","machine","gratuit","etranger","apprendre"
           "immigrer", "tourismes","canada","visa","examen","developpement","carriere","reseau sociaux"],
     contentUrl: 'https://flutter.io',
-    testDevices: <String>[], // Android emulators are considered test devices
+    // testDevices: <String>[], // Android emulators are considered test devices
     nonPersonalizedAds: true,
   );
 

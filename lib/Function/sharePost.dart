@@ -6,7 +6,7 @@ import 'package:yencampus/Function/convertListString.dart';
 import 'package:yencampus/Function/translation.dart';
 
  dynamic sharePost(BuildContext context,final post, String type)async{
-  String campusapp = 'https://play.google.com/store/apps/details?id=com.bigfaso.campus';
+  String campusapp = 'https://play.google.com/store/apps/details?id=com.yentech.yencampus';
 
   String _title_fr = "Campus+, l'application qui donne des informations sur les bourses,"+
       "les universités, les Jobs et bien d'autres informations sur le plan national et "

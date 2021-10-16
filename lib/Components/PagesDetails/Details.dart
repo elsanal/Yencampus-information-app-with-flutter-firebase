@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
@@ -25,7 +26,7 @@ class _DetailsState extends State<Details> {
   late final doc;
   late String type;
   late bool isLocal;
-
+  Timer _timer = Timer(Duration(seconds: 0),(){});
   List<BannerAd> myBanners = [
     Admob().myBannerAd,
     Admob().myBannerAd1,
@@ -39,6 +40,7 @@ class _DetailsState extends State<Details> {
     doc = widget.doc;
     type = widget.type;
     isLocal = widget.isLocal;
+    startTimer();
     for(int i=0;i<myBanners.length;i++){
       myBanners[i].load();
     }
@@ -54,8 +56,6 @@ class _DetailsState extends State<Details> {
   }
   @override
   Widget build(BuildContext context) {
-    Admob().myRewardInterstitialAd();
-    Admob().myVideoAdLoading();
     return Scaffold(
       body: CustomScrollView(
        physics: ScrollPhysics(),
@@ -82,6 +82,34 @@ class _DetailsState extends State<Details> {
       default :
         return SliverToBoxAdapter(child: Container(),);
     }
+  }
+
+  startTimer() {
+    int seconds = 0;
+    const oneSec = const Duration(seconds: 1);
+    _timer = new Timer.periodic(
+      oneSec,
+          (Timer timer) {
+        setState(() {
+          if (seconds < 0) {
+            timer.cancel();
+          } else {
+            seconds = seconds + 1;
+            if (seconds == 150) {
+              Admob().myInterstitialAd();
+            }
+            if(seconds == 360){
+              Admob().myVideoAdLoading();
+            }
+            if(seconds == 600){
+              Admob().myRewardInterstitialAd();
+              seconds = 0;
+            }
+          }
+
+        });
+      },
+    );
   }
 }
 

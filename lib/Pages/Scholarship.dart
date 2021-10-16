@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
+import 'package:yencampus/Admob.dart';
 import 'package:yencampus/Components/PagesBody.dart';
 import 'package:yencampus/Components/PagesSliverBar.dart';
 import 'package:yencampus/Database/Countries.dart';
@@ -31,6 +32,7 @@ class _ScholarshipState extends State<Scholarship> {
   Widget build(BuildContext context) {
     lang = getLocale(context);
     var width = MediaQuery.of(context).size.width;
+    Admob().myInterstitialAd();
     return SafeArea(
       child: Scaffold(
         body: new CustomScrollView(
@@ -74,7 +76,7 @@ class _ScholarshipState extends State<Scholarship> {
                   _target = result[1];
                 });
               }
-              print(result);
+              // print(result);
             },
             child: items[index]=="more"?popUpMenuItems(context):
             pageMenuBar(translate(context,items[index]),index,_selectedIndex),
@@ -172,10 +174,17 @@ class _ScholarshipState extends State<Scholarship> {
                 child: ListTile(
                   onTap: (){
                     if(type=="country"){
-                      setState(() {
-                        _selected = items[index];
-                        _target = lang=="fr"?"country_french":"country_english";
-                      });
+                      _selectedList.clear();
+                      if(items[index]== ("All the countries")||items[index]==("Tous les pays")){
+                        _selected = "";
+                      }else{
+                        setState(() {
+                          isArrayTarget = false;
+                          _selected = items[index];
+                          _target = lang=="fr"?"country_french":"country_english";
+                        });
+                      }
+
                     }else if(type=="level"){
                       _selectedList.clear();
                       setState(() {

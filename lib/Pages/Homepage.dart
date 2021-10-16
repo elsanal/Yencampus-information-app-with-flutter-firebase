@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
@@ -83,8 +85,6 @@ class _HomepageState extends State<Homepage> {
   Widget build(BuildContext context) {
     var height = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;
-    Admob().myVideoAdLoading();
-    Admob().myInterstitialAd();
     return SafeArea(
       child: Scaffold(
         body: Container(

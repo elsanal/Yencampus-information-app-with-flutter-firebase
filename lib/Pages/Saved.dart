@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:yencampus/Admob.dart';
 import 'package:yencampus/Components/PagesSliverBar.dart';
 import 'package:yencampus/Components/SavedBody.dart';
 import 'package:yencampus/Function/Locale.dart';
@@ -23,6 +24,7 @@ class _SavedState extends State<Saved> {
     var width = MediaQuery.of(context).size.width;
     var height = MediaQuery.of(context).size.height;
     lang = getLocale(context);
+    Admob().myInterstitialAd();
     return SafeArea(
       child: Scaffold(
           body: Container(

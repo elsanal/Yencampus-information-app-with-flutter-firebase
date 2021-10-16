@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
+import 'package:yencampus/Admob.dart';
 import 'package:yencampus/Components/PagesBody.dart';
 import 'package:yencampus/Components/PagesSliverBar.dart';
 import 'package:yencampus/Database/Countries.dart';
@@ -30,6 +31,7 @@ class _JobState extends State<Job> {
   Widget build(BuildContext context) {
     lang = getLocale(context);
     var width = MediaQuery.of(context).size.width;
+    Admob().myInterstitialAd();
     return SafeArea(
       child: Scaffold(
           body: new CustomScrollView(
@@ -81,7 +83,7 @@ class _JobState extends State<Job> {
                   _target = result[1];
                 });
               }
-              print(result);
+              // print(result);
             },
             child: pageMenuBar(translate(context,items[index]),index,_selectedIndex),
           );
@@ -120,10 +122,16 @@ class _JobState extends State<Job> {
                 child: ListTile(
                   onTap: (){
                     if(type=="country"){
-                      setState(() {
-                        _selected = items[index];
-                        _target = lang=="fr"?"country_french":"country_english";
-                      });
+                      if(items[index]== ("All the countries")||items[index]==("Tous les pays")){
+                        _selected = "";
+
+                      }else{
+                        setState(() {
+                          isArrayTarget = false;
+                          _selected = items[index];
+                          _target = lang=="fr"?"country_french":"country_english";
+                        });
+                      }
                     }else if(type=="category"){
                       _selectedList.clear();
                       setState(() {
@@ -140,7 +148,7 @@ class _JobState extends State<Job> {
                       });
                     }
 
-                    print(_selected);
+                    // print(_selected);
                     Navigator.of(context).pop(true);
                   },
                   title: Text("${items[index]}",style: textStyle,),

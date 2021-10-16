@@ -61,7 +61,7 @@ Widget homepageContent(BuildContext context, final docs, String type){
                           onTap: ()=>_seeMore(context, type),
                           child: Container(
                            color: Colors.black.withOpacity(0.7),
-                            child: Center(child: Text("+${docs.length - 4}",
+                            child: Center(child: Text("+${docs.length}",
                             style: titleStyle2.copyWith(
                               color: Colors.white,
                               fontWeight: FontWeight.bold,
